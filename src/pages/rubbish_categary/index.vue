@@ -8,22 +8,44 @@
       <button class="ctrl" @click="checkResult(4)">厨余（湿垃圾）</button>
       <button class="ctrl" @click="checkResult(8)">其他（干垃圾）</button>
     </view>
+    <view class="share-box" v-if="shareShow">
+      <share
+        shareImg="https://www.xyzgy.xyz/image/xyz.jpg"
+        :title="'66道垃圾分类，用了' + showTime + '秒，敢来吗？'"
+        author="每日66问"
+        imgScan="https://www.xyzgy.xyz/image/xyz.jpg"
+        :bottomType="0"
+        :isWhiteSpace="false"
+        :borderRadius="20"
+        :shareImgW="574"
+        :shareImgH="548"
+        :padding="0"
+        :bottomPadding="[40, 20]"
+        @savePhoto="savePhoto"
+      />
+    </view>
   </view>
 </template>
 
 <script>
+import share from '@/components/share'
 import rubbishs from '@/assets/rubbish.json'
 const results = [{ name: '可回收', categroy: 1, }, { name: '有害垃圾', categroy: 2, }, { name: '厨余（湿垃圾）', categroy: 4, }, { name: '其他（干垃圾）', categroy: 8, }]
 // 完成数超过66则成功
-const maxCompleteCount = 66
+const maxCompleteCount = 1
+let interval
 
 export default {
+  components: {
+    share
+  },
   data() {
     return {
       question: {},
       progress: 0,
       // 计时器
       time: 0,
+      shareShow: false,
     }
   },
   computed: {
@@ -40,7 +62,7 @@ export default {
   },
   methods: {
     startTime() {
-      setInterval(() => {
+      interval = setInterval(() => {
         this.time += .1
       }, 100)
     },
@@ -50,12 +72,14 @@ export default {
     checkResult(categroy) {
       // 答对了的情况，加速弹框显示，增加一次
       if(categroy === this.question.categroy) {
-        this.progress++
-        this.generateQuestion()
         // 66次答完
+        this.progress++
         if(this.progress >= maxCompleteCount) {
-          console.log('今天答完了')
+          this.shareShow = true
+          clearInterval(interval)
+          return
         }
+        this.generateQuestion()
       } else {
         let duration = 3000
         uni.showToast({
@@ -111,5 +135,14 @@ export default {
     &:after {
     }
   }
+}
+.share-box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.2);
 }
 </style>
