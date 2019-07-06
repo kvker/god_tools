@@ -13,5 +13,10 @@
 </script>
 
 <style>
-	/*每个页面公共css */
+  /*每个页面公共css */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 88upx);
+}
 </style>
