@@ -3,11 +3,17 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "请选择"
+        "navigationBarTitleText": "你是什么垃圾"
       }
     },
     {
       "path": "pages/rubbish_categary/index",
+      "style": {
+        "navigationBarTitleText": "垃圾分类66问"
+      }
+    },
+    {
+      "path": "pages/rubbish_search/index",
       "style": {
         "navigationBarTitleText": "垃圾分类66问"
       }

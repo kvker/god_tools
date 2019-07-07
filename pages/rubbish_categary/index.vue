@@ -52,6 +52,11 @@
       this.startTime()
       this.generateQuestion()
     },
+    destroyed() {
+      if (interval) {
+        clearInterval(interval)
+      }
+    },
     methods: {
       startTime() {
         interval = setInterval(() => {
@@ -64,27 +69,15 @@
       checkResult(categroy) {
         // 答对了的情况，加速弹框显示，增加一次
         if (categroy === this.question.categroy) {
-          // 66次答完
           this.progress++
+          // 66次答完
           if (this.progress >= maxCompleteCount) {
             clearInterval(interval)
             uni.showModal({
               title: '提示',
               content: `完成，耗时${this.showTime}秒。`,
               success: function(res) {
-                if (res.confirm) {
-                  console.log(11111)
-                  uni.share({
-                    type: 5,
-                    scene: 'WXSceneSession',
-                    title: '1',
-                    summary: '2',
-                    miniProgram: {
-                      id: '',
-                      path: '/pages/rubbish_categary/index'
-                    }
-                  })
-                } else if (res.cancel) {
+                if (res.confirm) {} else if (res.cancel) {
 
                 }
               }
@@ -135,25 +128,25 @@
       flex: 1;
       height: 210upx;
       color: white;
-      
+
       &:after {
         border: 0;
       }
 
       &:nth-child(1) {
-        background: url(~@/assets/icon.jpg) 0 0 ~'/' 400% auto no-repeat;
+        background: url(~@/assets/icon.jpg) 0 0 ~'/'400% auto no-repeat;
       }
 
       &:nth-child(2) {
-        background: url(~@/assets/icon.jpg) 33.3% 0 ~'/' 400% auto no-repeat;
+        background: url(~@/assets/icon.jpg) 33.3% 0 ~'/'400% auto no-repeat;
       }
 
       &:nth-child(3) {
-        background: url(~@/assets/icon.jpg) 66.6% 0 ~'/' 400% auto no-repeat;
+        background: url(~@/assets/icon.jpg) 66.6% 0 ~'/'400% auto no-repeat;
       }
 
       &:nth-child(4) {
-        background: url(~@/assets/icon.jpg) 100% 0 ~'/' 400% auto no-repeat;
+        background: url(~@/assets/icon.jpg) 100% 0 ~'/'400% auto no-repeat;
       }
 
       &:after {}
