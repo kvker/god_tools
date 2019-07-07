@@ -1,0 +1,1 @@
+<view class="page"><button data-event-opts="{{[['tap',[['goRabbishCategary',['$event']]]]]}}" class="title" bindtap="__e">{{title}}</button></view>
