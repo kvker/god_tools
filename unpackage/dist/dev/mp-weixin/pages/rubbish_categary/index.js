@@ -125,9 +125,21 @@ var _rubbish = _interopRequireDefault(__webpack_require__(/*! @/assets/rubbish.j
 //
 //
 //
-var results = [{ name: '可回收', categroy: 1 }, { name: '有害垃圾', categroy: 2 }, { name: '厨余（湿垃圾）', categroy: 4 }, { name: '其他（干垃圾）', categroy: 8 }]; // 完成数超过66则成功
-var maxCompleteCount = 1;var interval;var _default = { components: {}, data: function data() {return { question: {}, progress: 0, // 计时器
-      time: 0 };},
+var results = [{ name: '可回收', categroy: 1 }, { name: '有害垃圾', categroy: 2 }, { name: '厨余（湿垃圾）', categroy: 4 }, { name: '其他（干垃圾）', categroy: 8 }];
+// 完成数超过66则成功
+var maxCompleteCount = 1;
+var interval;var _default =
+
+{
+  components: {},
+  data: function data() {
+    return {
+      question: {},
+      progress: 0,
+      // 计时器
+      time: 0 };
+
+  },
   computed: {
     /**
                * 用于显示的，即消除浮点问题的计时器
