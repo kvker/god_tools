@@ -12,13 +12,7 @@ export default {
     }
   },
   mounted() {
-    uni.login({
-      provider: 'weixin',
-      success: function(loginRes) {
-        console.log(loginRes)
-        console.log(loginRes.authResult)
-      }
-    })
+
   },
   methods: {
     goRabbishCategary() {

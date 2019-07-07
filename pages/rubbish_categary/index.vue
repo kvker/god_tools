@@ -14,16 +14,16 @@
 <script>
   import rubbishs from '@/assets/rubbish.json'
   const results = [{
-    name: '可回收',
+    name: '可回收物',
     categroy: 1,
   }, {
     name: '有害垃圾',
     categroy: 2,
   }, {
-    name: '厨余（湿垃圾）',
+    name: '厨余垃圾',
     categroy: 4,
   }, {
-    name: '其他（干垃圾）',
+    name: '其他垃圾',
     categroy: 8,
   }]
   // 完成数超过66则成功

@@ -2,6 +2,9 @@
   export default {
     onLaunch: function() {
       console.log('App Launch')
+      this.$AV.User.loginWithWeapp().then(user => {
+        console.log({user})
+      }).catch(console.error)
     },
     onShow: function() {
       console.log('App Show')
