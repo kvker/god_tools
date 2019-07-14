@@ -27,7 +27,7 @@
     categroy: 8,
   }]
   // 完成数超过66则成功
-  const maxCompleteCount = 1
+  const maxCompleteCount = 100
   let interval
 
   export default {

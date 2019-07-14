@@ -2,12 +2,12 @@
   export default {
     onLaunch: function() {
       console.log('App Launch')
-      this.$AV.User.loginWithWeapp().then(user => {
-        console.group()
-        console.log('登陆成功，用户信息：')
-        console.log(user)
-        console.groupEnd()
-      }).catch(console.error)
+      // this.$AV.User.loginWithWeapp().then(user => {
+      //   console.group()
+      //   console.log('登陆成功，用户信息：')
+      //   console.log(user)
+      //   console.groupEnd()
+      // }).catch(console.error)
     },
     onShow: function() {
       console.log('App Show')
