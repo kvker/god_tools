@@ -1,88 +1,69 @@
 <template>
   <view class="page">
-    <view class="search-box">
-      <text class="result">结果：{{result}}</text>
-      <input class="main-input" placeholder='输入搜索' v-model="searchStr" @input="inputSearch"></input>
+    <news class='news'></news>
+    <view class="utils">
+      <view class="util" v-for="(item, idx) in utils" :key='`${idx}rc`' @click="clickUtil(idx)">垃圾分类</view>
     </view>
-    <button @click="goRabbishCategary" class="title">垃圾分类题</button>
   </view>
 </template>
 
 <script>
-  import rubbishs from '@/assets/rubbish.json'
+  import news from '@/components/homepage/news'
   
-  
-  const results = [{
-    name: '可回收物',
-    categroy: 1,
-  }, {
-    name: '有害垃圾',
-    categroy: 2,
-  }, {
-    name: '厨余垃圾',
-    categroy: 4,
-  }, {
-    name: '其他垃圾',
-    categroy: 8,
-  }]
+  // uni.request({
+  //   url: 'http://api.tianapi.com/wxnew?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
+  //   success(res) {
+  //     console.log(res.data.newslist)
+  //   }
+  // })
 
   export default {
+    components: {
+      news,
+    },
     data() {
       return {
-        title: '垃圾分类',
-        searchStr: '',
-        result: '未搜索',
+        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }
+        ],
       }
     },
-    mounted() {
-
-    },
     methods: {
-      goRabbishCategary() {
+      clickUtil(idx) {
+        let util = this.utils[idx]
         uni.navigateTo({
-          url: `/pages/rubbish_categary/index`
-        })
-      },
-      inputSearch() {
-        this.result = '......'
-        this.$util.doAsyncLast(this.searchResult, 300)
-      },
-      searchResult() {
-        let rubbish = rubbishs.find(i => i.name === this.searchStr)
-        if (rubbish) {
-          this.result = (results.find(i => i.categroy === rubbish.categroy) || {}).name
-        } else {
-          // 如果是空字符
-          if (!this.searchStr) {
-            this.result = '未搜索'
-          } else {
-            this.result = '没有找到'
-          }
-        }
+          url: util.path,
+        });
       },
     }
   }
 </script>
 
-<style>
+<style scoped lang='less'>
   .page {
-    align-items: center;
+    justify-content: space-between;
   }
 
-  .main-input {
-    height: 80upx;
-    border: 1px solid green;
-    border-radius: 16upx;
-    padding: 0 16upx;
-    margin: 8upx 0 0;
+  .news {
+    flex: 1;
   }
 
-  .result {
-    color: red;
-    font-size: 32upx;
-  }
+  .utils {
+    height: 62%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-between;
 
-  .search-box {
-    margin: 240upx 0 32upx;
+    .util {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200upx;
+      height: 200upx;
+    }
   }
 </style>
