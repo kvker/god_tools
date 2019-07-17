@@ -1,21 +1,14 @@
 <template>
   <view class="page">
-    <news class='news'></news>
+    <news class='news' :newsGroups="newsGroups"></news>
     <view class="utils">
-      <view class="util" v-for="(item, idx) in utils" :key='`${idx}rc`' @click="clickUtil(idx)">垃圾分类</view>
+      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="item.path">垃圾分类</navigator>
     </view>
   </view>
 </template>
 
 <script>
   import news from '@/components/homepage/news'
-  
-  // uni.request({
-  //   url: 'http://api.tianapi.com/wxnew?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
-  //   success(res) {
-  //     console.log(res.data.newslist)
-  //   }
-  // })
 
   export default {
     components: {
@@ -29,14 +22,42 @@
           { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
           { label: '垃圾分类', path: '/pages/rubbish_categary/index' }
         ],
+        // 存放下载新闻的容器，套数组
+        newsGroups: [],
       }
     },
+    mounted() {
+      this.getWxNews()
+      this.getTtNews()
+    },
     methods: {
-      clickUtil(idx) {
-        let util = this.utils[idx]
-        uni.navigateTo({
-          url: util.path,
-        });
+      /**
+       * 获取微信新闻
+       */
+      getWxNews() {
+        uni.request({
+          url: 'https://api.tianapi.com/wxnew?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
+          success: res => {
+            this.newsGroups.push({
+              list: res.data.newslist,
+              label: '微信',
+            })
+          }
+        })
+      },
+      /**
+       * 获取头条新闻
+       */
+      getTtNews() {
+        uni.request({
+          url: 'https://api.tianapi.com/topnews?key=4641dbc0816d3ac895f65462c1d967fd',
+          success: res => {
+            this.newsGroups.push({
+              list: res.data.newslist,
+              label: '头条',
+            })
+          }
+        })
       },
     }
   }
@@ -64,6 +85,10 @@
       align-items: center;
       width: 200upx;
       height: 200upx;
+    }
+
+    .util-hover {
+      border: 2upx solid green;
     }
   }
 </style>
