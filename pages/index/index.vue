@@ -2,7 +2,7 @@
   <view class="page">
     <news class='news' :newsGroups="newsGroups" @update='updateNews'></news>
     <view class="utils">
-      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="item.path">{{item.label}}</navigator>
+      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="handleUrl(item)">{{item.label}}</navigator>
     </view>
     <button class="contact" open-type="contact">问</button>
   </view>
@@ -17,7 +17,8 @@
     },
     data() {
       return {
-        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '姓氏起源', path: '/pages/search/index' },
+        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+          { label: '姓氏起源', path: `/pages/search/index?path=/txapi/surname/&key=xing` },
           { label: '敬请期待', path: '/pages/rubbish_categary/index' },
         ],
         // 存放下载新闻的容器，套数组
@@ -98,6 +99,13 @@
        */
       updateNews(idx) {
         this.funcs[idx](idx)
+      },
+      handleUrl(item) {
+        let path = item.path
+        if(path.includes('?')) {
+          path += `&title=${item.label}`
+        }
+        return path
       },
     }
   }

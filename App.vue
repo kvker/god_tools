@@ -2,12 +2,6 @@
   export default {
     onLaunch: function() {
       console.log('App Launch')
-      // this.$AV.User.loginWithWeapp().then(user => {
-      //   console.group()
-      //   console.log('登陆成功，用户信息：')
-      //   console.log(user)
-      //   console.groupEnd()
-      // }).catch(console.error)
     },
     onShow: function() {
       console.log('App Show')
@@ -27,6 +21,10 @@
     box-sizing: border-box !important;
     color: #666;
     font-size: 28upx;
+  }
+  
+  rich-text {
+    line-height: 48upx;
   }
 
   .button {

@@ -1,4 +1,5 @@
 let doLastTimeout, doLastOperates = []
+let timeout = 500
 
 export default {
   /**
@@ -6,7 +7,7 @@ export default {
    * @param {function} operate 传入的操作
    * @param {number} idx (可选)执行特性索引号的操作，一般不会用到
    */
-  doAsyncLast(operate, time = 500, idx) {
+  doAsyncLast(operate, time = timeout, idx) {
     if (typeof operate !== 'function') {
       throw '执行doLast函数报错：需要传入函数！'
     }
@@ -25,7 +26,7 @@ export default {
    * @param {function} operate 传入的操作
    * @param {number} idx (可选)执行特性索引号的操作，一般不会用到
    */
-  doSyncLast(operate, time = 500, idx) {
+  doSyncLast(operate, time = timeout, idx) {
     if (typeof operate !== 'function') {
       throw '执行doLast函数报错：需要传入函数！'
     }

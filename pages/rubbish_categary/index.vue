@@ -2,7 +2,7 @@
   <view class="page">
     <button @click="goRabbishCategary" class="title">垃圾分类练习</button>
     <view class="search-box">
-      <input class="main-input" placeholder='输入搜索' v-model="searchStr" @input="inputSearch"></input>
+      <input class="main-input" placeholder='输入搜索' v-model="searchStr" @confirm="inputSearch"></input>
       <scroll-view scroll-y class="result-list-box">
         <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
       </scroll-view>
@@ -28,7 +28,6 @@
   export default {
     data() {
       return {
-        title: '垃圾分类',
         searchStr: '',
         resultList: ['未搜索'],
       }
@@ -44,7 +43,7 @@
       },
       inputSearch() {
         this.resultList = ['......']
-        this.$util.doAsyncLast(this.searchResult, 300)
+        this.searchResult()
       },
       searchResult() {
         if (!this.searchStr.length) {
