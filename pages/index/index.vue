@@ -19,8 +19,7 @@
         utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
           { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
           { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
-          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
-          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
         ],
         // 存放下载新闻的容器，套数组
         newsGroups: [],
@@ -36,7 +35,7 @@
        */
       getWxNews() {
         uni.request({
-          url: 'https://api.tianapi.com/wxnew?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
+          url: 'https://api.tianapi.com/wxnew/?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
           success: res => {
             this.newsGroups.push({
               list: res.data.newslist,
@@ -50,7 +49,7 @@
        */
       getTtNews() {
         uni.request({
-          url: 'https://api.tianapi.com/topnews?key=4641dbc0816d3ac895f65462c1d967fd',
+          url: 'https://api.tianapi.com/topnews/?key=4641dbc0816d3ac895f65462c1d967fd',
           success: res => {
             this.newsGroups.push({
               list: res.data.newslist,
@@ -65,15 +64,11 @@
 
 <style scoped lang='less'>
   .page {
-    justify-content: space-between;
-  }
-
-  .news {
-    flex: 1;
+    display: block;
   }
 
   .utils {
-    height: 62%;
+    height: 38%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -84,11 +79,11 @@
       justify-content: center;
       align-items: center;
       width: 200upx;
-      height: 200upx;
+      height: 120upx;
     }
 
     .util-hover {
-      border: 2upx solid green;
+      border: 2upx solid #666;
     }
   }
 </style>

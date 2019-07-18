@@ -20,21 +20,26 @@
 
 <style>
   /*每个页面公共css */
-  view, navigator {
+  view,
+  navigator {
     box-sizing: border-box !important;
+    color: #666;
   }
-  
+
   .button {
+    min-width: 120upx;
     padding: 8upx 16upx;
-    border: 2upx solid #333;
+    border: 2upx solid #666;
     border-radius: 8upx;
-    color: #333;
+    color: #666;
+    text-align: center;
   }
 
   .page {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 80upx);
+    padding: 16upx;
   }
 
   /* #ifdef MP */
@@ -43,4 +48,7 @@
   }
 
   /* #endif */
+  .highlight {
+    color: black;
+  }
 </style>
