@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <input class="main-input" placeholder='输入搜索' v-model="searchStr" @confirm="inputSearch"></input>
+    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @confirm="inputSearch"></input>
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
     </scroll-view>
