@@ -49,6 +49,10 @@
         this.$util.doAsyncLast(this.searchResult, 300)
       },
       searchResult() {
+        if (!this.searchStr.length) {
+          this.resultList = ['未搜索']
+          return
+        }
         this.$http.tGet('/txapi/lajifenlei/', { word: this.searchStr }, res => {
           if (res) {
             let resultList = []
@@ -64,8 +68,6 @@
               })
             }
             this.resultList = resultList
-          } else if (!this.searchStr.length) {
-            this.resultList = ['未搜索']
           } else {
             this.resultList = ['没有找到']
           }
