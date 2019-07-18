@@ -49,15 +49,10 @@
         this.$util.doAsyncLast(this.searchResult, 300)
       },
       searchResult() {
-        uni.request({
-          url: 'http://api.tianapi.com/txapi/lajifenlei/',
-          data: {
-            key: '4641dbc0816d3ac895f65462c1d967fd',
-            word: this.searchStr,
-          },
-          success: res => {
+        this.$http.tGet('http://api.tianapi.com/txapi/lajifenlei/', { word: this.searchStr }, res => {
+          if (res) {
             let resultList = []
-            let newslist = res.data.newslist
+            let newslist = res.newslist
             if (newslist) {
               newslist.forEach(item => {
                 let type = ''
@@ -67,15 +62,13 @@
                 }
                 resultList.push(`${item.name}: ${type}`)
               })
-            } else if(!this.searchStr.length) {
-              resultList = ['未搜索']
-            } else {
-              resultList = ['没有找到']
             }
             this.resultList = resultList
-          },
-          fail: () => {},
-          complete: () => {}
+          } else if (!this.searchStr.length) {
+            this.resultList = ['未搜索']
+          } else {
+            this.resultList = ['没有找到']
+          }
         })
       },
     }

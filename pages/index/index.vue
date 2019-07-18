@@ -16,8 +16,7 @@
     },
     data() {
       return {
-        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '敬请期待', path: '/pages/rubbish_categary/index' },
-        ],
+        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '敬请期待', path: '/pages/rubbish_categary/index' }, ],
         // 存放下载新闻的容器，套数组
         newsGroups: [],
       }
@@ -30,11 +29,10 @@
        * 获取微信新闻
        */
       getWxNews() {
-        uni.request({
-          url: 'https://api.tianapi.com/wxnew/?key=4641dbc0816d3ac895f65462c1d967fd&num=10',
-          success: res => {
+        this.$http.tGet('https://api.tianapi.com/wxnew/', { num: 10 }, res => {
+          if (res) {
             this.newsGroups.push({
-              list: res.data.newslist,
+              list: res.newslist,
               label: '微信',
             })
             this.getTtNews()
@@ -45,11 +43,10 @@
        * 获取头条新闻
        */
       getTtNews() {
-        uni.request({
-          url: 'https://api.tianapi.com/topnews/?key=4641dbc0816d3ac895f65462c1d967fd',
-          success: res => {
+        this.$http.tGet('https://api.tianapi.com/topnews/', null, res => {
+          if (res) {
             this.newsGroups.push({
-              list: res.data.newslist,
+              list: res.newslist,
               label: '头条',
             })
           }

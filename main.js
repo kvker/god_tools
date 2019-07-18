@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import util from './assets/js/util.js'
+import http from './assets/js/http.js'
 // const AV = require('./libs/av-weapp-min.js')
 
 // AV.init({
@@ -10,6 +11,7 @@ import util from './assets/js/util.js'
 
 // Vue.prototype.$AV = AV
 Vue.prototype.$util = util
+Vue.prototype.$http = http
 Vue.config.productionTip = false
 
 App.mpType = 'app'
