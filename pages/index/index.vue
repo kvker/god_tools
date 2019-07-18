@@ -36,6 +36,7 @@
               label: '微信',
             })
             this.getTtNews()
+            this.getTtKejis()
           }
         })
       },
@@ -48,6 +49,19 @@
             this.newsGroups.push({
               list: res.newslist,
               label: '头条',
+            })
+          }
+        })
+      },
+      /**
+       * 获取科技新闻
+       */
+      getTtKejis() {
+        this.$http.tGet('https://api.tianapi.com/keji/', null, res => {
+          if (res) {
+            this.newsGroups.push({
+              list: res.newslist,
+              label: '科技',
             })
           }
         })
