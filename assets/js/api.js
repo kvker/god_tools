@@ -21,4 +21,6 @@ export default {
   NICE_JU_ZI: '/txapi/sentence/',
   // 优美诗句
   NICE_SHI_JU: '/txapi/verse/',
+  // 笑话
+  FUNNY: '/txapi/joke/',
 }

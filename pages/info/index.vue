@@ -2,7 +2,7 @@
   <view class="page">
     <scroll-view scroll-y class="result-list-box">
       <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>
-        <text>{{item}}</text>
+        <rich-text :nodes="item"></rich-text>
       </view>
     </scroll-view>
     <view class="ctrls">
@@ -48,7 +48,7 @@
             res.forEach(item => {
               let text = ''
               this.keys.forEach(key => {
-                text += `${item[key]}\n`
+                text += `${item[key]}<br>`
               })
               resultList.push(text)
             })

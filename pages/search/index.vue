@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @confirm="inputSearch"></input>
+    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch" @confirm="search"></input>
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
     </scroll-view>
@@ -9,15 +9,16 @@
 </template>
 
 <script>
+  import searchMixin from '@/mixins/search'
+
   export default {
+    mixins: [searchMixin],
     data() {
       return {
         // 请求的path
         path: '',
         // 请求参数的关键字段
         keys: [],
-        searchStr: '',
-        result: '未搜索',
       }
     },
     onLoad(option) {
@@ -28,13 +29,9 @@
       })
     },
     methods: {
-      inputSearch() {
-        this.result = '......'
-        this.searchResult()
-      },
       searchResult() {
         if (!this.searchStr.length) {
-          this.result = '未搜索'
+          this.result = '请搜索'
           return
         }
         let body = {}

@@ -2,7 +2,8 @@
   <view class="page">
     <button @click="goRabbishCategary" class="title">垃圾分类练习</button>
     <view class="search-box">
-      <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @confirm="inputSearch"></input>
+      <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch"
+        @confirm="search"></input>
       <scroll-view scroll-y class="result-list-box">
         <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
       </scroll-view>
@@ -11,6 +12,8 @@
 </template>
 
 <script>
+  import searchMixin from '@/mixins/search'
+  
   const results = [{
     name: '可回收物',
     categroy: 1,
@@ -26,11 +29,9 @@
   }]
 
   export default {
+    mixins: [searchMixin],
     data() {
-      return {
-        searchStr: '',
-        resultList: ['未搜索'],
-      }
+      return {}
     },
     methods: {
       goRabbishCategary() {
@@ -38,13 +39,9 @@
           url: `/pages/rubbish_categary/question/index`
         })
       },
-      inputSearch() {
-        this.resultList = ['......']
-        this.searchResult()
-      },
       searchResult() {
         if (!this.searchStr.length) {
-          this.resultList = ['未搜索']
+          this.resultList = ['请搜索']
           return
         }
         this.$http.tGet(this.$api.RUBBISH_CATEGORY, { word: this.searchStr }, res => {
