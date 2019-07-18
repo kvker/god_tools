@@ -4,6 +4,7 @@
     <view class="utils">
       <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="item.path">{{item.label}}</navigator>
     </view>
+    <button class="contact" open-type="contact">问</button>
   </view>
 </template>
 

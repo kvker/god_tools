@@ -18,10 +18,11 @@
   }
 </script>
 
-<style>
+<style lang="less">
   /*每个页面公共css */
   view,
   scroll-view,
+  button,
   navigator {
     box-sizing: border-box !important;
     color: #666;
@@ -52,5 +53,20 @@
   /* #endif */
   .highlight {
     color: black;
+  }
+  
+  .contact {
+    @size: 90upx;
+    position: fixed;
+    right: 24upx;
+    bottom: 24upx;
+    width: @size;
+    line-height: @size;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 4upx #666;
+    &:after {
+      border: none;
+    }
   }
 </style>
