@@ -102,6 +102,8 @@
       align-items: center;
       width: 200upx;
       height: 120upx;
+      border: 2upx dashed #666;
+      border-radius: 16upx;
     }
 
     .util-hover {
