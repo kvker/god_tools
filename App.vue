@@ -54,7 +54,7 @@
   .highlight {
     color: black;
   }
-  
+
   .contact {
     @size: 90upx;
     position: fixed;
@@ -65,6 +65,7 @@
     border-radius: 50%;
     background: white;
     box-shadow: 0 0 4upx #666;
+
     &:after {
       border: none;
     }

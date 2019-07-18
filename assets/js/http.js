@@ -17,7 +17,7 @@ export default {
       data: params,
       success: ({ data }) => {
         if (data.code === 200) {
-          cb(data)
+          cb(data.newslist)
         } else {
           uni.showToast({
             title: data.msg,

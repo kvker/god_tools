@@ -17,6 +17,9 @@
       "style": {
         "navigationBarTitleText": "垃圾分类100问"
       }
+    }, {
+      "path": "pages/search/index",
+      "style": {}
     }
   ],
   "globalStyle": {

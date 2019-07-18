@@ -35,7 +35,11 @@
     },
     methods: {
       clickButton(idx) {
-        this.currentIdx = idx
+        if(this.currentIdx === idx) {
+          this.$emit('update', idx)
+        } else {
+          this.currentIdx = idx
+        }
       },
       copyLink(idx) {
         let item = this.newsGroup.list[idx]
