@@ -27,7 +27,6 @@
     },
     mounted() {
       this.getWxNews()
-      this.getTtNews()
     },
     methods: {
       /**
@@ -41,6 +40,7 @@
               list: res.data.newslist,
               label: '微信',
             })
+            this.getTtNews()
           }
         })
       },

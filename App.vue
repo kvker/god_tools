@@ -24,6 +24,7 @@
   navigator {
     box-sizing: border-box !important;
     color: #666;
+    font-size: 28upx;
   }
 
   .button {
