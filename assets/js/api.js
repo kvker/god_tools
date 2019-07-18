@@ -11,4 +11,6 @@ export default {
   NAME_FROM: '/txapi/surname/',
   // 神回复
   GOD_REPLY: '/txapi/godreply/',
+  // 顺口溜
+  SHUN_KOU_LIU: '/txapi/skl/',
 }
