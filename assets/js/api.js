@@ -13,4 +13,12 @@ export default {
   GOD_REPLY: '/txapi/godreply/',
   // 顺口溜
   SHUN_KOU_LIU: '/txapi/skl/',
+  // 小段子
+  DUAN_ZI: '/txapi/mnpara/',
+  // 简说历史
+  EASY_HISTORY: '/txapi/pitlishi/',
+  // 精美句子
+  NICE_JU_ZI: '/txapi/sentence/',
+  // 优美诗句
+  NICE_SHI_JU: '/txapi/verse/',
 }

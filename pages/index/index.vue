@@ -22,9 +22,13 @@
           // 单参数搜索页面，key是传入请求参数
           { label: '姓氏起源', path: `/pages/search/index?path=${this.$api.NAME_FROM}&key=xing` },
           // 获取信息页面，keys是返回拼接参数列表，要按照顺序传
-          { label: '神回复', path: `/pages/get_info/index?path=${this.$api.GOD_REPLY}&keys=["title","content"]&num=10` },
-          { label: '顺口溜', path: `/pages/get_info/index?path=${this.$api.SHUN_KOU_LIU}&keys=["content"]&num=10` },
-          
+          { label: '神回复', path: `/pages/info/index?path=${this.$api.GOD_REPLY}&keys=["title","content"]&num=10` },
+          { label: '顺口溜', path: `/pages/info/index?path=${this.$api.SHUN_KOU_LIU}&keys=["content"]&num=10` },
+          { label: '小段子', path: `/pages/info/index?path=${this.$api.DUAN_ZI}&keys=["author","content"]&num=10` },
+          { label: '简说历史', path: `/pages/info/index?path=${this.$api.EASY_HISTORY}&keys=["content"]&num=10` },
+          { label: '精美句子', path: `/pages/info/index?path=${this.$api.NICE_JU_ZI}&keys=["author","content"]&num=10` },
+          { label: '优美诗句', path: `/pages/info/index?path=${this.$api.NICE_SHI_JU}&keys=["source","author","content"]&num=10` },
+
           { label: '敬请期待', path: '/pages/rubbish_categary/index' },
         ],
         // 存放下载新闻的容器，套数组
