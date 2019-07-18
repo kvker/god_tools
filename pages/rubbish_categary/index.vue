@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <button @click="goRabbishCategary" class="title">垃圾分类题</button>
+    <button @click="goRabbishCategary" class="title">垃圾分类练习</button>
     <view class="search-box">
       <input class="main-input" placeholder='输入搜索' v-model="searchStr" @input="inputSearch"></input>
       <scroll-view scroll-y class="result-list-box">
