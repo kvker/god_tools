@@ -47,7 +47,7 @@
           this.resultList = ['未搜索']
           return
         }
-        this.$http.tGet('/txapi/lajifenlei/', { word: this.searchStr }, res => {
+        this.$http.tGet(this.$api.RUBBISH_CATEGORY, { word: this.searchStr }, res => {
           if (res) {
             let resultList = []
             if (res) {

@@ -19,10 +19,10 @@
       return {
         utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
 
-          // 单参数搜索页面 
-          { label: '姓氏起源', path: `/pages/search/index?path=/txapi/surname/&key=xing` },
-          // 获取信息页面
-          { label: '神回复', path: `/pages/get_info/index?path=/txapi/godreply/&keys=["title","content"]&num=10` },
+          // 单参数搜索页面，key是传入请求参数
+          { label: '姓氏起源', path: `/pages/search/index?path=${this.$api.NAME_FROM}&key=xing` },
+          // 获取信息页面，keys是返回拼接参数列表，要按照顺序传
+          { label: '神回复', path: `/pages/get_info/index?path=${this.$api.GOD_REPLY}&keys=["title","content"]&num=10` },
           
           { label: '敬请期待', path: '/pages/rubbish_categary/index' },
         ],
@@ -75,28 +75,28 @@
        * @param {Number} idx 如果有idx则为刷新，首次调用不传的
        */
       getWx(idx) {
-        this.getNews('/wxnew/', { num: 10 }, '微信', this.getWx, idx)
+        this.getNews(this.$api.WEIXIN_NEWS, { num: 10 }, '微信', this.getWx, idx)
       },
       /**
        * 获取头条新闻
        * @param {Number} idx 如果有idx则为刷新，首次调用不传的
        */
       getTt(idx) {
-        this.getNews('/topnews/', null, '头条', this.getTt, idx)
+        this.getNews(this.$api.TOUTIAO_NEWS, null, '头条', this.getTt, idx)
       },
       /**
        * 获取科技新闻
        * @param {Number} idx 如果有idx则为刷新，首次调用不传的
        */
       getKejis(idx) {
-        this.getNews('/keji/', null, '科技', this.getKejis, idx)
+        this.getNews(this.$api.KEJI_NEWS, null, '科技', this.getKejis, idx)
       },
       /**
        * 获取科技新闻
        * @param {Number} idx 如果有idx则为刷新，首次调用不传的
        */
       getApples(idx) {
-        this.getNews('/apple/', null, '苹果', this.getApples, idx)
+        this.getNews(this.$api.APPLE_NEWS, null, '苹果', this.getApples, idx)
       },
       /**
        * 根据点击索引刷新内容
