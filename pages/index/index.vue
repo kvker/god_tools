@@ -2,7 +2,7 @@
   <view class="page">
     <news class='news' :newsGroups="newsGroups"></news>
     <view class="utils">
-      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="item.path">垃圾分类</navigator>
+      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="item.path">{{item.label}}</navigator>
     </view>
   </view>
 </template>
@@ -16,10 +16,7 @@
     },
     data() {
       return {
-        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
-          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
-          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
-          { label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '垃圾分类', path: '/pages/rubbish_categary/index' },{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' }, { label: '敬请期待', path: '/pages/rubbish_categary/index' },
         ],
         // 存放下载新闻的容器，套数组
         newsGroups: [],
