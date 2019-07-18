@@ -9,20 +9,6 @@
 </template>
 
 <script>
-  const results = [{
-    name: '可回收物',
-    categroy: 1,
-  }, {
-    name: '有害垃圾',
-    categroy: 2,
-  }, {
-    name: '厨余垃圾',
-    categroy: 4,
-  }, {
-    name: '其他垃圾',
-    categroy: 8,
-  }]
-
   export default {
     data() {
       return {
@@ -35,16 +21,11 @@
       }
     },
     onLoad(option) {
-      try {
-        this.path = option.path
-        this.key = option.key
-        uni.setNavigationBarTitle({
-          title: option.title
-        })
-      } catch (e) {
-        console.log(e)
-        throw '参数不足'
-      }
+      this.path = option.path
+      this.key = option.key
+      uni.setNavigationBarTitle({
+        title: option.title
+      })
     },
     methods: {
       inputSearch() {
@@ -99,8 +80,8 @@
     line-height: 64upx;
     padding: 0 8upx;
   }
-  
+
   .copy-btn {
-    margin-top: 16px;
+    margin-top: 16upx;
   }
 </style>

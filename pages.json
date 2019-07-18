@@ -20,6 +20,9 @@
     }, {
       "path": "pages/search/index",
       "style": {}
+    }, {
+      "path": "pages/get_info/index",
+      "style": {}
     }
   ],
   "globalStyle": {

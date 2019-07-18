@@ -32,9 +32,6 @@
         resultList: ['未搜索'],
       }
     },
-    mounted() {
-
-    },
     methods: {
       goRabbishCategary() {
         uni.navigateTo({
@@ -85,18 +82,18 @@
   .search-box {
     width: 100%;
 
-    .result-list-box {
-      border: 2upx solid #666;
-      height: 600upx;
-      border-radius: 8upx;
-    }
-
     .main-input {
       height: 80upx;
       border: 1px solid #666;
       border-radius: 16upx;
       padding: 0 16upx;
       margin: 0 0 16upx;
+    }
+
+    .result-list-box {
+      border: 2upx solid #666;
+      height: 600upx;
+      border-radius: 8upx;
     }
 
     .reslut-text {

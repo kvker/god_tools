@@ -18,7 +18,12 @@
     data() {
       return {
         utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+
+          // 单参数搜索页面 
           { label: '姓氏起源', path: `/pages/search/index?path=/txapi/surname/&key=xing` },
+          // 获取信息页面
+          { label: '神回复', path: `/pages/get_info/index?path=/txapi/godreply/&keys=["title","content"]&num=10` },
+          
           { label: '敬请期待', path: '/pages/rubbish_categary/index' },
         ],
         // 存放下载新闻的容器，套数组
@@ -102,7 +107,7 @@
       },
       handleUrl(item) {
         let path = item.path
-        if(path.includes('?')) {
+        if (path.includes('?')) {
           path += `&title=${item.label}`
         }
         return path
