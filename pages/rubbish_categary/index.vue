@@ -115,7 +115,6 @@
 
     .reslut-text {
       line-height: 64upx;
-      margin: 0 0 16upx;
       padding: 0 8upx;
     }
   }
