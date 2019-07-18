@@ -8,9 +8,10 @@ export default {
    * @param {Object} data 参数
    * @param {Function} cb 回调
    */
-  tGet(url, params, cb) {
+  tGet(path, params, cb) {
     if (!params) params = {}
     params.key = TAK
+    let url = 'https://api.tianapi.com' + path
     uni.request({
       url,
       data: params,

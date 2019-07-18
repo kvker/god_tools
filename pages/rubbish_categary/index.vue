@@ -49,7 +49,7 @@
         this.$util.doAsyncLast(this.searchResult, 300)
       },
       searchResult() {
-        this.$http.tGet('http://api.tianapi.com/txapi/lajifenlei/', { word: this.searchStr }, res => {
+        this.$http.tGet('/txapi/lajifenlei/', { word: this.searchStr }, res => {
           if (res) {
             let resultList = []
             let newslist = res.newslist

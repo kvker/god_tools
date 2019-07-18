@@ -29,14 +29,15 @@
        * 获取微信新闻
        */
       getWxNews() {
-        this.$http.tGet('https://api.tianapi.com/wxnew/', { num: 10 }, res => {
+        this.$http.tGet('/wxnew/', { num: 10 }, res => {
           if (res) {
             this.newsGroups.push({
               list: res.newslist,
               label: '微信',
             })
             this.getTtNews()
-            this.getTtKejis()
+            this.getKejis()
+            this.getApples()
           }
         })
       },
@@ -44,7 +45,7 @@
        * 获取头条新闻
        */
       getTtNews() {
-        this.$http.tGet('https://api.tianapi.com/topnews/', null, res => {
+        this.$http.tGet('/topnews/', null, res => {
           if (res) {
             this.newsGroups.push({
               list: res.newslist,
@@ -56,12 +57,25 @@
       /**
        * 获取科技新闻
        */
-      getTtKejis() {
-        this.$http.tGet('https://api.tianapi.com/keji/', null, res => {
+      getKejis() {
+        this.$http.tGet('/keji/', null, res => {
           if (res) {
             this.newsGroups.push({
               list: res.newslist,
               label: '科技',
+            })
+          }
+        })
+      },
+      /**
+       * 获取科技新闻
+       */
+      getApples() {
+        this.$http.tGet('/apple/', null, res => {
+          if (res) {
+            this.newsGroups.push({
+              list: res.newslist,
+              label: '苹果',
             })
           }
         })
