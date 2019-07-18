@@ -1,17 +1,18 @@
 <template>
   <view class="page">
-    <view class="search-box">
-      <text class="result">结果：{{result}}</text>
-      <input class="main-input" placeholder='输入搜索' v-model="searchStr" @input="inputSearch"></input>
-    </view>
     <button @click="goRabbishCategary" class="title">垃圾分类题</button>
+    <view class="search-box">
+      <input class="main-input" placeholder='输入搜索' v-model="searchStr" @input="inputSearch"></input>
+      <scroll-view scroll-y class="result-list-box">
+        <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
+      </scroll-view>
+    </view>
   </view>
 </template>
 
 <script>
   import rubbishs from '@/assets/rubbish.json'
-  
-  
+
   const results = [{
     name: '可回收物',
     categroy: 1,
@@ -31,7 +32,7 @@
       return {
         title: '垃圾分类',
         searchStr: '',
-        result: '未搜索',
+        resultList: ['未搜索'],
       }
     },
     mounted() {
@@ -40,41 +41,50 @@
     methods: {
       goRabbishCategary() {
         uni.navigateTo({
-          url: `/pages/rubbish_categary/index`
+          url: `/pages/rubbish_categary/question/index`
         })
       },
       inputSearch() {
-        this.result = '......'
+        this.resultList = ['......']
         this.$util.doAsyncLast(this.searchResult, 300)
       },
       searchResult() {
-        let rubbish = rubbishs.find(i => i.name === this.searchStr)
-        if (rubbish) {
-          this.result = (results.find(i => i.categroy === rubbish.categroy) || {}).name
-        } else {
-          // 如果是空字符
-          if (!this.searchStr) {
-            this.result = '未搜索'
-          } else {
-            this.result = '没有找到'
-          }
-        }
+        uni.request({
+          url: 'http://api.tianapi.com/txapi/lajifenlei/',
+          data: {
+            key: '4641dbc0816d3ac895f65462c1d967fd',
+            word: this.searchStr,
+          },
+          success: res => {
+            let resultList = []
+            let newslist = res.data.newslist
+            if (newslist) {
+              newslist.forEach(item => {
+                let type = ''
+                let matchResult = results.find(i => i.categroy === 2 ** item.type)
+                if (matchResult) {
+                  type = matchResult.name
+                }
+                resultList.push(`${item.name}: ${type}`)
+              })
+            } else if(!this.searchStr.length) {
+              resultList = ['未搜索']
+            } else {
+              resultList = ['没有找到']
+            }
+            this.resultList = resultList
+          },
+          fail: () => {},
+          complete: () => {}
+        })
       },
     }
   }
 </script>
 
-<style>
+<style scoped lang="less">
   .page {
     align-items: center;
-  }
-
-  .main-input {
-    height: 80upx;
-    border: 1px solid green;
-    border-radius: 16upx;
-    padding: 0 16upx;
-    margin: 8upx 0 0;
   }
 
   .result {
@@ -82,7 +92,31 @@
     font-size: 32upx;
   }
 
-  .search-box {
+  .title {
     margin: 240upx 0 32upx;
+  }
+
+  .search-box {
+    width: 100%;
+
+    .result-list-box {
+      border: 2upx solid #666;
+      height: 600upx;
+      border-radius: 8upx;
+    }
+
+    .main-input {
+      height: 80upx;
+      border: 1px solid #666;
+      border-radius: 16upx;
+      padding: 0 16upx;
+      margin: 0 0 16upx;
+    }
+
+    .reslut-text {
+      line-height: 64upx;
+      margin: 0 0 16upx;
+      padding: 0 8upx;
+    }
   }
 </style>

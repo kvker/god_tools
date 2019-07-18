@@ -21,6 +21,7 @@
 <style>
   /*每个页面公共css */
   view,
+  scroll-view,
   navigator {
     box-sizing: border-box !important;
     color: #666;
