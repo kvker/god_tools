@@ -4,6 +4,12 @@ export default {
       searchStr: '',
       result: '请搜索',
       resultList: ['请搜索'],
+      title: '',
+    }
+  },
+  onLoad(option) {
+    if(option.title) {
+      this.title = option.title
     }
   },
   methods: {

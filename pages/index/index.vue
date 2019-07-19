@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <news class='news' :newsGroups="newsGroups" @update='updateNews'></news>
+    <!-- <news class='news' :newsGroups="newsGroups" @update='updateNews'></news> -->
     <view class="utils">
       <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="handleUrl(item)">{{item.label}}</navigator>
     </view>
@@ -28,7 +28,7 @@
           { label: '简说历史', path: `/pages/info/index?path=${this.$api.EASY_HISTORY}&keys=["content"]` },
           { label: '精美句子', path: `/pages/info/index?path=${this.$api.NICE_JU_ZI}&keys=["author","content"]` },
           { label: '优美诗句', path: `/pages/info/index?path=${this.$api.NICE_SHI_JU}&keys=["source","author","content"]` },
-          
+
           // 敬请期待，放个笑话
           { label: '敬请期待', path: `/pages/info/index?path=${this.$api.FUNNY}&keys=["title","content"]` },
         ],
@@ -40,10 +40,8 @@
     },
     mounted() {
       if (this.$isPro) {
-        this.getWx()
-        this.getTt()
-        this.getKejis()
-        this.getApples()
+        // this.getKejis()
+        // this.getApples()
       }
     },
     methods: {
@@ -77,20 +75,6 @@
         })
       },
       /**
-       * 获取微信新闻
-       * @param {Number} idx 如果有idx则为刷新，首次调用不传的
-       */
-      getWx(idx) {
-        this.getNews(this.$api.WEIXIN_NEWS, { num: 10 }, '微信', this.getWx, idx)
-      },
-      /**
-       * 获取头条新闻
-       * @param {Number} idx 如果有idx则为刷新，首次调用不传的
-       */
-      getTt(idx) {
-        this.getNews(this.$api.TOUTIAO_NEWS, null, '头条', this.getTt, idx)
-      },
-      /**
        * 获取科技新闻
        * @param {Number} idx 如果有idx则为刷新，首次调用不传的
        */
@@ -118,13 +102,14 @@
         }
         return path
       },
-    }
+    },
   }
 </script>
 
 <style scoped lang='less'>
   .page {
-    display: block;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .utils {

@@ -12,6 +12,15 @@ Vue.prototype.$isPro = process.env.NODE_ENV === 'production'
 
 App.mpType = 'app'
 
+Vue.mixin({
+  onShareAppMessage(res) {
+    console.log(this.title)
+    return {
+      title: this.title || '只有神才知道的工具合集',
+    }
+  }
+})
+
 const app = new Vue({
   ...App
 })

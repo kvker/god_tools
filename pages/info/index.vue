@@ -20,6 +20,7 @@
         path: '',
         // 请求参数的关键字段
         keys: [],
+        title: '',
         searchStr: '',
         resultList: ['......'],
       }
@@ -27,6 +28,7 @@
     onLoad(option) {
       try {
         this.path = option.path
+        this.title = option.title
         this.num = option.num || 10
         this.keys = JSON.parse(option.keys)
         uni.setNavigationBarTitle({

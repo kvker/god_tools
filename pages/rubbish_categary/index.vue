@@ -31,7 +31,9 @@
   export default {
     mixins: [searchMixin],
     data() {
-      return {}
+      return {
+        title: '垃圾分类',
+      }
     },
     methods: {
       goRabbishCategary() {

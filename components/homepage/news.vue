@@ -4,12 +4,12 @@
       <view class="button" :class="{highlight: currentIdx === idx}" v-for="(newsGroup, idx) of newsGroups" :key="`nb${idx}`"
         @click="clickButton(idx)">{{newsGroup.label}}</view>
     </view>
-    <view class="news-group">
+    <scroll-view scroll-y class="news-group">
       <view class="news" v-for="(news, nidx) of newsGroup.list" :key="`ng${nidx}`">
         <text class="desc">{{news.title}}</text>
         <view class="button" @click="copyLink(nidx)">链接</view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -67,7 +67,6 @@
 
   .news-group {
     height: calc(100% - 72upx);
-    overflow-y: scroll;
 
     .news {
       display: flex;

@@ -38,6 +38,7 @@
         progress: 0,
         // 计时器
         time: 0,
+        title: '垃圾分类练习题',
       }
     },
     computed: {
