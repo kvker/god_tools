@@ -17,14 +17,18 @@
     },
     data() {
       return {
-        utils: [{ label: '垃圾分类', path: '/pages/rubbish_categary/index' },
+        utils: [
+          // 独立功能类型
+          { label: '垃圾分类', path: '/pages/rubbish_categary/index' },
 
           // 单参数搜索页面，key是传入请求参数
           { label: '姓氏起源', path: `/pages/search/index?path=${this.$api.NAME_FROM}&key=xing` },
           { label: '实时油价', path: `/pages/search/index?path=${this.$api.OIL_PRICE}&key=prov` },
           { label: '景区查询', path: `/pages/search/index?path=${this.$api.SCENIC}&key=word` },
           
-          
+          // 固定筛选类型
+          { label: '天气诗句', path: `/pages/picker/index?path=${this.$api.WEATHER_SHI_JU}&key=tqtype&keys=["source","author","content"]&values=["风","云","雨","雪","霜","露","雾","雷","晴","阴"]` },
+         
           // 获取信息页面，keys是返回拼接参数列表，要按照顺序传
           { label: '神回复', path: `/pages/info/index?path=${this.$api.GOD_REPLY}&keys=["title","content"]` },
           { label: '顺口溜', path: `/pages/info/index?path=${this.$api.SHUN_KOU_LIU}&keys=["content"]` },

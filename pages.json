@@ -23,6 +23,9 @@
     }, {
       "path": "pages/info/index",
       "style": {}
+    }, {
+      "path": "pages/picker/index",
+      "style": {}
     }
   ],
   "globalStyle": {
