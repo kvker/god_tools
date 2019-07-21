@@ -22,6 +22,7 @@
           // 单参数搜索页面，key是传入请求参数
           { label: '姓氏起源', path: `/pages/search/index?path=${this.$api.NAME_FROM}&key=xing` },
           { label: '实时油价', path: `/pages/search/index?path=${this.$api.OIL_PRICE}&key=prov` },
+          { label: '景区查询', path: `/pages/search/index?path=${this.$api.SCENIC}&key=word` },
           
           
           // 获取信息页面，keys是返回拼接参数列表，要按照顺序传

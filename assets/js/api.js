@@ -10,6 +10,8 @@ export default {
   RUBBISH_CATEGORY: '/txapi/lajifenlei/',
   // 实时油价
   OIL_PRICE: '/txapi/oilprice/',
+  // 景区
+  SCENIC: '/txapi/scenic/',
 
 
   // 姓氏起源

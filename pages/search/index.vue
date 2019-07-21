@@ -1,6 +1,7 @@
 <template>
   <view class="page">
-    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch" @confirm="search"></input>
+    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch"
+      @confirm="search"></input>
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
     </scroll-view>
@@ -34,23 +35,38 @@
           this.result = '请搜索'
           return
         }
-        let body = {}
+        let body = {
+          num: 10,
+        }
         body[this.key] = this.searchStr
         this.$http.tGet(this.path, body, res => {
           if (res) {
-            let result = res[0]
-            if(result instanceof String) {
-              this.result = result.content
-            } else {
-              let node = ''
-              for(let key in result) {
-                if(result.hasOwnProperty(key)) {
-                  node += `<div>${key}：${result[key]}</div>`
+            let node = ''
+            res.forEach(item => {
+              for (let key in item) {
+                if (item.hasOwnProperty(key)) {
+                  node += `<div><b>${key}：</b>${item[key]}</div>`
                 }
               }
-              this.result = node
-              console.log(this.result)
-            }
+              node += '<hr style="margin: 16px 0;">'
+            })
+            let regs = [{
+              key: new RegExp('name：', 'g'),
+              value: '名称：',
+            },{
+              key: new RegExp('content：', 'g'),
+              value: '内容：',
+            },{
+              key: new RegExp('province：', 'g'),
+              value: '省份：',
+            },{
+              key: new RegExp('city：', 'g'),
+              value: '城市：',
+            },]
+            regs.forEach(item => {
+              node=node.replace(item.key, item.value)
+            })
+            this.result = node
           } else {
             this.result = '没有找到'
           }
