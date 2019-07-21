@@ -36,7 +36,7 @@
       },
     },
     mounted() {
-      if (!this.$isPro) {
+      if (this.$isPro) {
         this.getBTC()
         this.getETH()
       }

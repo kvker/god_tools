@@ -5,8 +5,13 @@ export default {
   KEJI_NEWS: '/keji/',
   APPLE_NEWS: '/apple/',
   
-  // 垃圾分类查询
+  // 查询相关
+  // 垃圾分类
   RUBBISH_CATEGORY: '/txapi/lajifenlei/',
+  // 实时油价
+  OIL_PRICE: '/txapi/oilprice/',
+  
+  
   // 姓氏起源
   NAME_FROM: '/txapi/surname/',
   // 神回复

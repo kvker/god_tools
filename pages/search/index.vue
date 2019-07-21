@@ -38,7 +38,19 @@
         body[this.key] = this.searchStr
         this.$http.tGet(this.path, body, res => {
           if (res) {
-            this.result = res[0].content
+            let result = res[0]
+            if(result instanceof String) {
+              this.result = result.content
+            } else {
+              let node = ''
+              for(let key in result) {
+                if(result.hasOwnProperty(key)) {
+                  node += `<div>${key}：${result[key]}</div>`
+                }
+              }
+              this.result = node
+              console.log(this.result)
+            }
           } else {
             this.result = '没有找到'
           }
