@@ -31,6 +31,7 @@
           { label: '简说历史', path: `/pages/info/index?path=${this.$api.EASY_HISTORY}&keys=["content"]` },
           { label: '精美句子', path: `/pages/info/index?path=${this.$api.NICE_JU_ZI}&keys=["author","content"]` },
           { label: '优美诗句', path: `/pages/info/index?path=${this.$api.NICE_SHI_JU}&keys=["source","author","content"]` },
+          { label: '名人名言', path: `/pages/info/index?path=${this.$api.PEOPLE_SAY}&keys=["author","content"]` },
 
           // 敬请期待，放个笑话
           { label: '敬请期待', path: `/pages/info/index?path=${this.$api.FUNNY}&keys=["title","content"]` },

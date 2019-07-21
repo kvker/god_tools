@@ -4,14 +4,14 @@ export default {
   TOUTIAO_NEWS: '/topnews/',
   KEJI_NEWS: '/keji/',
   APPLE_NEWS: '/apple/',
-  
+
   // 查询相关
   // 垃圾分类
   RUBBISH_CATEGORY: '/txapi/lajifenlei/',
   // 实时油价
   OIL_PRICE: '/txapi/oilprice/',
-  
-  
+
+
   // 姓氏起源
   NAME_FROM: '/txapi/surname/',
   // 神回复
@@ -28,7 +28,9 @@ export default {
   NICE_SHI_JU: '/txapi/verse/',
   // 笑话
   FUNNY: '/txapi/joke/',
-  
+  // 名人名言
+  PEOPLE_SAY: '/txapi/mingyan/',
+
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',
 }
