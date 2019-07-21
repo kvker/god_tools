@@ -23,4 +23,7 @@ export default {
   NICE_SHI_JU: '/txapi/verse/',
   // 笑话
   FUNNY: '/txapi/joke/',
+  
+  // 虚拟货币
+  CYBER_MONEY: '/txapi/cybermoney/',
 }

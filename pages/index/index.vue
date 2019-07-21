@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <!-- <news class='news' :newsGroups="newsGroups" @update='updateNews'></news> -->
+    <money></money>
     <view class="utils">
       <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='`${idx}rc`' :url="handleUrl(item)">{{item.label}}</navigator>
     </view>
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import news from '@/components/homepage/news'
+  import money from '@/components/homepage/money'
 
   export default {
     components: {
-      news,
+      money,
     },
     data() {
       return {
@@ -32,69 +32,9 @@
           // 敬请期待，放个笑话
           { label: '敬请期待', path: `/pages/info/index?path=${this.$api.FUNNY}&keys=["title","content"]` },
         ],
-        // 存放下载新闻的容器，套数组
-        newsGroups: [],
-        // 请求的顺序函数，用来刷新
-        funcs: [],
-      }
-    },
-    mounted() {
-      if (this.$isPro) {
-        // this.getKejis()
-        // this.getApples()
       }
     },
     methods: {
-      /** 
-       * 请求新闻的统一函数，基准函数
-       * @param {String} path 请求地址
-       * @param {Object} params 请求参数
-       * @param {String} label 显示的title
-       * @param {Function} func 刷新调用的具体函数
-       * @param {Number} idx 传入idx则为刷新
-       */
-      getNews(path, params, label, func, idx) {
-        let isFresh = typeof(idx) === 'number'
-        let item = {
-          list: [],
-          label,
-        }
-        if (isFresh) {
-          this.$set(this.newsGroups, idx, item)
-        }
-        this.$http.tGet(path, params, res => {
-          if (res) {
-            item.list = res
-            if (isFresh) {
-              this.$set(this.newsGroups, idx, item)
-            } else {
-              this.funcs.push(func)
-              this.newsGroups.push(item)
-            }
-          }
-        })
-      },
-      /**
-       * 获取科技新闻
-       * @param {Number} idx 如果有idx则为刷新，首次调用不传的
-       */
-      getKejis(idx) {
-        this.getNews(this.$api.KEJI_NEWS, null, '科技', this.getKejis, idx)
-      },
-      /**
-       * 获取科技新闻
-       * @param {Number} idx 如果有idx则为刷新，首次调用不传的
-       */
-      getApples(idx) {
-        this.getNews(this.$api.APPLE_NEWS, null, '苹果', this.getApples, idx)
-      },
-      /**
-       * 根据点击索引刷新内容
-       * @param {Number} idx 点击的按钮索引
-       */
-      updateNews(idx) {
-        this.funcs[idx](idx)
-      },
       handleUrl(item) {
         let path = item.path
         if (path.includes('?')) {
@@ -109,15 +49,14 @@
 <style scoped lang='less'>
   .page {
     flex-direction: column;
-    justify-content: center;
   }
 
   .utils {
-    height: 38%;
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-content: space-between;
+    align-content: center;
 
     .util {
       display: flex;
@@ -127,6 +66,7 @@
       height: 120upx;
       border: 2upx dashed #666;
       border-radius: 16upx;
+      margin-bottom: 16px;
     }
 
     .util-hover {
