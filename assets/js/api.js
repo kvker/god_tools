@@ -35,6 +35,10 @@ export default {
   FUNNY: '/txapi/joke/',
   // 名人名言
   PEOPLE_SAY: '/txapi/mingyan/',
+  // 土味情话
+  TU_LOVE: '/txapi/saylove/',
+  // 英语一句
+  ONE_ENGLISH: '/txapi/ensentence/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',

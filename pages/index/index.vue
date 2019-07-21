@@ -37,6 +37,8 @@
           { label: '精美句子', path: `/pages/info/index?path=${this.$api.NICE_JU_ZI}&keys=["author","content"]` },
           { label: '优美诗句', path: `/pages/info/index?path=${this.$api.NICE_SHI_JU}&keys=["source","author","content"]` },
           { label: '名人名言', path: `/pages/info/index?path=${this.$api.PEOPLE_SAY}&keys=["author","content"]` },
+          { label: '土味情话', path: `/pages/info/index?path=${this.$api.TU_LOVE}&keys=["content"]` },
+          { label: '英语一句', path: `/pages/info/index?path=${this.$api.ONE_ENGLISH}&keys=["en","zh"]` },
 
           // 敬请期待，放个笑话
           { label: '敬请期待', path: `/pages/info/index?path=${this.$api.FUNNY}&keys=["title","content"]` },
