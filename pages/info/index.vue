@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import regs from '@/assets/js/regexp.js'
+
   export default {
     data() {
       return {
@@ -43,7 +45,9 @@
     methods: {
       getInfo() {
         this.resultList = ['......']
-        this.$http.tGet(this.path, { num: this.num }, res => {
+        this.$http.tGet(this.path, {
+          num: this.num
+        }, res => {
           if (res) {
             let resultList = []
             this.resultList = []
@@ -87,6 +91,7 @@
     padding: 0 8upx 16upx;
     border-bottom: 2upx dashed #666;
     margin-bottom: 16upx;
+
     &:last-child {
       border-bottom: none;
     }
@@ -96,6 +101,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+
     .btn {
       margin-top: 16upx;
     }

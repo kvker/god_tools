@@ -11,6 +11,7 @@
 
 <script>
   import searchMixin from '@/mixins/search'
+  import regs from '@/assets/js/regexp.js'
 
   export default {
     mixins: [searchMixin],
@@ -50,19 +51,7 @@
               }
               node += '<hr style="margin: 16px 0;">'
             })
-            let regs = [{
-              key: new RegExp('name：', 'g'),
-              value: '名称：',
-            },{
-              key: new RegExp('content：', 'g'),
-              value: '内容：',
-            },{
-              key: new RegExp('province：', 'g'),
-              value: '省份：',
-            },{
-              key: new RegExp('city：', 'g'),
-              value: '城市：',
-            },]
+            
             regs.forEach(item => {
               node=node.replace(item.key, item.value)
             })
