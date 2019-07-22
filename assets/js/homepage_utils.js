@@ -36,13 +36,6 @@ export default [
         key: 'word',
       },
       {
-        label: '唐诗三百',
-        url: api.TANG_SHI,
-        key: 'word',
-        hasPage: true,
-        canRandom: true,
-      },
-      {
         label: '唐诗大全',
         url: api.TANG_SHIS,
         key: 'word',
@@ -64,17 +57,20 @@ export default [
         label: '成语典故',
         url: api.CHENG_YU_DIAN_GU,
         key: 'word',
-      }, {
+      },
+      {
         label: '周公解梦',
         url: api.RESOLVE_DREAM,
         key: 'word',
         keys: ["title", "result"],
-      }, {
+      },
+      {
         label: '实时股票',
         url: api.FINANCE,
         key: 'code',
         arrayOnly: true,
-      }, {
+      },
+      {
         label: '汉字拼音',
         url: api.HAN_ZI_PIN_YIN,
         key: 'text',
