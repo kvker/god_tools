@@ -102,5 +102,15 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "神的工具箱",
+        "router" : {
+            "mode" : "history"
+        },
+        "devServer" : {
+            "port" : 3098
+        },
+        "domain" : "https://m.kvker.com/"
     }
 }
