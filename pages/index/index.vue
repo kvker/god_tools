@@ -26,6 +26,8 @@
   }, {
     key: 'values',
     isJSON: true
+  }, {
+    key: 'canRandom', // 是否可以随机，用于搜索
   }, ]
 
   let utils = []

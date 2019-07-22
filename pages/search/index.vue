@@ -7,6 +7,7 @@
     </scroll-view>
     <view class="ctrls">
       <button class="btn" @click="clickCopy">拷贝内容</button>
+      <button v-if="canRandom" class="btn" @click="searchResult">随机</button>
       <button v-if="hasPage && searched" class="btn" @click="clickNextPage">下一页</button>
     </view>
   </view>
@@ -28,19 +29,21 @@
         page: 1,
         // 是否搜索过，用来判断是否刚刚进入
         searched: false,
+        canRandom: false,
       }
     },
     onLoad(option) {
       this.url = option.url
       this.key = option.key
       this.hasPage = !!option.hasPage
+      this.canRandom = !!option.canRandom
       uni.setNavigationBarTitle({
         title: option.label
       })
     },
     methods: {
       searchResult() {
-        if (!this.searchStr.length) {
+        if (!this.searchStr.length && !this.canRandom) {
           this.result = '请搜索'
           return
         }
@@ -50,7 +53,10 @@
           num: 10,
           page: this.page,
         }
-        body[this.key] = this.searchStr
+        // 如果非随机，则插入搜索字段
+        if (!this.canRandom) {
+          body[this.key] = this.searchStr
+        }
         this.$http.tGet(this.url, body, res => {
           if (res) {
             let node = ''

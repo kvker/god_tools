@@ -33,6 +33,7 @@ export default [
         url: api.TANG_SHI,
         key: 'word',
         hasPage: true,
+        canRandom: true,
       },
     ],
   },
