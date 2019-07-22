@@ -48,6 +48,16 @@ export default [
         key: 'word',
         keys: ['content'],
       },
+      {
+        label: '网络梗',
+        url: api.NET_GENG,
+        key: 'word',
+      },
+      {
+        label: '成语典故',
+        url: api.CHENG_YU_DIAN_GU,
+        key: 'word',
+      },
     ],
   },
   

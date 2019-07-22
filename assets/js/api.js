@@ -18,6 +18,10 @@ export default {
   TANG_SHIS: '/txapi/poetries/',
   // 股市术语
   GU_SHI_LANGUAGE: '/txapi/shares/',
+  // 网络热词
+  NET_GENG: '/txapi/hotword/',
+  // 成语典故
+  CHENG_YU_DIAN_GU: '/txapi/chengyu/',
   
   // 固定选择
   WEATHER_SHI_JU: '/txapi/tianqishiju/',

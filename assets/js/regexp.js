@@ -22,4 +22,19 @@ export default [{
 }, {
   key: new RegExp('title：', 'g'),
   value: '标题：',
+}, {
+  key: new RegExp('chengyu：', 'g'),
+  value: '成语：',
+}, {
+  key: new RegExp('pinyin：', 'g'),
+  value: '拼音：',
+}, {
+  key: new RegExp('diangu：', 'g'),
+  value: '典故：',
+}, {
+  key: new RegExp('chuchu：', 'g'),
+  value: '出处：',
+}, {
+  key: new RegExp('fanli：', 'g'),
+  value: '范例：',
 }, ]
