@@ -40,4 +40,25 @@ export default [{
 }, {
   key: new RegExp('lsdate：', 'g'),
   value: '日期：',
+}, {
+  key: new RegExp('cp_名称：', 'g'),
+  value: '名称：',
+}, {
+  key: new RegExp('type_名称：', 'g'),
+  value: '类型：',
+}, {
+  key: new RegExp('texing：', 'g'),
+  value: '特性：',
+}, {
+  key: new RegExp('tiaoliao：', 'g'),
+  value: '调料：',
+}, {
+  key: new RegExp('yuanliao：', 'g'),
+  value: '原料：',
+}, {
+  key: new RegExp('zuofa：', 'g'),
+  value: '做法：',
+}, {
+  key: new RegExp('tishi：', 'g'),
+  value: '提示：',
 }, ]

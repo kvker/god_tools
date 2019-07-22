@@ -8,6 +8,8 @@ export default {
   // 查询相关
   // 垃圾分类
   RUBBISH_CATEGORY: '/txapi/lajifenlei/',
+  // 菜谱大全
+  CAI_PU: '/txapi/caipu/',
   // 实时油价
   OIL_PRICE: '/txapi/oilprice/',
   // 景区
@@ -55,6 +57,10 @@ export default {
   NET_NAME: '/txapi/cname/',
   // 历史上的今天
   HISTORY_TODAY: '/txapi/lishi/',
+  // 脑急转弯
+  HEAD_BACK: '/txapi/naowan/',
+  // 名言警句
+  MING_YAN: '/txapi/dictum/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',

@@ -14,9 +14,15 @@ export default [
     path: '/pages/search/index',
     label: '普通搜索',
     subs: [{
+        label: '菜谱大全',
+        url: api.CAI_PU,
+        key: 'word',
+        keys: ['cp_name', 'type_name', 'texing', 'tiaoliao', 'yuanliao', 'zuofa', 'tishi'],
+      }, {
         label: '姓氏起源',
         url: api.NAME_FROM,
         key: 'xing',
+        keys: ['content'],
       },
       {
         label: '实时油价',
@@ -127,6 +133,16 @@ export default [
       url: api.HISTORY_TODAY,
       key: 'date',
       keys: ["title", "lsdate"],
+    }, {
+      label: '脑急转弯',
+      url: api.HEAD_BACK,
+      key: 'date',
+      keys: ["quest", "result"],
+    }, {
+      label: '名言警句',
+      url: api.MING_YAN,
+      key: 'date',
+      keys: ["mrname", "content"],
     }, {
       label: '敬请期待', // 敬请期待，放个笑话
       url: api.FUNNY,

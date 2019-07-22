@@ -1,5 +1,5 @@
 // 天行Api的AppKey
-const TAK = '4641dbc0816d3ac895f65462c1d967fd'
+const TAK = 'e3714a97786a795065d75327d2850115'
 
 export default {
   /**
