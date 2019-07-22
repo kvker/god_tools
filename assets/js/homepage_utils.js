@@ -69,6 +69,11 @@ export default [
         url: api.RESOLVE_DREAM,
         key: 'word',
         keys: ["title", "result"],
+      }, {
+        label: '实时股票',
+        url: api.FINANCE,
+        key: 'code',
+        arrayOnly: true,
       },
     ],
   },

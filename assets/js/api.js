@@ -24,6 +24,8 @@ export default {
   NET_GENG: '/txapi/hotword/',
   // 成语典故
   CHENG_YU_DIAN_GU: '/txapi/chengyu/',
+  // 实时股票
+  FINANCE: '/txapi/finance/',
   
   // 固定选择
   WEATHER_SHI_JU: '/txapi/tianqishiju/',

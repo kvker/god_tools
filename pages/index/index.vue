@@ -23,6 +23,8 @@
   }, {
     key: 'key'
   }, {
+    key: 'arrayOnly'
+  }, {
     key: 'keys',
     isJSON: true
   }, {

@@ -30,6 +30,8 @@
         // 是否搜索过，用来判断是否刚刚进入
         searched: false,
         canRandom: false,
+        // 下发数据纯数组内字符串
+        arrayOnly: false,
       }
     },
     onLoad(option) {
@@ -41,6 +43,7 @@
         }
         this.hasPage = !!option.hasPage
         this.canRandom = !!option.canRandom
+        this.arrayOnly = !!option.arrayOnly
         uni.setNavigationBarTitle({
           title: option.label
         })
@@ -74,6 +77,8 @@
                 for (let key of this.keys) {
                   node += `<div><b>${key}：</b>${item[key]}</div>`
                 }
+              } else if(this.arrayOnly) {
+                node += `<div>${item}</div>`
               } else {
                 for (let key in item) {
                   if (item.hasOwnProperty(key)) {
