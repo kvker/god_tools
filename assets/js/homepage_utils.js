@@ -49,7 +49,7 @@ export default [
         keys: ['content'],
       },
       {
-        label: '网络梗',
+        label: '网络梗来源',
         url: api.NET_GENG,
         key: 'word',
       },
@@ -71,7 +71,7 @@ export default [
         arrayOnly: true,
       },
       {
-        label: '汉字拼音',
+        label: '汉字转拼音',
         url: api.HAN_ZI_PIN_YIN,
         key: 'text',
       },
@@ -140,12 +140,12 @@ export default [
       url: api.NET_NAME,
       keys: ["naming"],
     }, {
-      label: '历史今天',
+      label: '历史上今天',
       url: api.HISTORY_TODAY,
       key: 'date',
       keys: ["title", "lsdate"],
     }, {
-      label: '脑急转弯',
+      label: '脑筋急转弯',
       url: api.HEAD_BACK,
       key: 'date',
       keys: ["quest", "result"],
