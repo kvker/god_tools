@@ -125,7 +125,7 @@
 
   .result-list-box {
     border: 2upx solid #666;
-    height: 800upx;
+    height: 880upx;
     border-radius: 8upx;
     padding: 16upx;
   }
