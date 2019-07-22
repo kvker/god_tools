@@ -74,6 +74,10 @@ export default [
         url: api.FINANCE,
         key: 'code',
         arrayOnly: true,
+      }, {
+        label: '汉字拼音',
+        url: api.HAN_ZI_PIN_YIN,
+        key: 'text',
       },
     ],
   },

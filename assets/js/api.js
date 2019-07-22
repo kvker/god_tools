@@ -26,6 +26,8 @@ export default {
   CHENG_YU_DIAN_GU: '/txapi/chengyu/',
   // 实时股票
   FINANCE: '/txapi/finance/',
+  // 汉字转拼音
+  HAN_ZI_PIN_YIN:'/txapi/pinyin/',
   
   // 固定选择
   WEATHER_SHI_JU: '/txapi/tianqishiju/',

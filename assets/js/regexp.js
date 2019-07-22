@@ -67,4 +67,7 @@ export default [{
 }, {
   key: new RegExp('time：', 'g'),
   value: '时间：',
+}, {
+  key: new RegExp('jianxie：', 'g'),
+  value: '简写：',
 }, ]

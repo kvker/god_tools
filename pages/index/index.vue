@@ -5,7 +5,7 @@
       <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='idx' :url="item.path">{{item.label}}</navigator>
     </view>
     <!-- #ifdef MP-WEIXIN -->
-      <button class="contact" open-type="contact">问</button>
+    <button class="contact" open-type="contact">问</button>
     <!-- #endif -->
   </view>
 </template>
@@ -46,7 +46,8 @@
         key,
         isJSON
       }) => {
-        util.path += `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
+        util.path +=
+          `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
       })
       utils.push(util)
     })
@@ -71,11 +72,11 @@
   }
 
   .utils {
-    flex: 1;
+    height: calc(100% - 400upx);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-content: center;
+    overflow-y: scroll;
 
     .util {
       display: flex;
