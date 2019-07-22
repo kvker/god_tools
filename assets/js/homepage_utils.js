@@ -28,6 +28,7 @@ export default [
         label: '实时油价',
         url: api.OIL_PRICE,
         key: 'prov',
+        keys: ['p0', 'p89', 'p92', 'p95', 'p98', 'time'],
       },
       {
         label: '景区查询',

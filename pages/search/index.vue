@@ -7,7 +7,7 @@
     </scroll-view>
     <view class="ctrls">
       <button class="btn" @click="clickCopy">拷贝内容</button>
-      <button v-if="canRandom" class="btn" @click="searchResult">随机</button>
+      <button v-if="canRandom" class="btn" @click="clickRandom">随机</button>
       <button v-if="hasPage && searched" class="btn" @click="clickNextPage">下一页</button>
     </view>
   </view>
@@ -102,7 +102,11 @@
         this.page++
         this.searchResult()
       },
-    }
+      clickRandom() {
+        this.searchStr = ''
+        this.searchResult()
+      }
+    },
   }
 </script>
 

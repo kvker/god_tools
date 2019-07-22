@@ -64,4 +64,7 @@ export default [{
 }, {
   key: new RegExp('result：', 'g'),
   value: '结果：',
+}, {
+  key: new RegExp('time：', 'g'),
+  value: '时间：',
 }, ]
