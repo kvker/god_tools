@@ -33,13 +33,21 @@
       }
     },
     onLoad(option) {
-      this.url = option.url
-      this.key = option.key
-      this.hasPage = !!option.hasPage
-      this.canRandom = !!option.canRandom
-      uni.setNavigationBarTitle({
-        title: option.label
-      })
+      try {
+        this.url = option.url
+        this.key = option.key
+        if (option.keys) {
+          this.keys = JSON.parse(option.keys)
+        }
+        this.hasPage = !!option.hasPage
+        this.canRandom = !!option.canRandom
+        uni.setNavigationBarTitle({
+          title: option.label
+        })
+      } catch (e) {
+        console.log(e)
+        throw '参数不足'
+      }
     },
     methods: {
       searchResult() {
@@ -61,9 +69,16 @@
           if (res) {
             let node = ''
             res.forEach(item => {
-              for (let key in item) {
-                if (item.hasOwnProperty(key)) {
+              // 如果指定了显示的key
+              if (this.keys && this.keys.length) {
+                for (let key of this.keys) {
                   node += `<div><b>${key}：</b>${item[key]}</div>`
+                }
+              } else {
+                for (let key in item) {
+                  if (item.hasOwnProperty(key)) {
+                    node += `<div><b>${key}：</b>${item[key]}</div>`
+                  }
                 }
               }
               node += '<hr style="margin: 16px 0;">'

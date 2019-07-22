@@ -42,7 +42,7 @@
         key,
         isJSON
       }) => {
-        util.path += `${key}=${isJSON ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
+        util.path += `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
       })
       utils.push(util)
     })

@@ -14,6 +14,10 @@ export default {
   SCENIC: '/txapi/scenic/',
   // 唐诗
   TANG_SHI: '/txapi/poetry/',
+  // 唐诗大全
+  TANG_SHIS: '/txapi/poetries/',
+  // 股市术语
+  GU_SHI_LANGUAGE: '/txapi/shares/',
   
   // 固定选择
   WEATHER_SHI_JU: '/txapi/tianqishiju/',
@@ -41,6 +45,10 @@ export default {
   TU_LOVE: '/txapi/saylove/',
   // 英语一句
   ONE_ENGLISH: '/txapi/ensentence/',
+  // 歇后语
+  XIE_HOU_YU: '/txapi/xiehou/',
+  // 网络起名
+  NET_NAME: '/txapi/cname/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',

@@ -35,8 +35,22 @@ export default [
         hasPage: true,
         canRandom: true,
       },
+      {
+        label: '唐诗大全',
+        url: api.TANG_SHIS,
+        key: 'word',
+        hasPage: true,
+        canRandom: true,
+      },
+      {
+        label: '股市术语',
+        url: api.GU_SHI_LANGUAGE,
+        key: 'word',
+        keys: ['content'],
+      },
     ],
   },
+  
   // 固定筛选类型
   {
     path: '/pages/picker/index',
@@ -90,6 +104,14 @@ export default [
       label: '英语一句',
       url: api.ONE_ENGLISH,
       keys: ["en", "zh"],
+    }, {
+      label: '歇后语',
+      url: api.XIE_HOU_YU,
+      keys: ["quest", "result"],
+    }, {
+      label: '网络起名',
+      url: api.NET_NAME,
+      keys: ["naming"],
     }, {
       label: '敬请期待', // 敬请期待，放个笑话
       url: api.FUNNY,
