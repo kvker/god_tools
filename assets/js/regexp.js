@@ -37,4 +37,7 @@ export default [{
 }, {
   key: new RegExp('fanli：', 'g'),
   value: '范例：',
+}, {
+  key: new RegExp('lsdate：', 'g'),
+  value: '日期：',
 }, ]

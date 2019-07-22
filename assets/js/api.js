@@ -53,6 +53,8 @@ export default {
   XIE_HOU_YU: '/txapi/xiehou/',
   // 网络起名
   NET_NAME: '/txapi/cname/',
+  // 历史上的今天
+  HISTORY_TODAY: '/txapi/lishi/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',

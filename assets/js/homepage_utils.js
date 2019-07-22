@@ -60,7 +60,7 @@ export default [
       },
     ],
   },
-  
+
   // 固定筛选类型
   {
     path: '/pages/picker/index',
@@ -70,7 +70,7 @@ export default [
       url: api.WEATHER_SHI_JU,
       key: 'tqtype',
       keys: ["source", "author", "content"],
-      values: ["风","云","雨","雪","霜","露","雾","雷","晴","阴"],
+      values: ["风", "云", "雨", "雪", "霜", "露", "雾", "雷", "晴", "阴"],
     }, ]
   },
 
@@ -122,6 +122,11 @@ export default [
       label: '网络起名',
       url: api.NET_NAME,
       keys: ["naming"],
+    }, {
+      label: '历史今天',
+      url: api.HISTORY_TODAY,
+      key: 'date',
+      keys: ["title", "lsdate"],
     }, {
       label: '敬请期待', // 敬请期待，放个笑话
       url: api.FUNNY,
