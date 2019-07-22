@@ -28,14 +28,13 @@
       }
     },
     onLoad(option) {
-      console.log(option)
       try {
         this.url = option.url
-        this.title = option.title
+        this.title = option.label
         this.num = option.num || 10
         this.keys = JSON.parse(option.keys)
         uni.setNavigationBarTitle({
-          title: option.title
+          title: option.label
         })
         this.getInfo()
       } catch (e) {

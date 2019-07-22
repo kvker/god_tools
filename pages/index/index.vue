@@ -12,6 +12,22 @@
   import money from '@/components/homepage/money'
   import homepageUtils from '@/assets/js/homepage_utils.js'
 
+  const params = [{
+    key: 'label'
+  }, {
+    key: 'hasPage'
+  }, {
+    key: 'url'
+  }, {
+    key: 'key'
+  }, {
+    key: 'keys',
+    isJSON: true
+  }, {
+    key: 'values',
+    isJSON: true
+  }, ]
+
   let utils = []
   homepageUtils.forEach(item => {
     item.subs.forEach(subItem => {
@@ -19,7 +35,13 @@
         path: item.path,
       }
       util.label = subItem.label
-      util.path += `?title=${subItem.label}&hasPage=${subItem.hasPage}&url=${subItem.url}&key=${subItem.key}&keys=${JSON.stringify(subItem.keys || '[]')}&values=${JSON.stringify(subItem.values || '[]')}`
+      util.path += '?'
+      params.forEach(({
+        key,
+        isJSON
+      }) => {
+        util.path += `${key}=${isJSON ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
+      })
       utils.push(util)
     })
   })
@@ -33,8 +55,7 @@
         utils,
       }
     },
-    methods: {
-    },
+    methods: {},
   }
 </script>
 

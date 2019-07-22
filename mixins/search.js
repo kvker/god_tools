@@ -8,8 +8,8 @@ export default {
     }
   },
   onLoad(option) {
-    if(option.title) {
-      this.title = option.title
+    if(option.label) {
+      this.title = option.label
     }
   },
   methods: {

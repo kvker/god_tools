@@ -35,7 +35,7 @@
       this.key = option.key
       this.hasPage = !!option.hasPage
       uni.setNavigationBarTitle({
-        title: option.title
+        title: option.label
       })
     },
     methods: {
