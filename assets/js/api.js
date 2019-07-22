@@ -61,6 +61,8 @@ export default {
   HEAD_BACK: '/txapi/naowan/',
   // 名言警句
   MING_YAN: '/txapi/dictum/',
+  // 周公解梦
+  RESOLVE_DREAM: '/txapi/dream/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',

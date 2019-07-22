@@ -61,4 +61,7 @@ export default [{
 }, {
   key: new RegExp('tishi：', 'g'),
   value: '提示：',
+}, {
+  key: new RegExp('result：', 'g'),
+  value: '结果：',
 }, ]

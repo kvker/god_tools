@@ -63,6 +63,11 @@ export default [
         label: '成语典故',
         url: api.CHENG_YU_DIAN_GU,
         key: 'word',
+      }, {
+        label: '周公解梦',
+        url: api.RESOLVE_DREAM,
+        key: 'word',
+        keys: ["title", "result"],
       },
     ],
   },
