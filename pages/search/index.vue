@@ -17,14 +17,14 @@
     mixins: [searchMixin],
     data() {
       return {
-        // 请求的path
-        path: '',
+        // 请求的url
+        url: '',
         // 请求参数的关键字段
         keys: [],
       }
     },
     onLoad(option) {
-      this.path = option.path
+      this.url = option.url
       this.key = option.key
       uni.setNavigationBarTitle({
         title: option.title
@@ -40,7 +40,7 @@
           num: 10,
         }
         body[this.key] = this.searchStr
-        this.$http.tGet(this.path, body, res => {
+        this.$http.tGet(this.url, body, res => {
           if (res) {
             let node = ''
             res.forEach(item => {

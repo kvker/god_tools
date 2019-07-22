@@ -18,8 +18,8 @@
   export default {
     data() {
       return {
-        // 请求的path
-        path: '',
+        // 请求的url
+        url: '',
         // 请求参数的关键字段
         keys: [],
         title: '',
@@ -28,8 +28,9 @@
       }
     },
     onLoad(option) {
+      console.log(option)
       try {
-        this.path = option.path
+        this.url = option.url
         this.title = option.title
         this.num = option.num || 10
         this.keys = JSON.parse(option.keys)
@@ -45,7 +46,7 @@
     methods: {
       getInfo() {
         this.resultList = ['......']
-        this.$http.tGet(this.path, {
+        this.$http.tGet(this.url, {
           num: this.num
         }, res => {
           if (res) {

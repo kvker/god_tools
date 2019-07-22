@@ -1,11 +1,11 @@
 <template>
   <view class="money-box">
     <view class="buttons">
-      <view class="button" :class="{highlight: currentIdx === idx}" v-for="(moneyGroup, idx) of moneyGroups" :key="`nb${idx}`"
+      <view class="button" :class="{highlight: currentIdx === idx}" v-for="(moneyGroup, idx) of moneyGroups" :key="idx"
         @click="clickButton(idx)">{{moneyGroup.label}}</view>
     </view>
     <view class="money-group">
-      <view class="money" v-for="(money, nidx) of moneyGroup.list" :key="`ng${nidx}`">
+      <view class="money" v-for="(money, nidx) of moneyGroup.list" :key="nidx">
         <view class="desc">单位：<text class='result'>美元</text></view>
         <view class="desc cur">收盘价：<text class='result'>{{money.close}}</text></view>
         <view class="desc high">日最高价：<text class='result'>{{money.high}}</text></view>

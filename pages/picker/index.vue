@@ -21,8 +21,8 @@
   export default {
     data() {
       return {
-        // 请求的path
-        path: '',
+        // 请求的url
+        url: '',
         // 请求关键字段
         key: '',
         // 显示的关键字段
@@ -37,7 +37,7 @@
     },
     onLoad(option) {
       try {
-        this.path = option.path
+        this.url = option.url
         this.title = option.title
         this.key = option.key
         this.num = option.num || 10
@@ -63,7 +63,7 @@
           num: this.num
         }
         body[this.key] = this.index + 1
-        this.$http.tGet(this.path, body, res => {
+        this.$http.tGet(this.url, body, res => {
           if (res) {
             let resultList = []
             this.resultList = []
