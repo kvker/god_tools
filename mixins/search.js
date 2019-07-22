@@ -20,8 +20,8 @@ export default {
       }
     },
     search() {
-      this.result = '......'
-      this.resultList = ['......']
+      this.result = '获取中...'
+      this.resultList = ['获取中...']
       this.searchResult()
     },
   },

@@ -46,6 +46,7 @@
           this.resultList = ['请搜索']
           return
         }
+        this.resultList = ['获取中...']
         this.$http.tGet(this.$api.RUBBISH_CATEGORY, { word: this.searchStr }, res => {
           if (res) {
             let resultList = []

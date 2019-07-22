@@ -32,7 +32,7 @@
         index: 0,
         title: '',
         searchStr: '',
-        resultList: ['......'],
+        resultList: ['获取中...'],
       }
     },
     onLoad(option) {
@@ -58,7 +58,7 @@
         this.getInfo()
       },
       getInfo() {
-        this.resultList = ['......']
+        this.resultList = ['获取中...']
         let body = {
           num: this.num
         }

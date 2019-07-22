@@ -5,7 +5,10 @@
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
     </scroll-view>
-    <button class="copy-btn" @click="clickCopy">拷贝内容</button>
+    <view class="ctrls">
+      <button class="btn" @click="clickCopy">拷贝内容</button>
+      <button v-if="hasPage && searched" class="btn" @click="clickNextPage">下一页</button>
+    </view>
   </view>
 </template>
 
@@ -21,11 +24,16 @@
         url: '',
         // 请求参数的关键字段
         keys: [],
+        hasPage: false,
+        page: 1,
+        // 是否搜索过，用来判断是否刚刚进入
+        searched: false,
       }
     },
     onLoad(option) {
       this.url = option.url
       this.key = option.key
+      this.hasPage = !!option.hasPage
       uni.setNavigationBarTitle({
         title: option.title
       })
@@ -36,8 +44,11 @@
           this.result = '请搜索'
           return
         }
+        this.result = '获取中...'
+        this.searched = true
         let body = {
           num: 10,
+          page: this.page,
         }
         body[this.key] = this.searchStr
         this.$http.tGet(this.url, body, res => {
@@ -51,9 +62,9 @@
               }
               node += '<hr style="margin: 16px 0;">'
             })
-            
+
             regs.forEach(item => {
-              node=node.replace(item.key, item.value)
+              node = node.replace(item.key, item.value)
             })
             this.result = node
           } else {
@@ -65,6 +76,10 @@
         uni.setClipboardData({
           data: this.result,
         })
+      },
+      clickNextPage() {
+        this.page++
+        this.searchResult()
       },
     }
   }
@@ -95,7 +110,13 @@
     padding: 0 8upx;
   }
 
-  .copy-btn {
-    margin-top: 16upx;
+  .ctrls {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .btn {
+      margin-top: 16upx;
+    }
   }
 </style>

@@ -28,6 +28,12 @@ export default [
         url: api.SCENIC,
         key: 'word',
       },
+      {
+        label: '唐诗三百',
+        url: api.TANG_SHI,
+        key: 'word',
+        hasPage: true,
+      },
     ],
   },
   // 固定筛选类型

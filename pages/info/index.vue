@@ -24,7 +24,7 @@
         keys: [],
         title: '',
         searchStr: '',
-        resultList: ['......'],
+        resultList: ['获取中...'],
       }
     },
     onLoad(option) {
@@ -45,7 +45,7 @@
     },
     methods: {
       getInfo() {
-        this.resultList = ['......']
+        this.resultList = ['获取中...']
         this.$http.tGet(this.url, {
           num: this.num
         }, res => {

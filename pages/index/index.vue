@@ -19,7 +19,7 @@
         path: item.path,
       }
       util.label = subItem.label
-      util.path += `?title=${subItem.label}&url=${subItem.url}&key=${subItem.key}&keys=${JSON.stringify(subItem.keys || '[]')}&values=${JSON.stringify(subItem.values || '[]')}`
+      util.path += `?title=${subItem.label}&hasPage=${subItem.hasPage}&url=${subItem.url}&key=${subItem.key}&keys=${JSON.stringify(subItem.keys || '[]')}&values=${JSON.stringify(subItem.values || '[]')}`
       utils.push(util)
     })
   })
@@ -54,8 +54,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 200upx;
-      height: 120upx;
+      width: 160upx;
+      height: 80upx;
       border: 2upx dashed #666;
       border-radius: 16upx;
       margin-bottom: 16px;

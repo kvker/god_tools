@@ -10,4 +10,16 @@ export default [{
 }, {
   key: new RegExp('city：', 'g'),
   value: '城市：',
+}, {
+  key: new RegExp('author：', 'g'),
+  value: '作者：',
+}, {
+  key: new RegExp('kind：', 'g'),
+  value: '类型：',
+}, {
+  key: new RegExp('intro：', 'g'),
+  value: '注解：',
+}, {
+  key: new RegExp('title：', 'g'),
+  value: '标题：',
 }, ]

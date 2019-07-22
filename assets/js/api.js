@@ -12,6 +12,8 @@ export default {
   OIL_PRICE: '/txapi/oilprice/',
   // 景区
   SCENIC: '/txapi/scenic/',
+  // 唐诗
+  TANG_SHI: '/txapi/poetry/',
   
   // 固定选择
   WEATHER_SHI_JU: '/txapi/tianqishiju/',
