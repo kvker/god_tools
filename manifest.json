@@ -93,9 +93,7 @@
             "es6" : false
         },
         "usingComponents" : true,
-        "navigateToMiniProgramAppIdList": [
-          "wx370aae98dc3ead4b"
-        ]
+        "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ]
     },
     "mp-alipay" : {
         "usingComponents" : true

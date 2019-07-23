@@ -80,6 +80,7 @@
         let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
           img: res.base64,
         })
+
         if (checkRes) {
           checkRes.forEach(item => {
             let type = ''
