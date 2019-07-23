@@ -1,9 +1,11 @@
 <template>
   <view class="page">
-    <money></money>
+    <!-- <money></money> -->
     <view class="utils">
+      <!-- #ifdef MP-WEIXIN -->
+      <view class="util jump" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
+      <!-- #endif -->
       <navigator class="util" hover-class="util-hover" v-for="(item, idx) of utils" :key='idx' :url="item.path">{{item.label}}</navigator>
-      <view class="util" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
     </view>
     <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
@@ -72,9 +74,8 @@
           appId: item.wxmpid,
           path: '/pages/index/index',
           extraData: {},
-          envVersion: 'develop',
           success(res) {
-            // 打开成功
+            console.log('跳转成功')
           }
         })
       }
@@ -88,10 +89,11 @@
   }
 
   .utils {
-    height: calc(100% - 400upx);
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-content: center;
     overflow-y: scroll;
 
     .util {
@@ -102,7 +104,11 @@
       height: 80upx;
       border: 2upx dashed #666;
       border-radius: 16upx;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
+    }
+
+    .jump {
+      color: red;
     }
 
     .util-hover {

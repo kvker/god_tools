@@ -29,4 +29,35 @@ export default {
       complete: () => {}
     });
   },
+  /**
+   * 天行Api的POST
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  tPost(path, data, cb) {
+    if (!data) data = {}
+    data.key = TAK
+    let url = 'https://api.tianapi.com' + path
+    uni.request({
+      url,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      data,
+      success: ({ data }) => {
+        if (data.code === 200) {
+          cb(data.newslist)
+        } else {
+          uni.showToast({
+            title: data.msg,
+          })
+          cb()
+        }
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  },
 }

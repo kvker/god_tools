@@ -1,6 +1,10 @@
 <template>
   <view class="page">
-    <button @click="goRabbishCategary" class="title">垃圾分类练习</button>
+    <canvas canvas-id="canvas"></canvas>
+    <view class="ctrls">
+      <button @click="goRabbishCategary" class="button">练习</button>
+      <button @click="chooseImage" class="button">图像检索</button>
+    </view>
     <view class="search-box">
       <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch"
         @confirm="search"></input>
@@ -13,7 +17,8 @@
 
 <script>
   import searchMixin from '@/mixins/search'
-  
+  import chooseImg2base64 from '@/assets/js/img2base64'
+
   const results = [{
     name: '可回收物',
     categroy: 1,
@@ -47,7 +52,9 @@
           return
         }
         this.resultList = ['获取中...']
-        this.$http.tGet(this.$api.RUBBISH_CATEGORY, { word: this.searchStr }, res => {
+        this.$http.tGet(this.$api.RUBBISH_CATEGORY, {
+          word: this.searchStr
+        }, res => {
           if (res) {
             let resultList = []
             if (res) {
@@ -66,6 +73,15 @@
           }
         })
       },
+      async chooseImage() {
+        let res = await chooseImg2base64('canvas')
+        console.log(res)
+        let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
+          img: res.base64,
+        }, res => {
+          console.log(res)
+        })
+      }
     }
   }
 </script>
@@ -75,7 +91,16 @@
     align-items: center;
   }
 
-  .title {
+  canvas {
+    position: absolute;
+    left: -10000px;
+    top: 0;
+    width: 2000px;
+    height: 2000px;
+  }
+
+  .ctrls {
+    display: flex;
     margin: 240upx 0 32upx;
   }
 

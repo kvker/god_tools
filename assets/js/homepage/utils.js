@@ -18,11 +18,6 @@ export default [
         url: api.CAI_PU,
         key: 'word',
         keys: ['cp_name', 'type_name', 'texing', 'tiaoliao', 'yuanliao', 'zuofa', 'tishi'],
-      }, {
-        label: '姓氏起源',
-        url: api.NAME_FROM,
-        key: 'xing',
-        keys: ['content'],
       },
       {
         label: '实时油价',
@@ -34,6 +29,12 @@ export default [
         label: '景区查询',
         url: api.SCENIC,
         key: 'word',
+      },
+      {
+        label: '姓氏起源',
+        url: api.NAME_FROM,
+        key: 'xing',
+        keys: ['content'],
       },
       {
         label: '唐诗大全',
@@ -64,12 +65,12 @@ export default [
         key: 'word',
         keys: ["title", "result"],
       },
-      {
-        label: '实时股票',
-        url: api.FINANCE,
-        key: 'code',
-        arrayOnly: true,
-      },
+      // {
+      //   label: '实时股票',
+      //   url: api.FINANCE,
+      //   key: 'code',
+      //   arrayOnly: true,
+      // },
       {
         label: '汉字转拼音',
         url: api.HAN_ZI_PIN_YIN,
@@ -119,10 +120,6 @@ export default [
       label: '优美诗句',
       url: api.NICE_SHI_JU,
       keys: ['source', "author", "content"],
-    }, {
-      label: '名人名言',
-      url: api.PEOPLE_SAY,
-      keys: ["author", "content"],
     }, {
       label: '土味情话',
       url: api.TU_LOVE,
