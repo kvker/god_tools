@@ -53,7 +53,7 @@
       }
     },
     methods: {
-      searchResult() {
+      async searchResult() {
         if (!this.searchStr.length && !this.canRandom) {
           this.result = '请搜索'
           return
@@ -68,35 +68,34 @@
         if (!this.canRandom) {
           body[this.key] = this.searchStr
         }
-        this.$http.tGet(this.url, body, res => {
-          if (res) {
-            let node = ''
-            res.forEach(item => {
-              // 如果指定了显示的key
-              if (this.keys && this.keys.length) {
-                for (let key of this.keys) {
+        let res = await this.$http.tGet(this.url, body)
+        if (res) {
+          let node = ''
+          res.forEach(item => {
+            // 如果指定了显示的key
+            if (this.keys && this.keys.length) {
+              for (let key of this.keys) {
+                node += `<div><b>${key}：</b>${item[key]}</div>`
+              }
+            } else if(this.arrayOnly) {
+              node += `<div>${item}</div>`
+            } else {
+              for (let key in item) {
+                if (item.hasOwnProperty(key)) {
                   node += `<div><b>${key}：</b>${item[key]}</div>`
                 }
-              } else if(this.arrayOnly) {
-                node += `<div>${item}</div>`
-              } else {
-                for (let key in item) {
-                  if (item.hasOwnProperty(key)) {
-                    node += `<div><b>${key}：</b>${item[key]}</div>`
-                  }
-                }
               }
-              node += '<hr style="margin: 16px 0;">'
-            })
-
-            regs.forEach(item => {
-              node = node.replace(item.key, item.value)
-            })
-            this.result = node
-          } else {
-            this.result = '没有找到'
-          }
-        })
+            }
+            node += '<hr style="margin: 16px 0;">'
+          })
+        
+          regs.forEach(item => {
+            node = node.replace(item.key, item.value)
+          })
+          this.result = node
+        } else {
+          this.result = '没有找到'
+        }
       },
       clickCopy() {
         uni.setClipboardData({

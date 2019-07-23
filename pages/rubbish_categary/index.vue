@@ -46,32 +46,31 @@
           url: `/pages/rubbish_categary/question/index`
         })
       },
-      searchResult() {
+      async searchResult() {
         if (!this.searchStr.length) {
           this.resultList = ['请搜索']
           return
         }
         this.resultList = ['获取中...']
-        this.$http.tGet(this.$api.RUBBISH_CATEGORY, {
+        let res = await this.$http.tGet(this.$api.RUBBISH_CATEGORY, {
           word: this.searchStr
-        }, res => {
-          if (res) {
-            let resultList = []
-            if (res) {
-              res.forEach(item => {
-                let type = ''
-                let matchResult = results.find(i => i.categroy === 2 ** item.type)
-                if (matchResult) {
-                  type = matchResult.name
-                }
-                resultList.push(`${item.name}: ${type}`)
-              })
-            }
-            this.resultList = resultList
-          } else {
-            this.resultList = ['没有找到']
-          }
         })
+        if (res) {
+          let resultList = []
+          if (res) {
+            res.forEach(item => {
+              let type = ''
+              let matchResult = results.find(i => i.categroy === 2 ** item.type)
+              if (matchResult) {
+                type = matchResult.name
+              }
+              resultList.push(`${item.name}: ${type}`)
+            })
+          }
+          this.resultList = resultList
+        } else {
+          this.resultList = ['没有找到']
+        }
       },
       async chooseImage() {
         let res = await chooseImg2base64('canvas')

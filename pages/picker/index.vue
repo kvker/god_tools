@@ -57,26 +57,25 @@
         this.index = +e.target.value
         this.getInfo()
       },
-      getInfo() {
+      async getInfo() {
         this.resultList = ['获取中...']
         let body = {
           num: this.num
         }
         body[this.key] = this.index + 1
-        this.$http.tGet(this.url, body, res => {
-          if (res) {
-            let resultList = []
-            this.resultList = []
-            res.forEach(item => {
-              let text = ''
-              this.keys.forEach(key => {
-                text += `${item[key]}<br>`
-              })
-              resultList.push(text)
+        let res = await this.$http.tGet(this.url, body)
+        if (res) {
+          let resultList = []
+          this.resultList = []
+          res.forEach(item => {
+            let text = ''
+            this.keys.forEach(key => {
+              text += `${item[key]}<br>`
             })
-            this.resultList = resultList
-          }
-        })
+            resultList.push(text)
+          })
+          this.resultList = resultList
+        }
       },
       clickCopy() {
         uni.setClipboardData({

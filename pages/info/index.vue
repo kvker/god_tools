@@ -43,24 +43,23 @@
       }
     },
     methods: {
-      getInfo() {
+      async getInfo() {
         this.resultList = ['获取中...']
-        this.$http.tGet(this.url, {
+        let res = await this.$http.tGet(this.url, {
           num: this.num
-        }, res => {
-          if (res) {
-            let resultList = []
-            this.resultList = []
-            res.forEach(item => {
-              let text = ''
-              this.keys.forEach(key => {
-                text += `${item[key]}<br>`
-              })
-              resultList.push(text)
-            })
-            this.resultList = resultList
-          }
         })
+        if (res) {
+          let resultList = []
+          this.resultList = []
+          res.forEach(item => {
+            let text = ''
+            this.keys.forEach(key => {
+              text += `${item[key]}<br>`
+            })
+            resultList.push(text)
+          })
+          this.resultList = resultList
+        }
       },
       clickCopy() {
         uni.setClipboardData({
