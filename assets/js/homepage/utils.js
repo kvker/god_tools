@@ -152,7 +152,7 @@ export default [
       key: 'date',
       keys: ["mrname", "content"],
     }, {
-      label: '敬请期待', // 敬请期待，放个笑话
+      label: '雷人笑话',
       url: api.FUNNY,
       keys: ["title", "content"],
     }, ]

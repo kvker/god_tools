@@ -77,6 +77,7 @@
       async chooseImage() {
         let res = await chooseImg2base64('canvas')
         this.checkImgUrl = res.filePath
+        this.resultList = ['获取中...']
         let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
           img: res.base64,
         })
@@ -121,6 +122,8 @@
 
   .ctrls {
     display: flex;
+    width: 400upx;
+    justify-content: space-between;
     margin: 240upx 0 32upx;
   }
 
