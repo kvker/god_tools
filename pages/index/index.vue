@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <!-- <money></money> -->
+    <image src="/static/logo.png" mode="aspectFit"></image>
     <view class="utils">
       <!-- #ifdef MP-WEIXIN -->
       <view class="util jump" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
@@ -85,6 +85,7 @@
 
 <style scoped lang='less'>
   .page {
+    align-items: center;
     flex-direction: column;
   }
 

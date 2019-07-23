@@ -1,6 +1,7 @@
 <template>
   <view class="page">
     <canvas canvas-id="canvas"></canvas>
+    <image :src="checkImgUrl" mode="aspectFit"></image>
     <view class="ctrls">
       <button @click="goRabbishCategary" class="button">练习</button>
       <button @click="chooseImage" class="button">图像检索</button>
@@ -38,6 +39,7 @@
     data() {
       return {
         title: '垃圾分类',
+        checkImgUrl: '',
       }
     },
     methods: {
@@ -74,12 +76,23 @@
       },
       async chooseImage() {
         let res = await chooseImg2base64('canvas')
-        console.log(res)
+        this.checkImgUrl = res.filePath
         let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
           img: res.base64,
-        }, res => {
-          console.log(res)
         })
+        if (checkRes) {
+          checkRes.forEach(item => {
+            let type = ''
+            let matchResult = results.find(i => i.categroy === 2 ** item.lajitype)
+            if (matchResult) {
+              type = matchResult.name
+            }
+            resultList.push(`${item.keyword}: ${type}(可信度：${item.trust})`)
+            this.resultList = resultList
+          })
+        } else {
+          this.resultList = ['没有找到']
+        }
       }
     }
   }
@@ -96,6 +109,13 @@
     top: 0;
     width: 2000px;
     height: 2000px;
+  }
+
+  image {
+    position: absolute;
+    @size: 200upx;
+    width: @size;
+    height: @size;
   }
 
   .ctrls {
