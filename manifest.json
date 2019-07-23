@@ -46,7 +46,12 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "privacyDescription" : {
+                    "NSPhotoLibraryUsageDescription" : "获取图片，用来检测内容以匹配结果。",
+                    "NSCameraUsageDescription" : "获取图片，用来检测内容以匹配结果。"
+                }
+            },
             /* SDK配置 */
             "sdkConfigs" : {},
             "icons" : {
@@ -78,6 +83,13 @@
                         "settings@3x" : "unpackage/res/icons/87x87.png",
                         "spotlight@2x" : "unpackage/res/icons/80x80.png",
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "ios" : {
+                    "iphone" : {
+                        "portrait-896h@3x" : ""
                     }
                 }
             }
