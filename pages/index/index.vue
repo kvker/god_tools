@@ -2,7 +2,8 @@
   <view class="page">
     <money></money>
     <view class="utils">
-      <navigator class="util" hover-class="util-hover" v-for="(item, idx) in utils" :key='idx' :url="item.path">{{item.label}}</navigator>
+      <navigator class="util" hover-class="util-hover" v-for="(item, idx) of utils" :key='idx' :url="item.path">{{item.label}}</navigator>
+      <view class="util" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
     </view>
     <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
@@ -12,7 +13,8 @@
 
 <script>
   import money from '@/components/homepage/money'
-  import homepageUtils from '@/assets/js/homepage_utils.js'
+  import homepageUtils from '@/assets/js/homepage/utils.js'
+  import jumps from '@/assets/js/homepage/jumps.js'
 
   const params = [{
     key: 'label'
@@ -60,9 +62,23 @@
     data() {
       return {
         utils,
+        // 跳转用
+        jumps,
       }
     },
-    methods: {},
+    methods: {
+      jump(item, idx) {
+        uni.navigateToMiniProgram({
+          appId: item.wxmpid,
+          path: '/pages/index/index',
+          extraData: {},
+          envVersion: 'develop',
+          success(res) {
+            // 打开成功
+          }
+        })
+      }
+    },
   }
 </script>
 

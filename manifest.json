@@ -92,7 +92,10 @@
             "urlCheck" : false,
             "es6" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "navigateToMiniProgramAppIdList": [
+          "wx370aae98dc3ead4b"
+        ]
     },
     "mp-alipay" : {
         "usingComponents" : true
