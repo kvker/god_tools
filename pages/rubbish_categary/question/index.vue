@@ -1,5 +1,6 @@
 <template>
-  <view class="page">
+  <view class="page" v-if="!downloaded">请求数据中...（{{totalCount}}条）</view>
+  <view class="page" v-else>
     <text class="idx">当前进度：{{progress}} 耗时：{{showTime}}秒</text>
     <view class="question">{{question.name}}</view>
     <view class="ctrls">
@@ -12,7 +13,8 @@
 </template>
 
 <script>
-  import rubbishs from '@/assets/rubbish.json'
+  const classs = 'RubbishCategory'
+
   const results = [{
     name: '可回收物',
     categroy: 1,
@@ -26,12 +28,16 @@
     name: '其他垃圾',
     categroy: 8,
   }]
-  // 完成数超过66则成功
+
+  // 完成数超过100则成功
   const maxCompleteCount = 100
+  // 计时器句柄
   let interval
 
+  // 每次获取的最大值，超过1000页没用，还是下发1000
+  const limit = 1000
+
   export default {
-    components: {},
     data() {
       return {
         question: {},
@@ -39,6 +45,10 @@
         // 计时器
         time: 0,
         title: '垃圾分类练习题',
+        // 是否下载完成
+        downloaded: false,
+        list: [],
+        skipTimes: 0,
       }
     },
     computed: {
@@ -48,10 +58,15 @@
       showTime() {
         return this.time.toFixed(1)
       },
+      /**
+       * 分页获取垃圾分类数据的次数，相当于页码
+       */
+      totalCount() {
+        return this.list.length
+      },
     },
-    mounted() {
-      this.startTime()
-      this.generateQuestion()
+    onLoad(option) {
+      this.getList()
     },
     destroyed() {
       if (interval) {
@@ -59,13 +74,45 @@
       }
     },
     methods: {
+      getList() {
+        this.list = JSON.parse(uni.getStorageSync(this.$storageKeys.STORAGE_RUBBISH_CATEGORY_KEY) || '[]')
+        if (!this.list.length) {
+          this.updateList()
+        } else {
+          setTimeout(() => {
+            this.downloaded = true
+            // 所有都获取后，开始游戏
+            this.startTime()
+            this.generateQuestion()
+          }, 1500)
+        }
+      },
+      async updateList() {
+        let res = await this.$http.avRetrieve(classs, query => {
+          query.limit(limit)
+          query.skip(limit * this.skipTimes)
+        })
+        this.list.push.apply(this.list, res)
+        if (res.length >= limit) {
+          this.skipTimes++
+          this.updateList()
+        } else {
+          uni.setStorage({
+            key: this.$storageKeys.STORAGE_RUBBISH_CATEGORY_KEY,
+            data: JSON.stringify(this.list),
+            complete: () => {
+              setTimeout(this.getList, 1500)
+            }
+          })
+        }
+      },
       startTime() {
         interval = setInterval(() => {
           this.time += .1
         }, 100)
       },
       generateQuestion() {
-        this.question = rubbishs[Math.floor(Math.random() * rubbishs.length)]
+        this.question = this.list[Math.floor(Math.random() * this.totalCount)]
       },
       checkResult(categroy) {
         // 答对了的情况，加速弹框显示，增加一次
@@ -77,11 +124,6 @@
             uni.showModal({
               title: '提示',
               content: `完成，耗时${this.showTime}秒。`,
-              success: function(res) {
-                if (res.confirm) {} else if (res.cancel) {
-
-                }
-              }
             })
             return
           }
@@ -101,7 +143,7 @@
           })
         }
       },
-    }
+    },
   }
 </script>
 

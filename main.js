@@ -3,10 +3,12 @@ import App from './App'
 import util from './assets/js/util.js'
 import http from './assets/js/http.js'
 import api from './assets/js/api.js'
+import storageKeys from './assets/js/storage_keys.js'
 
 Vue.prototype.$util = util
 Vue.prototype.$http = http
 Vue.prototype.$api = api
+Vue.prototype.$storageKeys = storageKeys
 Vue.config.productionTip = false
 Vue.prototype.$isPro = process.env.NODE_ENV === 'production'
 

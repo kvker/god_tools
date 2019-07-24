@@ -15,15 +15,9 @@
 </template>
 
 <script>
-  import money from '@/components/homepage/money'
   import localUtils from '@/assets/js/homepage/utils.js'
 
-  const STORAGE_UTILS_KEY = 'storage_utils_key'
-
   export default {
-    components: {
-      money,
-    },
     data() {
       return {
         // 工具列表
@@ -45,7 +39,7 @@
           this.handleUtils([...localUtils, ...res])
           // 备份工具，防止断网或其他原因挂掉
           uni.setStorage({
-            key: STORAGE_UTILS_KEY,
+            key: this.$storageKeys.STORAGE_UTILS_KEY,
             data: JSON.stringify(res)
           })
         } catch (e) {
