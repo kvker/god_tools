@@ -17,51 +17,38 @@
 <script>
   import money from '@/components/homepage/money'
   import homepageUtils from '@/assets/js/homepage/utils.js'
-  import jumps from '@/assets/js/homepage/jumps.js'
-
-  const params = [{
-    key: 'label'
-  }, {
-    key: 'hasPage'
-  }, {
-    key: 'url'
-  }, {
-    key: 'key'
-  }, {
-    key: 'arrayOnly'
-  }, {
-    key: 'keys',
-    isJSON: true
-  }, {
-    key: 'values',
-    isJSON: true
-  }, {
-    key: 'canRandom', // 是否可以随机，用于搜索
-  }, ]
 
   let utils = []
-  homepageUtils.forEach(item => {
-    if (item.single) {
+  let jumps = []
+  homepageUtils.forEach(util => {
+    let {
+      label,
+      path,
+      url,
+      params,
+      single,
+    } = util
+    if (path) {
+      // 添加顶级参数
+      path += `?label=${label}&url=${url}&`
+      for (let key in params) {
+        if (params.hasOwnProperty(key)) {
+          let value = params[key]
+          // 如果是数组或对象，则转字符串传入页面
+          if (typeof(value) === 'object') {
+            path += `${key}=${JSON.stringify(value)}&`
+          } else {
+            path += `${key}=${value}&`
+          }
+        }
+      }
       utils.push({
-        ...item,
-        path: item.path + '?label=' + item.label
+        label,
+        path,
+        single,
       })
     } else {
-      item.subs.forEach(subItem => {
-        let util = {
-          path: item.path,
-        }
-        util.label = subItem.label
-        util.path += '?'
-        params.forEach(({
-          key,
-          isJSON
-        }) => {
-          util.path +=
-            `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
-        })
-        utils.push(util)
-      })
+      jumps.push(util)
     }
   })
 
@@ -104,6 +91,12 @@
         // 新的版本下载失败
       })
       // #endif
+    },
+    onLoad(option) {
+      this.$http.avRetrieve('Engine')
+        .then(res => {
+          console.log(res)
+        })
     },
     methods: {
       jump(item, idx) {

@@ -65,6 +65,8 @@ export default {
   MING_YAN: '/txapi/dictum/',
   // 周公解梦
   RESOLVE_DREAM: '/txapi/dream/',
+  // 古代情诗
+  LOVE_SHI: '/txapi/qingshi/',
 
   // 虚拟货币
   CYBER_MONEY: '/txapi/cybermoney/',
