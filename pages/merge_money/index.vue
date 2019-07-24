@@ -19,81 +19,71 @@
 </template>
 
 <script>
-  import img1 from '@/assets/img/1.jpg'
-  import img1j from '@/assets/img/1j.jpg'
-  import img1m from '@/assets/img/1m.jpg'
-  import img1y from '@/assets/img/1y.jpg'
-  import img5 from '@/assets/img/5.jpg'
-  import img5j from '@/assets/img/5j.jpg'
-  import img5m from '@/assets/img/5m.jpg'
-  import img10 from '@/assets/img/10.jpg'
-  import img20 from '@/assets/img/20.jpg'
-  import img50 from '@/assets/img/50.jpg'
-  import img100 from '@/assets/img/100.jpg'
-  import imgBg from '@/assets/img/bg.jpg'
   import singleMixin from '@/mixins/single.js'
+  
+  let avFileBaseUrl = 'https://lc-vdtaziqw.cn-e1.lcfile.com'
 
   export default {
     mixins: [singleMixin],
     data() {
       return {
         coins: [{
-            img: img100,
+            img: avFileBaseUrl + '/ea14f4cc58f03bb18673/100.jpg',
             count: '',
             priceF: 10000
           },
           {
-            img: img50,
+            img: avFileBaseUrl + '/9a78271725382190023b/50.jpg',
             count: '',
             priceF: 5000
           },
           {
-            img: img20,
+            img: avFileBaseUrl + '/2aab0cacb92777c711a9/20.jpg',
             count: '',
             priceF: 2000
           },
           {
-            img: img10,
+            img: avFileBaseUrl + '/e6792f9553c120537eaa/10.jpg',
             count: '',
             priceF: 1000
           },
           {
-            img: img5,
+            img: avFileBaseUrl + '/1a1b5acfee16e683b942/5.jpg',
             count: '',
             priceF: 500
           },
           {
-            img: img1,
+            img: avFileBaseUrl + '/f9dc8ea8eb4456c393dc/1.jpg',
             count: '',
             priceF: 100
           },
           {
-            img: img1y,
+            img: avFileBaseUrl + '/2de519419ef3aa494141/1y.jpg',
             count: '',
             priceF: 100
           },
           {
-            img: img5j,
+            img: avFileBaseUrl + '/9834bfa1b487c9c56660/5j.jpg',
             count: '',
             priceF: 50
           },
           {
-            img: img5m,
+            img: avFileBaseUrl + '/b1e09d721ea954a54d9f/5m.jpg',
             count: '',
             priceF: 50
           },
           {
-            img: img1j,
+            img: avFileBaseUrl + '/0a777ca4097a24f10fcf/1j.jpg',
             count: '',
             priceF: 10
           },
           {
-            img: img1m,
+            img: avFileBaseUrl + '/d91569625283c638422e/1m.jpg',
             count: '',
             priceF: 10
           }
         ],
-        imgBg,
+        imgBg: avFileBaseUrl + '/4a055b5859763dce1cc1/bg.jpg',
       }
     },
     computed: {

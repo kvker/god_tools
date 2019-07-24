@@ -171,28 +171,23 @@
       flex: 1;
       height: 210upx;
       color: white;
+      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/184eed9da02ca6f5258e/icon.jpg) 0 0 ~'/'400% auto no-repeat;
 
       &:after {
         border: 0;
       }
 
-      &:nth-child(1) {
-        background: url(~@/assets/icon.jpg) 0 0 ~'/'400% auto no-repeat;
-      }
-
       &:nth-child(2) {
-        background: url(~@/assets/icon.jpg) 33.3% 0 ~'/'400% auto no-repeat;
+        background-position-x: 33.3%;
       }
 
       &:nth-child(3) {
-        background: url(~@/assets/icon.jpg) 66.6% 0 ~'/'400% auto no-repeat;
+        background-position-x: 66.6%;
       }
 
       &:nth-child(4) {
-        background: url(~@/assets/icon.jpg) 100% 0 ~'/'400% auto no-repeat;
+        background-position-x: 100%;
       }
-
-      &:after {}
     }
   }
 

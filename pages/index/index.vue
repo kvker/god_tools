@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <image src="/static/logo.png" mode="aspectFit"></image>
+    <image src="https://lc-vdtaziqw.cn-e1.lcfile.com/02a252c33a6b0d586203/logo.png" mode="aspectFit"></image>
     <view class="utils">
       <!-- #ifdef MP-WEIXIN -->
       <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
