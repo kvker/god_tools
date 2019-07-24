@@ -3,9 +3,10 @@
     <image src="/static/logo.png" mode="aspectFit"></image>
     <view class="utils">
       <!-- #ifdef MP-WEIXIN -->
-      <view class="util jump" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
+      <view class="util highlight" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
       <!-- #endif -->
-      <navigator class="util" hover-class="util-hover" v-for="(item, idx) of utils" :key='idx' :url="item.path">{{item.label}}</navigator>
+      <navigator class="util" :class="{highlight: item.single}" hover-class="util-hover" v-for="(item, idx) of utils"
+        :key='idx' :url="item.path">{{item.label}}</navigator>
     </view>
     <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
@@ -40,21 +41,28 @@
 
   let utils = []
   homepageUtils.forEach(item => {
-    item.subs.forEach(subItem => {
-      let util = {
-        path: item.path,
-      }
-      util.label = subItem.label
-      util.path += '?'
-      params.forEach(({
-        key,
-        isJSON
-      }) => {
-        util.path +=
-          `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
+    if (item.single) {
+      utils.push({
+        ...item,
+        path: item.path + '?label=' + item.label
       })
-      utils.push(util)
-    })
+    } else {
+      item.subs.forEach(subItem => {
+        let util = {
+          path: item.path,
+        }
+        util.label = subItem.label
+        util.path += '?'
+        params.forEach(({
+          key,
+          isJSON
+        }) => {
+          util.path +=
+            `${key}=${(isJSON && subItem[key]) ? JSON.stringify(subItem[key]) : (subItem[key] || '')}&`
+        })
+        utils.push(util)
+      })
+    }
   })
 
   export default {
@@ -71,14 +79,14 @@
     onShow() {
       // #ifdef MP
       const updateManager = uni.getUpdateManager()
-      
+
       updateManager.onCheckForUpdate(function(res) {
         // 请求完新版本信息的回调
         if (!this.$isPro) {
           console.log('是否有更新：' + res.hasUpdate)
         }
       })
-      
+
       updateManager.onUpdateReady(function(res) {
         uni.showModal({
           title: '更新提示',
@@ -91,7 +99,7 @@
           }
         })
       })
-      
+
       updateManager.onUpdateFailed(function(res) {
         // 新的版本下载失败
       })
@@ -135,10 +143,6 @@
       border: 2upx dashed #666;
       border-radius: 16upx;
       margin-bottom: 8px;
-    }
-
-    .jump {
-      color: red;
     }
 
     .util-hover {

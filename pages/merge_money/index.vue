@@ -31,8 +31,10 @@
   import img50 from '@/assets/img/50.jpg'
   import img100 from '@/assets/img/100.jpg'
   import imgBg from '@/assets/img/bg.jpg'
+  import singleMixin from '@/mixins/single.js'
 
   export default {
+    mixins: [singleMixin],
     data() {
       return {
         coins: [{
