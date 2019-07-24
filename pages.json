@@ -24,6 +24,9 @@
     }, {
       "path": "pages/picker/index",
       "style": {}
+    }, {
+      "path": "pages/merge_money/index",
+      "style": {}
     }
   ],
   "globalStyle": {

@@ -9,6 +9,13 @@ export default [
       label: '垃圾分类',
     }, ]
   },
+  {
+    path: '/pages/merge_money/index',
+    label: '独立功能',
+    subs: [{
+      label: '快速数钱',
+    }, ]
+  },
   // 单参数搜索页面，key是传入请求参数
   {
     path: '/pages/search/index',
