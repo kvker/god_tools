@@ -54,9 +54,10 @@ export default {
         title: '处理中...',
         mask: true,
         complete() {
-          uni.hideLoading()
+          setTimeout(uni.hideLoading, 10000)
         }
       })
+      return
       // #ifdef APP-PLUS
       plus.io.resolveLocalFileSystemURL(filePath, entry => {
         entry.file(file => {
