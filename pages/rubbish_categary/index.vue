@@ -65,6 +65,8 @@
               let matchResult = results.find(i => i.category === 2 ** item.type)
               if (matchResult) {
                 type = matchResult.name
+              } else {
+                type = '未知类型'
               }
               resultList.push(`${item.name}: ${type}`)
             })
@@ -87,11 +89,12 @@
           checkRes.forEach(item => {
             let type = ''
             let matchResult = results.find(i => {
-              // 图像查询多1
-              return i.category === 2 ** (item.lajitype - 1)
+              return i.category === 2 ** item.lajitype
             })
             if (matchResult) {
               type = matchResult.name
+            } else {
+              type = '未知类型'
             }
             resultList.push(`${item.name}: ${type}（可信度：${item.trust}）`)
             this.resultList = resultList
