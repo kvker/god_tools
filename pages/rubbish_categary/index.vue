@@ -18,7 +18,6 @@
 
 <script>
   import searchMixin from '@/mixins/search'
-  import chooseImg2base64 from '@/assets/js/img2base64'
 
   const results = [{
     name: '可回收物',
@@ -84,7 +83,7 @@
             let filePath = imgRes.tempFilePaths[0]
             this.checkImgUrl = filePath
 
-            let res = await chooseImg2base64(canvasId, filePath)
+            let res = await this.$util.img2Base64(filePath, canvasId)
             this.resultList = ['获取中...']
             let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
               img: res.base64,
