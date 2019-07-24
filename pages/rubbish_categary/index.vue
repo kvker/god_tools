@@ -22,16 +22,16 @@
 
   const results = [{
     name: '可回收物',
-    categroy: 1,
+    category: 1,
   }, {
     name: '有害垃圾',
-    categroy: 2,
+    category: 2,
   }, {
     name: '厨余垃圾',
-    categroy: 4,
+    category: 4,
   }, {
     name: '其他垃圾',
-    categroy: 8,
+    category: 8,
   }]
 
   export default {
@@ -62,7 +62,7 @@
           if (res) {
             res.forEach(item => {
               let type = ''
-              let matchResult = results.find(i => i.categroy === 2 ** item.type)
+              let matchResult = results.find(i => i.category === 2 ** item.type)
               if (matchResult) {
                 type = matchResult.name
               }
@@ -83,13 +83,17 @@
         })
 
         if (checkRes) {
+          let resultList = []
           checkRes.forEach(item => {
             let type = ''
-            let matchResult = results.find(i => i.categroy === 2 ** item.lajitype)
+            let matchResult = results.find(i => {
+              // 图像查询多1
+              return i.category === 2 ** (item.lajitype - 1)
+            })
             if (matchResult) {
               type = matchResult.name
             }
-            resultList.push(`${item.keyword}: ${type}(可信度：${item.trust})`)
+            resultList.push(`${item.name}: ${type}（可信度：${item.trust}）`)
             this.resultList = resultList
           })
         } else {

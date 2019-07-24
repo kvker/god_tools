@@ -21,8 +21,8 @@ export default (canvasId) => {
                 width,
                 height,
                 success: res => {
-                  let pngData = upng.encode(res.data.buffer, width, height)
-                  let base64 = wx.arrayBufferToBase64(pngData)
+                  let pngData = upng.encode([res.data.buffer], width, height)
+                  let base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(pngData)
                   resolve({
                     filePath,
                     image,
