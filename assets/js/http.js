@@ -32,7 +32,10 @@ export default {
         // 成功保存之后，执行其他逻辑
         resolve(res.toJSON())
       }, err => {
-        this.showToast(err.rawMessage)
+        reject()
+        uni.showToast({
+          title: err.rawMessage
+        })
       })
     })
   },
@@ -52,7 +55,10 @@ export default {
         .then(res => {
           resolve(res.map(i => i.toJSON()))
         }, err => {
-          this.showToast(err.rawMessage)
+          reject()
+          uni.showToast({
+            title: err.rawMessage
+          })
         })
     })
   },
@@ -77,7 +83,10 @@ export default {
         .then(res => {
           resolve(res.toJSON())
         }, err => {
-          this.showToast(err.rawMessage)
+          reject()
+          uni.showToast({
+            title: err.rawMessage
+          })
         })
     })
   },
@@ -94,7 +103,10 @@ export default {
         .then(() => {
           resolve()
         }, err => {
-          this.showToast(err.rawMessage)
+          reject()
+          uni.showToast({
+            title: err.rawMessage
+          })
         })
     })
   },

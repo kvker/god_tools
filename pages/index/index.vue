@@ -16,6 +16,7 @@
 
 <script>
   import money from '@/components/homepage/money'
+  import localUtils from '@/assets/js/homepage/utils.js'
 
   const STORAGE_UTILS_KEY = 'storage_utils_key'
 
@@ -26,7 +27,7 @@
     data() {
       return {
         // 工具列表
-        utils: [],
+        utils: localUtils,
         // 小程序跳转出去的工具
         jumps: [],
       }
@@ -41,14 +42,15 @@
       async getUtils() {
         try {
           let res = await this.$http.avRetrieve('MpUtil')
-          this.handleUtils(res)
+          this.handleUtils([...localUtils, ...res])
           // 备份工具，防止断网或其他原因挂掉
           uni.setStorage({
             key: STORAGE_UTILS_KEY,
             data: JSON.stringify(res)
           })
         } catch (e) {
-          this.handleUtils(uni.getStorageSync(STORAGE_UTILS_KEY))
+          let localStorageUtils = JSON.parse(uni.getStorageSync(STORAGE_UTILS_KEY) || '[]')
+          this.handleUtils([...localUtils, ...localStorageUtils])
         }
       },
       jump(item) {
