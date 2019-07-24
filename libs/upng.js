@@ -963,7 +963,6 @@ UPNG._copyTile = function(sb, sw, sh, tb, tw, th, xoff, yoff, mode) {
 UPNG.encode = function(bufs, w, h, ps, dels, tabs, forbidPlte) {
   if (ps == null) ps = 0;
   if (forbidPlte == null) forbidPlte = false;
-
   var nimg = UPNG.encode.compress(bufs, w, h, ps, [false, false, false, 0, forbidPlte]);
   UPNG.encode.compressPNG(nimg, -1);
 
@@ -1203,8 +1202,8 @@ UPNG.encode.compress = function(bufs, w, h, ps, prms) // prms:  onlyBlend, minBi
   var ctype = 6,
     depth = 8,
     alphaAnd = 255
-
   for (var j = 0; j < bufs.length; j++) { // when not quantized, other frames can contain colors, that are not in an initial frame
+
     var img = new Uint8Array(bufs[j]),
       ilen = img.length;
     for (var i = 0; i < ilen; i += 4) alphaAnd &= img[i + 3];

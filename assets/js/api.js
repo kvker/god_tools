@@ -72,6 +72,8 @@ export default {
   
   
   // 额外功能
+  // 图片转base64
+  IMG_TO_BASE64: '/txapi/imgbase64/',
   // 垃圾上传查询分类
   RUBBISH_UPLOAD_CHECK: '/txapi/imglajifenlei/',
 }

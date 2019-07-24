@@ -2,7 +2,7 @@
   <view class="page">
     <canvas canvas-id="canvas"></canvas>
     <image :src="checkImgUrl" mode="aspectFit"></image>
-    <view class="ctrls">
+    <view ref='view' class="ctrls">
       <button @click="goRabbishCategary" class="button">练习</button>
       <button @click="chooseImage" class="button">图像检索</button>
     </view>
@@ -77,31 +77,38 @@
         }
       },
       async chooseImage() {
-        let res = await chooseImg2base64('canvas')
-        this.checkImgUrl = res.filePath
-        this.resultList = ['获取中...']
-        let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
-          img: res.base64,
-        })
+        let canvasId = 'canvas'
+        uni.chooseImage({
+          count: 1,
+          success: async imgRes => {
+            let filePath = imgRes.tempFilePaths[0]
+            this.checkImgUrl = filePath
 
-        if (checkRes) {
-          let resultList = []
-          checkRes.forEach(item => {
-            let type = ''
-            let matchResult = results.find(i => {
-              return i.category === 2 ** item.lajitype
+            let res = await chooseImg2base64(canvasId, filePath)
+            this.resultList = ['获取中...']
+            let checkRes = await this.$http.tPost(this.$api.RUBBISH_UPLOAD_CHECK, {
+              img: res.base64,
             })
-            if (matchResult) {
-              type = matchResult.name
+            if (checkRes) {
+              let resultList = []
+              checkRes.forEach(item => {
+                let type = ''
+                let matchResult = results.find(i => {
+                  return i.category === 2 ** item.lajitype
+                })
+                if (matchResult) {
+                  type = matchResult.name
+                } else {
+                  type = '未知类型'
+                }
+                resultList.push(`${item.name}: ${type}（可信度：${item.trust}）`)
+                this.resultList = resultList
+              })
             } else {
-              type = '未知类型'
+              this.resultList = ['没有找到']
             }
-            resultList.push(`${item.name}: ${type}（可信度：${item.trust}）`)
-            this.resultList = resultList
-          })
-        } else {
-          this.resultList = ['没有找到']
-        }
+          }
+        })
       }
     }
   }
