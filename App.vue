@@ -10,7 +10,9 @@
 
       updateManager.onCheckForUpdate(function(res) {
         // 请求完新版本信息的回调
-        console.log(res.hasUpdate)
+        if (!this.$isPro) {
+          console.log('是否有更新：' + res.hasUpdate)
+        }
       })
 
       updateManager.onUpdateReady(function(res) {
