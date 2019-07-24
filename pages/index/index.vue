@@ -1,7 +1,8 @@
 <template>
   <view class="page">
-    <image src="https://lc-vdtaziqw.cn-e1.lcfile.com/02a252c33a6b0d586203/logo.png" mode="aspectFit"></image>
-    <view class="utils">
+    <image class="logo" src="https://lc-vdtaziqw.cn-e1.lcfile.com/02a252c33a6b0d586203/logo.png" mode="aspectFit"></image>
+    <text v-if="!utils.length">加载工具中...</text>
+    <view v-else class="utils">
       <!-- #ifdef MP-WEIXIN -->
       <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
       <!-- #endif -->
@@ -21,7 +22,7 @@
     data() {
       return {
         // 工具列表
-        utils: localUtils,
+        utils: [],
         // 小程序跳转出去的工具
         jumps: [],
       }
@@ -107,9 +108,13 @@
     align-items: center;
     flex-direction: column;
   }
+  
+  .logo {
+    height: 320upx;
+  }
 
   .utils {
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
