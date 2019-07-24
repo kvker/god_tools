@@ -50,12 +50,21 @@ export default {
    */
   img2Base64(filePath, canvasId) {
     return new Promise(resolve => {
+      uni.showLoading({
+        title: '处理中...',
+        mask: true,
+        complete() {
+          setTimeout(uni.hideLoading, 10000)
+        }
+      })
+      return
       // #ifdef APP-PLUS
       plus.io.resolveLocalFileSystemURL(filePath, entry => {
         entry.file(file => {
           let fileReader = new plus.io.FileReader()
           fileReader.readAsDataURL(file)
           fileReader.onloadend = evt => {
+            uni.hideLoading()
             resolve({
               base64: evt.target.result,
             })
@@ -82,6 +91,7 @@ export default {
               success: res => {
                 let pngData = upng.encode([res.data.buffer], width, height)
                 let base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(pngData)
+                uni.hideLoading()
                 resolve({
                   base64,
                 })
