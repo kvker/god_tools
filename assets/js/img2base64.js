@@ -2,18 +2,6 @@ import upng from '@/libs/upng'
 
 export default (canvasId, filePath) => {
   return new Promise(resolve => {
-    uni.showLoading({
-      title: '过程可能比较慢，请稍后...',
-      mask: true,
-      success: res => {
-        setTimeout(() => {
-          uni.hideLoading()
-          uni.showToast({
-            title: '挂了，重试吧'
-          })
-        }, 30000)
-      }
-    })
     uni.getImageInfo({
       src: filePath,
       success: image => {
@@ -29,21 +17,27 @@ export default (canvasId, filePath) => {
             width,
             height,
             success: res => {
-              let pngData = ''
-              try {
-                pngData = upng.encode([res.data.buffer], width, height)
-              } catch (e) {
-                console.log(e.message)
-                pngData = ''
-              }
-              uni.hideLoading()
-
+              // #ifdef APP-PLUS
+              plus.io.resolveLocalFileSystemURL(filePath, entry => {
+                entry.file(file => {
+                  let fileReader = new plus.io.FileReader()
+                  fileReader.readAsDataURL(file)
+                  fileReader.onloadend = evt => {
+                    resolve({
+                      base64: evt.target.result,
+                    })
+                  }
+                })
+              })
+              // #endif
+              
+              // #ifndef APP-PLUS
+              let pngData = upng.encode([res.data.buffer], width, height)
               let base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(pngData)
               resolve({
-                filePath,
-                image,
                 base64,
               })
+              // #endif
             }
           })
         })
