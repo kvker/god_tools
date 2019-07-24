@@ -8,11 +8,9 @@ export default [
     path: '/pages/merge_money/index',
   },
   {
+    label: '垃圾分类',
+    single: true,
     path: '/pages/rubbish_categary/index',
-    label: '独立功能',
-    subs: [{
-      label: '垃圾分类',
-    }, ]
   },
   // 单参数搜索页面，key是传入请求参数
   {
