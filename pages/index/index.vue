@@ -3,7 +3,7 @@
     <image src="/static/logo.png" mode="aspectFit"></image>
     <view class="utils">
       <!-- #ifdef MP-WEIXIN -->
-      <view class="util highlight" @click="jump(item, idx)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
+      <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
       <!-- #endif -->
       <navigator class="util" :class="{highlight: item.single}" hover-class="util-hover" v-for="(item, idx) of utils"
         :key='idx' :url="item.path">{{item.label}}</navigator>
@@ -16,41 +16,8 @@
 
 <script>
   import money from '@/components/homepage/money'
-  import homepageUtils from '@/assets/js/homepage/utils.js'
 
-  let utils = []
-  let jumps = []
-  homepageUtils.forEach(util => {
-    let {
-      label,
-      path,
-      url,
-      params,
-      single,
-    } = util
-    if (path) {
-      // 添加顶级参数
-      path += `?label=${label}&url=${url}&`
-      for (let key in params) {
-        if (params.hasOwnProperty(key)) {
-          let value = params[key]
-          // 如果是数组或对象，则转字符串传入页面
-          if (typeof(value) === 'object') {
-            path += `${key}=${JSON.stringify(value)}&`
-          } else {
-            path += `${key}=${value}&`
-          }
-        }
-      }
-      utils.push({
-        label,
-        path,
-        single,
-      })
-    } else {
-      jumps.push(util)
-    }
-  })
+  const STORAGE_UTILS_KEY = 'storage_utils_key'
 
   export default {
     components: {
@@ -58,48 +25,33 @@
     },
     data() {
       return {
-        utils,
-        // 跳转用
-        jumps,
+        // 工具列表
+        utils: [],
+        // 小程序跳转出去的工具
+        jumps: [],
       }
     },
     onShow() {
-      // #ifdef MP
-      const updateManager = uni.getUpdateManager()
-
-      updateManager.onCheckForUpdate(function(res) {
-        // 请求完新版本信息的回调
-        if (!this.$isPro) {
-          console.log('是否有更新：' + res.hasUpdate)
-        }
-      })
-
-      updateManager.onUpdateReady(function(res) {
-        uni.showModal({
-          title: '更新提示',
-          content: '新版本已经准备好，是否重启应用？',
-          success(res) {
-            if (res.confirm) {
-              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-              updateManager.applyUpdate()
-            }
-          }
-        })
-      })
-
-      updateManager.onUpdateFailed(function(res) {
-        // 新的版本下载失败
-      })
-      // #endif
+      this.$util.checkUpdate()
     },
     onLoad(option) {
-      this.$http.avRetrieve('Engine')
-        .then(res => {
-          console.log(res)
-        })
+      this.getUtils()
     },
     methods: {
-      jump(item, idx) {
+      async getUtils() {
+        try {
+          let res = await this.$http.avRetrieve('MpUtil')
+          this.handleUtils(res)
+          // 备份工具，防止断网或其他原因挂掉
+          uni.setStorage({
+            key: STORAGE_UTILS_KEY,
+            data: JSON.stringify(res)
+          })
+        } catch (e) {
+          this.handleUtils(uni.getStorageSync(STORAGE_UTILS_KEY))
+        }
+      },
+      jump(item) {
         uni.navigateToMiniProgram({
           appId: item.wxmpid,
           path: '/pages/index/index',
@@ -108,7 +60,48 @@
             console.log('跳转成功')
           }
         })
-      }
+      },
+      /**
+       * 处理下发的utils对象转换成精简有效的utils数组
+       * @param {Object} homepageUtils 下发的Utils列表
+       */
+      handleUtils(homepageUtils) {
+        let utils = []
+        let jumps = []
+        homepageUtils.forEach(util => {
+          let {
+            label,
+            path,
+            url,
+            params,
+            single,
+          } = util
+          if (path) {
+            // 添加顶级参数
+            path += `?label=${label}&url=${url}&`
+            for (let key in params) {
+              if (params.hasOwnProperty(key)) {
+                let value = params[key]
+                // 如果是数组或对象，则转字符串传入页面
+                if (typeof(value) === 'object') {
+                  path += `${key}=${JSON.stringify(value)}&`
+                } else {
+                  path += `${key}=${value}&`
+                }
+              }
+            }
+            utils.push({
+              label,
+              path,
+              single,
+            })
+          } else {
+            jumps.push(util)
+          }
+        })
+        this.utils = utils
+        this.jumps = jumps
+      },
     },
   }
 </script>
