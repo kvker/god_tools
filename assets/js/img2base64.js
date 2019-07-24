@@ -3,12 +3,15 @@ import upng from '@/libs/upng'
 export default (canvasId, filePath) => {
   return new Promise(resolve => {
     uni.showLoading({
-      title: '过程可能慢，请稍等...',
+      title: '过程可能比较慢，请稍后...',
       mask: true,
       success: res => {
         setTimeout(() => {
           uni.hideLoading()
-        }, 10000)
+          uni.showToast({
+            title: '挂了，重试吧'
+          })
+        }, 30000)
       }
     })
     uni.getImageInfo({
