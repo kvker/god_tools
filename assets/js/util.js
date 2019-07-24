@@ -57,7 +57,6 @@ export default {
           setTimeout(uni.hideLoading, 10000)
         }
       })
-      return
       // #ifdef APP-PLUS
       plus.io.resolveLocalFileSystemURL(filePath, entry => {
         entry.file(file => {
