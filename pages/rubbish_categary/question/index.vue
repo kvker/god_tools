@@ -1,8 +1,9 @@
 <template>
   <view class="page" v-if="!downloaded">请求数据中...（{{totalCount}}条）</view>
   <view class="page" v-else>
-    <text class="idx">当前进度：{{progress}} 耗时：{{showTime}}秒</text>
+    <view class="idx">计时 {{showTime}} 进度 {{progress}}</view>
     <view class="question">{{question.name}}</view>
+    <view class="change" @click="generateQuestion">换一换</view>
     <view class="ctrls">
       <button class="ctrl" @click="checkResult(1)"></button>
       <button class="ctrl" @click="checkResult(2)"></button>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+  import dayjs from 'dayjs'
   const classs = 'RubbishCategory'
 
   const results = [{
@@ -36,6 +38,8 @@
 
   // 每次获取的最大值，超过1000页没用，还是下发1000
   const limit = 1000
+  // 数据加载完成显示时间
+  const waitTime = 1000
 
   export default {
     data() {
@@ -56,7 +60,8 @@
        * 用于显示的，即消除浮点问题的计时器
        */
       showTime() {
-        return this.time.toFixed(1)
+        let pointLeftNumberLength = this.$util.pointLeftNumberLength
+        return `${pointLeftNumberLength(~~(this.time / 3600))}:${pointLeftNumberLength(~~(this.time / 60) % 60)}:${pointLeftNumberLength(this.time % 60)}`
       },
       /**
        * 分页获取垃圾分类数据的次数，相当于页码
@@ -84,7 +89,7 @@
             // 所有都获取后，开始游戏
             this.startTime()
             this.generateQuestion()
-          }, 1500)
+          }, waitTime)
         }
       },
       async updateList() {
@@ -101,15 +106,15 @@
             key: this.$storageKeys.STORAGE_RUBBISH_CATEGORY_KEY,
             data: JSON.stringify(this.list),
             complete: () => {
-              setTimeout(this.getList, 1500)
+              setTimeout(this.getList, waitTime)
             }
           })
         }
       },
       startTime() {
         interval = setInterval(() => {
-          this.time += .1
-        }, 100)
+          this.time += 1
+        }, 1000)
       },
       generateQuestion() {
         this.question = this.list[Math.floor(Math.random() * this.totalCount)]
@@ -150,19 +155,57 @@
 <style scoped lang='less'>
   .page {
     justify-content: space-between;
+    align-items: center;
+    background: #EFFFF5;
+  }
+
+  .border {
+    border: 2px solid #1B3304;
+    border-radius: 10upx;
+  }
+
+  .idx {
+    .border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 487upx;
+    height: 66upx;
+    background: white;
+    font-size: 38upx;
+    font-family: PingFangSC-Regular;
+    color: rgba(22, 72, 11, 1);
   }
 
   .question {
-    flex: 1;
+    .border;
+    width: 480upx;
+    height: 249upx;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 80upx;
+    background: white;
+  }
+
+  .change {
+    .border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200upx;
+    height: 66upx;
+    background: #90CF93;
+    font-size: 38upx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(239, 255, 245, 1);
   }
 
   .ctrls {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 
     .ctrl {
       display: flex;
@@ -171,33 +214,27 @@
       flex: 1;
       height: 210upx;
       color: white;
-      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/184eed9da02ca6f5258e/icon.jpg) 0 0 ~'/'400% auto no-repeat;
+      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/7e6f505d6ea5b34318e0/logo_new.png) 0 0 ~'/'400% auto no-repeat;
 
       &:after {
         border: 0;
       }
 
-      &:nth-child(2) {
+      &:nth-child(1) {
         background-position-x: 33.3%;
       }
 
+      &:nth-child(2) {
+        background-position-x: -3%;
+      }
+
       &:nth-child(3) {
-        background-position-x: 66.6%;
+        background-position-x: 102%;
       }
 
       &:nth-child(4) {
-        background-position-x: 100%;
+        background-position-x: 66.6%;
       }
     }
-  }
-
-  .share-box {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
   }
 </style>

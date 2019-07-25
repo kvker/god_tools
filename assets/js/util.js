@@ -156,5 +156,24 @@ export default {
       str = str.replace(reg, item.after)
     })
     return str
-  }
+  },
+  /**
+   * 数字整数部分保持一定长度，不足用0补充，比如时间
+   * @params {number} num 传入的数字
+   * @params {number} length 数字左侧留着的长度，默认2是作为常用倒计时
+   */
+  pointLeftNumberLength(num, length = 2) {
+    if(typeof(num) === 'number') {
+      let numStr = String(num)
+      let leftLength = numStr.split('.')[0].length
+      if(length > leftLength) {
+        let lengthCut = length - leftLength
+        let zeroStr = Array.from({length: lengthCut}, () => '0').join('')
+        numStr = zeroStr + numStr
+      }
+      return numStr
+    } else {
+      throw '传数字类型!'
+    }
+  },
 }
