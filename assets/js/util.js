@@ -1,7 +1,20 @@
 import upng from '@/libs/upng'
+import http from '@/assets/js/http'
+import storageKeys from '@/assets/js/storage_keys'
 
 let doLastTimeout, doLastOperates = []
 let timeout = 500
+
+// RegExp替换资源
+const regClasss = 'RegExpReplace'
+let regs = []
+http.avRetrieve(regClasss)
+  .then(res => {
+    regs = res
+    uni.setStorageSync(storageKeys.REG_STORAGE_KEY, JSON.stringify(regs))
+  }).catch(err => {
+    regs = JSON.parse(uni.getStorageSync(REG_STORAGE_KEY) || '[]')
+  })
 
 export default {
   /**
@@ -134,4 +147,14 @@ export default {
     })
     // #endif
   },
+  /**
+   * @param {String} str 正则规则修改文本
+   */
+  replaceWords(str) {
+    regs.forEach(item => {
+      let reg = new RegExp(item.before, item.rule)
+      str = str.replace(reg, item.after)
+    })
+    return str
+  }
 }

@@ -15,7 +15,6 @@
 
 <script>
   import searchMixin from '@/mixins/search'
-  import regs from '@/assets/js/regexp.js'
 
   export default {
     mixins: [searchMixin],
@@ -89,10 +88,7 @@
             node += '<hr style="margin: 16px 0;">'
           })
         
-          regs.forEach(item => {
-            node = node.replace(item.key, item.value)
-          })
-          this.result = node
+          this.result = this.$util.replaceWords(node)
         } else {
           this.result = '没有找到'
         }

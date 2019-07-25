@@ -13,8 +13,6 @@
 </template>
 
 <script>
-  import regs from '@/assets/js/regexp.js'
-
   export default {
     data() {
       return {
