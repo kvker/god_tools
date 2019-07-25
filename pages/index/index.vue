@@ -6,8 +6,7 @@
       <!-- #ifdef MP-WEIXIN -->
       <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
       <!-- #endif -->
-      <navigator class="util" :class="{highlight: item.single}" hover-class="util-hover" v-for="(item, idx) of utils"
-        :key='idx' :url="item.path">{{item.label}}</navigator>
+      <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
     </view>
     <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
@@ -17,7 +16,8 @@
 
 <script>
   import localUtils from '@/assets/js/data/home_utils'
-
+  const classs = 'MpUtil'
+  
   export default {
     data() {
       return {
@@ -36,7 +36,10 @@
     methods: {
       async getUtils() {
         try {
-          let res = await this.$http.avRetrieve('MpUtil')
+          let res = await this.$http.avRetrieve(classs, query => {
+            // 按照点击次数降序排列
+            query.descending('click_count')
+          })
           this.handleUtils([...localUtils, ...res])
           // 备份工具，防止断网或其他原因挂掉
           uni.setStorage({
@@ -44,9 +47,20 @@
             data: JSON.stringify(res)
           })
         } catch (e) {
-          let localStorageUtils = JSON.parse(uni.getStorageSync(STORAGE_UTILS_KEY) || '[]')
+          let localStorageUtils = JSON.parse(uni.getStorageSync(this.$storageKeys.STORAGE_UTILS_KEY) || '[]')
           this.handleUtils([...localUtils, ...localStorageUtils])
         }
+      },
+      /**
+       * 
+       */
+      doNavi(item) {
+        let util = this.$http.avObject.createWithoutData(classs, item.objectId)
+        util.increment('click_count')
+        util.save()
+        uni.navigateTo({
+          url: item.path,
+        })
       },
       jump(item) {
         uni.navigateToMiniProgram({
@@ -72,6 +86,7 @@
             url,
             params,
             single,
+            objectId,
           } = util
           if (path) {
             // 添加顶级参数
@@ -91,6 +106,7 @@
               label,
               path,
               single,
+              objectId,
             })
           } else {
             jumps.push(util)
@@ -108,7 +124,7 @@
     align-items: center;
     flex-direction: column;
   }
-  
+
   .logo {
     height: 320upx;
   }
@@ -130,10 +146,6 @@
       border: 2upx dashed #666;
       border-radius: 16upx;
       margin-bottom: 8px;
-    }
-
-    .util-hover {
-      border: 2upx solid #666;
     }
   }
 </style>

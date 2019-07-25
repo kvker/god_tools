@@ -1,6 +1,9 @@
 <script>
   export default {
     onLaunch: function() {
+      this.$http.avUser.loginWithWeapp().then(user => {
+        this.$globalData.user = user.toJSON()
+      }).catch(console.error)
       // console.log('App Launch')
     },
     onShow: function() {

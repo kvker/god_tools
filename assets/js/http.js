@@ -8,6 +8,9 @@ if(!(AV.applicationId && (AV.applicationKey || AV.masterKey))) {
 const TAK = 'e3714a97786a795065d75327d2850115'
 
 export default {
+  avQuery: AV.Query,
+  avUser: AV.User,
+  avObject: AV.Object,
   /**
      * av删除对象
      * @param {string} classs 新增对象的累

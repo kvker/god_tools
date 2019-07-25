@@ -11,6 +11,8 @@ Vue.prototype.$api = api
 Vue.prototype.$storageKeys = storageKeys
 Vue.config.productionTip = false
 Vue.prototype.$isPro = process.env.NODE_ENV === 'production'
+// 全局数据
+Vue.prototype.$globalData = {}
 
 App.mpType = 'app'
 
