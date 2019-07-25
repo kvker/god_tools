@@ -52,12 +52,14 @@
         }
       },
       /**
-       * 
+       * 点击进入工具
        */
       doNavi(item) {
-        let util = this.$http.avObject.createWithoutData(classs, item.objectId)
-        util.increment('click_count')
-        util.save()
+        if(item.objectId) {
+          let util = this.$http.avObject.createWithoutData(classs, item.objectId)
+          util.increment('click_count')
+          util.save()
+        }
         uni.navigateTo({
           url: item.path,
         })

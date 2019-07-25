@@ -212,7 +212,7 @@
       justify-content: center;
       align-items: center;
       flex: 1;
-      height: 210upx;
+      height: 220upx;
       color: white;
       background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/7e6f505d6ea5b34318e0/logo_new.png) 0 0 ~'/'400% auto no-repeat;
 
