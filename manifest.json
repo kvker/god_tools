@@ -101,8 +101,10 @@
     "mp-weixin" : {
         "appid" : "wxfe51a197d8487990",
         "setting" : {
-            "urlCheck" : false,
-            "es6" : false
+            "urlCheck" : true,
+            "es6" : false,
+            "minified" : true,
+            "checkSiteMap": false
         },
         "usingComponents" : true,
         "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ]

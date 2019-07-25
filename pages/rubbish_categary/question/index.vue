@@ -212,28 +212,24 @@
       justify-content: center;
       align-items: center;
       flex: 1;
-      height: 220upx;
+      height: 240upx;
       color: white;
-      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/7e6f505d6ea5b34318e0/logo_new.png) 0 0 ~'/'400% auto no-repeat;
+      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/a122e504699a06628671/rubbish_category_icon.png) 0 0 ~'/'400% auto no-repeat;
 
       &:after {
         border: 0;
       }
 
-      &:nth-child(1) {
+      &:nth-child(2) {
         background-position-x: 33.3%;
       }
 
-      &:nth-child(2) {
-        background-position-x: -3%;
-      }
-
       &:nth-child(3) {
-        background-position-x: 102%;
+        background-position-x: 66.7%;
       }
 
       &:nth-child(4) {
-        background-position-x: 66.6%;
+        background-position-x: 100%;
       }
     }
   }

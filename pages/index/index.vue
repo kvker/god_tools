@@ -15,7 +15,6 @@
 </template>
 
 <script>
-  import localUtils from '@/assets/js/data/home_utils'
   const classs = 'MpUtil'
   
   export default {
@@ -40,7 +39,7 @@
             // 按照点击次数降序排列
             query.descending('click_count')
           })
-          this.handleUtils([...localUtils, ...res])
+          this.handleUtils(res)
           // 备份工具，防止断网或其他原因挂掉
           uni.setStorage({
             key: this.$storageKeys.STORAGE_UTILS_KEY,
@@ -48,7 +47,7 @@
           })
         } catch (e) {
           let localStorageUtils = JSON.parse(uni.getStorageSync(this.$storageKeys.STORAGE_UTILS_KEY) || '[]')
-          this.handleUtils([...localUtils, ...localStorageUtils])
+          this.handleUtils(localStorageUtils)
         }
       },
       /**
