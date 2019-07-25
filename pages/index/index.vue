@@ -127,7 +127,7 @@
   }
 
   .logo {
-    height: 320upx;
+    height: 200upx;
   }
 
   .utils {
