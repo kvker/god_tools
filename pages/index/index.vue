@@ -17,7 +17,6 @@
 
 <script>
   import localUtils from '@/assets/json/utils.json'
-  console.log(JSON.stringify(require('@/assets/js/regexp.js')))
 
   export default {
     data() {
