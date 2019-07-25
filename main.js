@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App'
 import util from './assets/js/util.js'
 import http from './assets/js/http.js'
-import api from './assets/js/api.js'
-import storageKeys from './assets/js/storage_keys.js'
+import api from './assets/js/data/api.js'
+import storageKeys from './assets/js/data/storage_keys.js'
 
 Vue.prototype.$util = util
 Vue.prototype.$http = http

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import localUtils from '@/assets/json/utils.json'
+  import localUtils from '@/assets/js/data/home_utils'
 
   export default {
     data() {

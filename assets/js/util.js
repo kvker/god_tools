@@ -1,6 +1,6 @@
 import upng from '@/libs/upng'
 import http from '@/assets/js/http'
-import storageKeys from '@/assets/js/storage_keys'
+import storageKeys from '@/assets/js/data/storage_keys'
 
 let doLastTimeout, doLastOperates = []
 let timeout = 500
