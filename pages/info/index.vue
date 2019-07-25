@@ -28,17 +28,17 @@
     onLoad(option) {
       try {
         this.url = option.url
+        this.key = option.key
         this.title = option.label
         this.num = option.num || 10
         this.keys = JSON.parse(option.keys)
         uni.setNavigationBarTitle({
           title: option.label
         })
-        this.getInfo()
       } catch (e) {
-        console.log(e)
         throw '参数不足'
       }
+      this.getInfo()
     },
     methods: {
       async getInfo() {

@@ -44,11 +44,10 @@
         uni.setNavigationBarTitle({
           title: option.label
         })
-        this.getInfo()
       } catch (e) {
-        console.log(e)
         throw '参数不足'
       }
+      this.getInfo()
     },
     methods: {
       changePicker(e) {
@@ -91,7 +90,7 @@
   .page {
     align-items: center;
   }
-  
+
   .button {
     margin-bottom: 8px;
   }

@@ -37,9 +37,7 @@
       try {
         this.url = option.url
         this.key = option.key
-        if (option.keys) {
-          this.keys = JSON.parse(option.keys)
-        }
+        this.keys = JSON.parse(option.keys)
         this.hasPage = !!option.hasPage
         this.canRandom = !!option.canRandom
         this.arrayOnly = !!option.arrayOnly
@@ -47,7 +45,6 @@
           title: option.label
         })
       } catch (e) {
-        console.log(e)
         throw '参数不足'
       }
     },
@@ -76,7 +73,7 @@
               for (let key of this.keys) {
                 node += `<div><b>${key}：</b>${item[key]}</div>`
               }
-            } else if(this.arrayOnly) {
+            } else if (this.arrayOnly) {
               node += `<div>${item}</div>`
             } else {
               for (let key in item) {
@@ -87,7 +84,7 @@
             }
             node += '<hr style="margin: 16px 0;">'
           })
-        
+
           this.result = this.$util.replaceWords(node)
         } else {
           this.result = '没有找到'
