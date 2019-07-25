@@ -17,6 +17,7 @@
 
 <script>
   import localUtils from '@/assets/json/utils.json'
+  console.log(JSON.stringify(require('@/assets/js/regexp.js')))
 
   export default {
     data() {
@@ -117,9 +118,9 @@
     flex: 1;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: center;
+    justify-content: space-between;
     overflow-y: scroll;
+    margin-top: 16upx;
 
     .util {
       display: flex;

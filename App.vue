@@ -54,15 +54,17 @@
   }
 
   .contact {
-    @size: 90upx;
+    @size: 64upx;
     position: fixed;
-    right: 24upx;
-    bottom: 24upx;
+    right: 16upx;
+    top: 16upx;
     width: @size;
     line-height: @size;
     border-radius: 50%;
     background: white;
     box-shadow: 0 0 4upx #666;
+    padding: 0;
+    font-size: 24upx;
 
     &:after {
       border: none;
