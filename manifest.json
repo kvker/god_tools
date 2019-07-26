@@ -104,10 +104,15 @@
             "urlCheck" : true,
             "es6" : false,
             "minified" : true,
-            "checkSiteMap": false
+            "checkSiteMap" : false
         },
         "usingComponents" : true,
-        "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ]
+        "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ],
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "天气预报苏姚根据定位获取数据"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

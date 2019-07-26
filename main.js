@@ -4,8 +4,10 @@ import util from './assets/js/util.js'
 import http from './assets/js/http.js'
 import api from './assets/js/data/api.js'
 import storageKeys from './assets/js/data/storage_keys.js'
+import dayjs from 'dayjs'
 
 Vue.prototype.$util = util
+Vue.prototype.$dayjs = dayjs
 Vue.prototype.$http = http
 Vue.prototype.$api = api
 Vue.prototype.$storageKeys = storageKeys

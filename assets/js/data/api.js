@@ -3,4 +3,6 @@ export default {
   RUBBISH_CATEGORY: '/txapi/lajifenlei/',
   // 垃圾上传查询分类
   RUBBISH_UPLOAD_CHECK: '/txapi/imglajifenlei/',
+  // 天气预报
+  TIAN_QI:'/txapi/tianqi/',
 }

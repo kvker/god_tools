@@ -29,6 +29,10 @@
     }, {
       "path": "pages/merge_money/index",
       "style": {}
+    },
+    {
+      "path": "pages/weather/index",
+      "style": {}
     }
   ],
   "globalStyle": {
