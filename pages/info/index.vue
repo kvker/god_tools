@@ -33,11 +33,25 @@
           let resultList = []
           this.resultList = []
           res.forEach(item => {
-            let text = ''
-            this.keys.forEach(key => {
-              text += `${item[key]}<br>`
-            })
-            resultList.push(text)
+            let node = ''
+            // 如果指定了显示的key
+            if (this.keys && this.keys.length) {
+              for (let key of this.keys) {
+                node += `<div><b>${key}：</b>${item[key]}</div>`
+              }
+              // 下发纯数组
+            } else if (this.arrayOnly) {
+              node += `<div>${item}</div>`
+              // 未指定则显示全部字段
+            } else {
+              for (let key in item) {
+                if (item.hasOwnProperty(key)) {
+                  node += `<div><b>${key}：</b>${item[key]}</div>`
+                }
+              }
+            }
+            node += '<hr style="margin: 16px 0;">'
+            resultList.push(this.$util.replaceWords(node))
           })
           this.resultList = resultList
         }

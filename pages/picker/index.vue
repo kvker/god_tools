@@ -1,7 +1,7 @@
 <template>
   <view class="page">
-    <picker class="button" @change="changePicker" :value="index" :range="values">
-      <view class="uni-input">{{values[index]}}</view>
+    <picker class="button" @change="changePicker" :value="index" :range="showLabels">
+      <view class="uni-input">{{values[index].label}}</view>
     </picker>
     <scroll-view scroll-y class="result-list-box">
       <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>
@@ -25,6 +25,11 @@
         index: 0,
       }
     },
+    computed: {
+      showLabels() {
+        return this.values.map(i => i.label)
+      }
+    },
     onLoad(option) {
       this.getInfo()
     },
@@ -38,17 +43,31 @@
         let body = {
           num: this.num
         }
-        body[this.key] = this.index + 1
+        body[this.key] = this.values[this.index].value
         let res = await this.$http.tGet(this.url, body)
         if (res) {
           let resultList = []
           this.resultList = []
           res.forEach(item => {
-            let text = ''
-            this.keys.forEach(key => {
-              text += `${item[key]}<br>`
-            })
-            resultList.push(text)
+            let node = ''
+            // 如果指定了显示的key
+            if (this.keys && this.keys.length) {
+              for (let key of this.keys) {
+                node += `<div><b>${key}：</b>${item[key]}</div>`
+              }
+              // 下发纯数组
+            } else if (this.arrayOnly) {
+              node += `<div>${item}</div>`
+              // 未指定则显示全部字段
+            } else {
+              for (let key in item) {
+                if (item.hasOwnProperty(key)) {
+                  node += `<div><b>${key}：</b>${item[key]}</div>`
+                }
+              }
+            }
+            node += '<hr style="margin: 16px 0;">'
+            resultList.push(this.$util.replaceWords(node))
           })
           this.resultList = resultList
         }

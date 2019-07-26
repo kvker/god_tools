@@ -24,6 +24,8 @@
         utils: [],
         // 小程序跳转出去的工具
         jumps: [],
+        // 维护中被隐藏的工具
+        hiddens: [],
       }
     },
     onShow() {
@@ -54,6 +56,7 @@
        * 点击进入工具
        */
       doNavi(item) {
+        // 点击数自增一个
         if(item.objectId) {
           let util = this.$http.avObject.createWithoutData(classs, item.objectId)
           util.increment('click_count')
@@ -81,6 +84,12 @@
         let utils = []
         let jumps = []
         homepageUtils.forEach(util => {
+          // 如果配置了隐藏，则pass，主要维护时候避免版本迭代挂掉
+          if(util.hidden) {
+            this.hiddens.push(util)
+            return
+          }
+          
           let {
             label,
             path,
@@ -115,6 +124,17 @@
         })
         this.utils = utils
         this.jumps = jumps
+        
+        // 如果有被隐藏的工具，则提示
+        if(this.hiddens.length) {
+          let hiddenUtilNames = this.hiddens.map(i => i.label)
+          uni.showModal({
+            title: '提示',
+            content: `${hiddenUtilNames.join('、')}正在维护中，带来不便，实在抱歉`,
+            showCancel: false,
+            confirmText: '朕晓得了',
+          })
+        }
       },
     },
   }
