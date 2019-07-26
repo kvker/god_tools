@@ -15,9 +15,9 @@
         </view>
         <view class="utils">
           <!-- #ifdef MP-WEIXIN -->
-          <view class="util highlight" @click="jump(item)" v-for="(item, idx) of group.jumps" :key='idx'>{{item.label}}</view>
+          <view class="util" @click="jump(item, idx, jidx)" v-for="(item, jidx) of group.jumps" :key='jidx'>{{item.label}}</view>
           <!-- #endif -->
-          <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of group.utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
+          <view class="util" v-for="(item, uidx) of group.utils" :key='uidx' @click="doNavi(item, idx, uidx)">{{item.label}}</view>
         </view>
       </view>
     </scroll-view>
@@ -68,7 +68,8 @@
       /**
        * 点击进入工具
        */
-      doNavi(item) {
+      doNavi(item, idx, uidx) {
+        item = this.utilGroups[idx].utils[uidx]
         // 点击数自增一个
         if (item.objectId) {
           let util = this.$http.avObject.createWithoutData(classs, item.objectId)
@@ -79,7 +80,8 @@
           url: item.path,
         })
       },
-      jump(item) {
+      jump(item, idx, jidx) {
+        item = this.utilGroups[idx].jumps[jidx]
         uni.navigateToMiniProgram({
           appId: item.wxmpid,
           path: '/pages/index/index',
@@ -169,7 +171,7 @@
         })
 
         this.utilGroups = utilGroups
-        console.log(this.utilGroups)
+        console.log(this.utilGroups[0])
 
         // 如果有被隐藏的工具，则提示
         if (this.hiddens.length) {
