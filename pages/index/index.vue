@@ -1,13 +1,13 @@
 <template>
   <view class="page">
     <image class="logo" src="https://lc-vdtaziqw.cn-e1.lcfile.com/f46958c978de7292f540/god_utils_header.png" mode="aspectFill"></image>
-    <text v-if="!utils.length">加载工具中...</text>
+    <text v-if="!utilGroups.length">加载工具中...</text>
     <scroll-view scroll-y v-else class="utils-area">
-      <view class="utils-group">
+      <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
           <image class="v-line" :src="vLineUrl" mode=""></image>
           <view class="group-title">
-            <text>日常工具</text>
+            <text>{{group.label}}</text>
             <view class="mask"></view>
             <view class="mask"></view>
           </view>
@@ -15,27 +15,9 @@
         </view>
         <view class="utils">
           <!-- #ifdef MP-WEIXIN -->
-          <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
+          <view class="util highlight" @click="jump(item)" v-for="(item, idx) of group.jumps" :key='idx'>{{item.label}}</view>
           <!-- #endif -->
-          <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
-        </view>
-        <view class="group-title-box">
-          <image class="v-line" :src="vLineUrl" mode=""></image>
-          <view class="group-title">
-            <text>每日学习</text>
-            <view class="mask"></view>
-            <view class="mask"></view>
-          </view>
-          <image class="v-line" :src="vLineUrl" mode=""></image>
-        </view>
-        <view class="group-title-box">
-          <image class="v-line" :src="vLineUrl" mode=""></image>
-          <view class="group-title">
-            <text>每日段子</text>
-            <view class="mask"></view>
-            <view class="mask"></view>
-          </view>
-          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of group.utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
         </view>
       </view>
     </scroll-view>
@@ -51,12 +33,11 @@
   export default {
     data() {
       return {
-        // 工具列表
-        utils: [],
-        // 小程序跳转出去的工具
-        jumps: [],
+        // 分组数据
+        utilGroups: [],
         // 维护中被隐藏的工具
         hiddens: [],
+        // 波浪线链接
         vLineUrl: 'https://lc-vdtaziqw.cn-e1.lcfile.com/4575142956cc21460df2/god_utils_v_line.png',
       }
     },
@@ -113,14 +94,41 @@
        * @param {Object} homepageUtils 下发的Utils列表
        */
       handleUtils(homepageUtils) {
-        let utils = []
-        let jumps = []
+        let utilGroups = [{
+            label: '日常工具',
+            // 工具列表
+            utils: [],
+            // 小程序跳转出去的工具
+            jumps: [],
+          },
+          {
+            label: '每日学习',
+            // 工具列表
+            utils: [],
+            jumps: [],
+          },
+          {
+            label: '每日段子',
+            // 工具列表
+            utils: [],
+            jumps: [],
+          },
+          {
+            label: '其他工具',
+            // 工具列表
+            utils: [],
+            jumps: [],
+          },
+        ]
         homepageUtils.forEach(util => {
           // 如果配置了隐藏，则pass，主要维护时候避免版本迭代挂掉
           if (util.hidden) {
             this.hiddens.push(util)
             return
           }
+
+          let utils = []
+          let jumps = []
 
           let {
             label,
@@ -130,32 +138,38 @@
             single,
             objectId,
           } = util
-          if (path) {
-            // 添加顶级参数
-            path += `?label=${label}&url=${url}&`
-            for (let key in params) {
-              if (params.hasOwnProperty(key)) {
-                let value = params[key]
-                // 如果是数组或对象，则转字符串传入页面
-                if (typeof(value) === 'object') {
-                  path += `${key}=${JSON.stringify(value)}&`
-                } else {
-                  path += `${key}=${value}&`
+
+          utilGroups.forEach(group => {
+            if (util.type === group.label) {
+              if (path) {
+                // 添加顶级参数
+                path += `?label=${label}&url=${url}&`
+                for (let key in params) {
+                  if (params.hasOwnProperty(key)) {
+                    let value = params[key]
+                    // 如果是数组或对象，则转字符串传入页面
+                    if (typeof(value) === 'object') {
+                      path += `${key}=${JSON.stringify(value)}&`
+                    } else {
+                      path += `${key}=${value}&`
+                    }
+                  }
                 }
+                group.utils.push({
+                  label,
+                  path,
+                  single,
+                  objectId,
+                })
+              } else {
+                group.jumps.push(util)
               }
             }
-            utils.push({
-              label,
-              path,
-              single,
-              objectId,
-            })
-          } else {
-            jumps.push(util)
-          }
+          })
         })
-        this.utils = utils
-        this.jumps = jumps
+
+        this.utilGroups = utilGroups
+        console.log(this.utilGroups)
 
         // 如果有被隐藏的工具，则提示
         if (this.hiddens.length) {
@@ -177,6 +191,7 @@
     align-items: center;
     flex-direction: column;
     padding: 0;
+    background: #FFFFF8;
   }
 
   .logo {
@@ -192,8 +207,16 @@
   .utils-area {
     width: 100%;
     height: calc(100vh - 300upx);
+    margin-bottom: 24upx;
+
+    .border() {
+      border: 4upx solid #161616;
+    }
 
     .utils-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
 
       .group-title-box {
@@ -224,7 +247,7 @@
             width: 100%;
             height: 100%;
             background: #FFCB05;
-            border: 3upx solid #161616;
+            .border();
             border-radius: 10upx;
 
             &:nth-child(2) {
@@ -237,17 +260,25 @@
       .utils {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
+        width: 690upx;
+        background: #91CFFF;
+        .border();
+        border-radius: 10px;
+        padding: 15upx 0;
 
         .util {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 160upx;
+          width: 200upx;
           height: 80upx;
-          border: 2upx dashed #666;
-          border-radius: 16upx;
-          margin-bottom: 8px;
+          .border();
+          font-family: PingFangSC-Semibold;
+          font-weight: 600;
+          margin: 15upx 0;
+          background: white;
+          color: black;
         }
       }
     }

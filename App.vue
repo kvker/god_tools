@@ -59,7 +59,7 @@
     @size: 64upx;
     position: fixed;
     right: 16upx;
-    top: 16upx;
+    top: 340upx;
     width: @size;
     line-height: @size;
     border-radius: 50%;
