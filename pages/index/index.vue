@@ -1,13 +1,44 @@
 <template>
   <view class="page">
-    <image class="logo" src="https://lc-vdtaziqw.cn-e1.lcfile.com/02a252c33a6b0d586203/logo.png" mode="aspectFit"></image>
+    <image class="logo" src="https://lc-vdtaziqw.cn-e1.lcfile.com/f46958c978de7292f540/god_utils_header.png" mode="aspectFill"></image>
     <text v-if="!utils.length">加载工具中...</text>
-    <view v-else class="utils">
-      <!-- #ifdef MP-WEIXIN -->
-      <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
-      <!-- #endif -->
-      <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
-    </view>
+    <scroll-view scroll-y v-else class="utils-area">
+      <view class="utils-group">
+        <view class="group-title-box">
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <view class="group-title">
+            <text>日常工具</text>
+            <view class="mask"></view>
+            <view class="mask"></view>
+          </view>
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+        </view>
+        <view class="utils">
+          <!-- #ifdef MP-WEIXIN -->
+          <view class="util highlight" @click="jump(item)" v-for="(item, idx) of jumps" :key='idx'>{{item.label}}</view>
+          <!-- #endif -->
+          <view class="util" :class="{highlight: item.single}" v-for="(item, idx) of utils" :key='idx' @click="doNavi(item)">{{item.label}}</view>
+        </view>
+        <view class="group-title-box">
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <view class="group-title">
+            <text>每日学习</text>
+            <view class="mask"></view>
+            <view class="mask"></view>
+          </view>
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+        </view>
+        <view class="group-title-box">
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <view class="group-title">
+            <text>每日段子</text>
+            <view class="mask"></view>
+            <view class="mask"></view>
+          </view>
+          <image class="v-line" :src="vLineUrl" mode=""></image>
+        </view>
+      </view>
+    </scroll-view>
     <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
     <!-- #endif -->
@@ -16,7 +47,7 @@
 
 <script>
   const classs = 'MpUtil'
-  
+
   export default {
     data() {
       return {
@@ -26,6 +57,7 @@
         jumps: [],
         // 维护中被隐藏的工具
         hiddens: [],
+        vLineUrl: 'https://lc-vdtaziqw.cn-e1.lcfile.com/4575142956cc21460df2/god_utils_v_line.png',
       }
     },
     onShow() {
@@ -57,7 +89,7 @@
        */
       doNavi(item) {
         // 点击数自增一个
-        if(item.objectId) {
+        if (item.objectId) {
           let util = this.$http.avObject.createWithoutData(classs, item.objectId)
           util.increment('click_count')
           util.save()
@@ -85,11 +117,11 @@
         let jumps = []
         homepageUtils.forEach(util => {
           // 如果配置了隐藏，则pass，主要维护时候避免版本迭代挂掉
-          if(util.hidden) {
+          if (util.hidden) {
             this.hiddens.push(util)
             return
           }
-          
+
           let {
             label,
             path,
@@ -124,9 +156,9 @@
         })
         this.utils = utils
         this.jumps = jumps
-        
+
         // 如果有被隐藏的工具，则提示
-        if(this.hiddens.length) {
+        if (this.hiddens.length) {
           let hiddenUtilNames = this.hiddens.map(i => i.label)
           uni.showModal({
             title: '提示',
@@ -144,29 +176,80 @@
   .page {
     align-items: center;
     flex-direction: column;
+    padding: 0;
   }
 
   .logo {
-    height: 200upx;
+    width: 100%;
+    height: 300upx;
   }
 
-  .utils {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    overflow-y: scroll;
-    margin-top: 16upx;
+  .v-line {
+    width: 145upx;
+    height: 7upx;
+  }
 
-    .util {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 160upx;
-      height: 80upx;
-      border: 2upx dashed #666;
-      border-radius: 16upx;
-      margin-bottom: 8px;
+  .utils-area {
+    width: 100%;
+    height: calc(100vh - 300upx);
+
+    .utils-group {
+      width: 100%;
+
+      .group-title-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 52upx 0 37upx;
+
+        .group-title {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 200upx;
+          height: 46upx;
+          margin: 0 27upx;
+          color: black;
+          font-size: 28upx;
+          font-family: PingFangSC-Semibold;
+          font-weight: 600;
+
+          .mask {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFCB05;
+            border: 3upx solid #161616;
+            border-radius: 10upx;
+
+            &:nth-child(2) {
+              transform: translate(6upx, 6upx);
+            }
+          }
+        }
+      }
+
+      .utils {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .util {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 160upx;
+          height: 80upx;
+          border: 2upx dashed #666;
+          border-radius: 16upx;
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 </style>

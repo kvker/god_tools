@@ -43,7 +43,6 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - 80upx);
-    padding: 16upx;
   }
 
   /* #ifdef MP */
