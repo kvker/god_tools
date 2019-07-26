@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App'
-import util from './assets/js/util.js'
-import http from './assets/js/http.js'
-import api from './assets/js/data/api.js'
-import storageKeys from './assets/js/data/storage_keys.js'
+import util from './assets/js/util'
+import http from './assets/js/http'
+import api from './assets/js/data/api'
+import storageKeys from './assets/js/data/storage_keys'
 import dayjs from 'dayjs'
+import maskLabel from './components/mask_label'
 
 Vue.prototype.$util = util
 Vue.prototype.$dayjs = dayjs
@@ -19,8 +20,11 @@ Vue.prototype.$globalData = {}
 App.mpType = 'app'
 
 Vue.mixin({
+  // 这里设置组件无效，艹
+  components: {
+    maskLabel,
+  },
   onShareAppMessage(res) {
-    console.log(this.title)
     return {
       title: this.title || '只有神才知道的工具合集',
     }

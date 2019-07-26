@@ -18,6 +18,7 @@
 
 <script>
   import searchMixin from '@/mixins/search'
+  import commonPageMixin from '@/mixins/common_page'
 
   const results = [{
     name: '可回收物',
@@ -34,7 +35,7 @@
   }]
 
   export default {
-    mixins: [searchMixin],
+    mixins: [searchMixin, commonPageMixin],
     data() {
       return {
         title: '垃圾分类',

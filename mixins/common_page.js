@@ -13,6 +13,8 @@ export default {
       values: [],
       // 是否需要随机获取
       canRandom: false,
+      // 页面标题
+      title: '',
       // 下发数据纯数组内字符串
       arrayOnly: false,
       resultList: ['获取中...'],
@@ -28,6 +30,9 @@ export default {
       this.hasPage = !!option.hasPage
       this.canRandom = !!option.canRandom
       this.arrayOnly = !!option.arrayOnly
+      if(option.label) {
+        this.title = option.label
+      }
       uni.setNavigationBarTitle({
         title: option.label
       })

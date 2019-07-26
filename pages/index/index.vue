@@ -6,11 +6,7 @@
       <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
           <image class="v-line" :src="vLineUrl" mode=""></image>
-          <view class="group-title">
-            <text>{{group.label}}</text>
-            <view class="mask"></view>
-            <view class="mask"></view>
-          </view>
+          <mask-label :label="group.label"></mask-label>
           <image class="v-line" :src="vLineUrl" mode=""></image>
         </view>
         <view class="utils">
@@ -28,9 +24,14 @@
 </template>
 
 <script>
+  import maskLabel from '@/components/mask_label'
+  
   const classs = 'MpUtil'
 
   export default {
+    components: {
+      maskLabel,
+    },
     data() {
       return {
         // 分组数据
@@ -227,36 +228,6 @@
         align-items: center;
         width: 100%;
         margin: 52upx 0 37upx;
-
-        .group-title {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 200upx;
-          height: 46upx;
-          margin: 0 27upx;
-          color: black;
-          font-size: 28upx;
-          font-family: PingFangSC-Semibold;
-          font-weight: 600;
-
-          .mask {
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #FFCB05;
-            .border();
-            border-radius: 10upx;
-
-            &:nth-child(2) {
-              transform: translate(6upx, 6upx);
-            }
-          }
-        }
       }
 
       .utils {
