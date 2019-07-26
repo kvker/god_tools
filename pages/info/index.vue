@@ -13,31 +13,14 @@
 </template>
 
 <script>
+  import commonPageMixin from '@/mixins/common_page'
+
   export default {
+    mixins: [commonPageMixin],
     data() {
-      return {
-        // 请求的url
-        url: '',
-        // 请求参数的关键字段
-        keys: [],
-        title: '',
-        searchStr: '',
-        resultList: ['获取中...'],
-      }
+      return {}
     },
     onLoad(option) {
-      try {
-        this.url = option.url
-        this.key = option.key
-        this.title = option.label
-        this.num = option.num || 10
-        this.keys = JSON.parse(option.keys)
-        uni.setNavigationBarTitle({
-          title: option.label
-        })
-      } catch (e) {
-        throw '参数不足'
-      }
       this.getInfo()
     },
     methods: {

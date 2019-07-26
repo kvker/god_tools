@@ -24,6 +24,20 @@ Vue.mixin({
     return {
       title: this.title || '只有神才知道的工具合集',
     }
+  },
+  methods: {
+    /**
+     * 带有超时时间的showLoading
+     */
+    showLoading(title = '请求中...', timeout = 15) {
+      uni.showLoading({
+        title,
+        mask: false,
+      })
+      setTimeout(() => {
+        uni.hideLoading()
+      }, timeout * 1000)
+    }
   }
 })
 

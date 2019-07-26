@@ -16,37 +16,16 @@
 </template>
 
 <script>
+  import commonPageMixin from '@/mixins/common_page'
+
   export default {
+    mixins: [commonPageMixin],
     data() {
       return {
-        // 请求的url
-        url: '',
-        // 请求关键字段
-        key: '',
-        // 显示的关键字段
-        keys: [],
-        // 选择的关键字段
-        values: [],
         index: 0,
-        title: '',
-        searchStr: '',
-        resultList: ['获取中...'],
       }
     },
     onLoad(option) {
-      try {
-        this.url = option.url
-        this.title = option.label
-        this.key = option.key
-        this.num = option.num || 10
-        this.keys = JSON.parse(option.keys)
-        this.values = JSON.parse(option.values)
-        uni.setNavigationBarTitle({
-          title: option.label
-        })
-      } catch (e) {
-        throw '参数不足'
-      }
       this.getInfo()
     },
     methods: {

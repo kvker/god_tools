@@ -7,7 +7,7 @@
       <button @click="chooseImage" class="button">图像检索</button>
     </view>
     <view class="search-box">
-      <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch"
+      <input class="main-input" confirm-type='search' :placeholder='placeholder' v-model="searchStr" @input="inputSearch"
         @confirm="search"></input>
       <scroll-view scroll-y class="result-list-box">
         <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>

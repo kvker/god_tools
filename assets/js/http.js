@@ -56,8 +56,10 @@ export default {
     return new Promise((resolve, reject) => {
       query.find()
         .then(res => {
+          uni.hideLoading()
           resolve(res.map(i => i.toJSON()))
         }, err => {
+          uni.hideLoading()
           reject()
           uni.showToast({
             title: err.rawMessage

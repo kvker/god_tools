@@ -5,11 +5,15 @@ export default {
       result: '请搜索',
       resultList: ['请搜索'],
       title: '',
+      placeholder: '请搜索',
     }
   },
   onLoad(option) {
     if(option.label) {
       this.title = option.label
+    }
+    if(option.placeholder) {
+      this.placeholder = option.placeholder
     }
   },
   methods: {

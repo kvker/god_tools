@@ -42,7 +42,9 @@
     onShow() {},
     methods: {
       async getList() {
+        this.showLoading('获取天气中...')
         let res = await this.$http.tGet(this.$api.TIAN_QI)
+        uni.hideLoading()
         this.list = res
       },
       clickTime(item, idx) {

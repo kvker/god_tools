@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <input class="main-input" confirm-type='search' placeholder='输入搜索' v-model="searchStr" @input="inputSearch"
+    <input class="main-input" confirm-type='search' :placeholder='placeholder' v-model="searchStr" @input="inputSearch"
       @confirm="search"></input>
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
@@ -15,39 +15,19 @@
 
 <script>
   import searchMixin from '@/mixins/search'
+  import commonPageMixin from '@/mixins/common_page'
 
   export default {
-    mixins: [searchMixin],
+    mixins: [searchMixin, commonPageMixin],
     data() {
       return {
-        // 请求的url
-        url: '',
-        // 请求参数的关键字段
-        keys: [],
         hasPage: false,
         page: 1,
         // 是否搜索过，用来判断是否刚刚进入
         searched: false,
-        canRandom: false,
-        // 下发数据纯数组内字符串
-        arrayOnly: false,
       }
     },
-    onLoad(option) {
-      try {
-        this.url = option.url
-        this.key = option.key
-        this.keys = JSON.parse(option.keys)
-        this.hasPage = !!option.hasPage
-        this.canRandom = !!option.canRandom
-        this.arrayOnly = !!option.arrayOnly
-        uni.setNavigationBarTitle({
-          title: option.label
-        })
-      } catch (e) {
-        throw '参数不足'
-      }
-    },
+    onLoad(option) {},
     methods: {
       async searchResult() {
         if (!this.searchStr.length && !this.canRandom) {
@@ -73,8 +53,10 @@
               for (let key of this.keys) {
                 node += `<div><b>${key}：</b>${item[key]}</div>`
               }
+              // 下发纯数组
             } else if (this.arrayOnly) {
               node += `<div>${item}</div>`
+              // 未指定则显示全部字段
             } else {
               for (let key in item) {
                 if (item.hasOwnProperty(key)) {
