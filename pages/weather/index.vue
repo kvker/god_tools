@@ -14,7 +14,7 @@
     </view>
     <view class="time">
       <view class="list">
-        <view class="item" :class="{highlight: currentIndex === idx}" v-for="(item, idx) of list" :key='idx' @click="clickTime(item, idx)">{{item.week}}<text
+        <view class="item" :class="{highlight: currentIndex === idx}" v-for="(item, idx) of list" :key='idx' @click="clickTime(item, idx)"><image class="inner-icon" :src="`http://res.tianapi.com/weather/${item.weatherimg}`" mode="aspectFit"></image>{{item.week}}<text
             v-if="!idx" class="today">(今天)</text></view>
       </view>
     </view>
@@ -40,8 +40,8 @@
       uni.getLocation({
         success: async ({ longitude, latitude }) => {
           let res = await this.$http.tGet(this.$api.IP_QUERY, {
-            longitude: 121.472644,
-            latitude: 31.231706,
+            longitude,
+            latitude,
           })
           console.log(res)
         }
@@ -114,6 +114,12 @@
       height: 14vh;
       font-size: 40upx;
       color: white;
+      
+      .inner-icon {
+        @size: 80upx;
+        width: @size;
+        height: @size;
+      }
 
       .today {
         font-size: 24upx;
