@@ -15,14 +15,11 @@
       value: {
         type: String,
       },
-      placeholder: {
-        type: String,
-        default: '搜索'
-      }
     },
     data() {
       return {
         searchStr: '',
+        placeholder: '请搜索地区',
       }
     }
   }

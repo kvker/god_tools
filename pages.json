@@ -31,6 +31,10 @@
     {
       "path": "pages/weather/index",
       "style": {}
+    },
+    {
+      "path": "pages/oil/index",
+      "style": {}
     }
   ],
   "globalStyle": {

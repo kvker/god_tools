@@ -72,9 +72,6 @@
       clickTime(item, idx) {
         this.currentIndex = idx
       },
-      inputSearch(e) {
-        this.searchKey = e.detail.value
-      },
       search() {
         this.getList()
       },

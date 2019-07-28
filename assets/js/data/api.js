@@ -7,4 +7,6 @@ export default {
   TIAN_QI:'/txapi/tianqi/',
   // IP查询
   IP_QUERY: '/txapi/ipquery/',
+  // 今日油价
+  OIL: '/txapi/oilprice/',
 }
