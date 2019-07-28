@@ -1,17 +1,12 @@
 <script>
   export default {
-    onLaunch: function() {
+    onLaunch() {
       this.$http.avUser.loginWithWeapp().then(user => {
         this.$globalData.user = user.toJSON()
-      }).catch(console.error)
-      // console.log('App Launch')
+      })
     },
-    onShow: function() {
-      // console.log('App Show')
-    },
-    onHide: function() {
-      // console.log('App Hide')
-    }
+    onShow() {},
+    onHide() {}
   }
 </script>
 
@@ -22,8 +17,11 @@
   button,
   navigator {
     box-sizing: border-box !important;
-    color: #666;
     font-size: 28upx;
+  }
+  
+  view, input {
+    box-sizing: border-box;
   }
 
   rich-text {
@@ -35,7 +33,6 @@
     padding: 8upx 16upx;
     border: 2upx solid #666;
     border-radius: 8upx;
-    color: #666;
     text-align: center;
   }
 

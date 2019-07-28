@@ -5,4 +5,6 @@ export default {
   RUBBISH_UPLOAD_CHECK: '/txapi/imglajifenlei/',
   // 天气预报
   TIAN_QI:'/txapi/tianqi/',
+  // IP查询
+  IP_QUERY: '/txapi/ipquery/',
 }

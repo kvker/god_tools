@@ -37,6 +37,15 @@
       }
     },
     onLoad(option) {
+      uni.getLocation({
+        success: async ({ longitude, latitude }) => {
+          let res = await this.$http.tGet(this.$api.IP_QUERY, {
+            longitude: 121.472644,
+            latitude: 31.231706,
+          })
+          console.log(res)
+        }
+      })
       this.getList()
     },
     onShow() {},

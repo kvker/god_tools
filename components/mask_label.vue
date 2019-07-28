@@ -1,6 +1,6 @@
 <template>
   <view class="mask-label">
-    <text>{{label}}</text>
+    <text class="text">{{label}}</text>
     <view class="mask"></view>
     <view class="mask"></view>
   </view>
@@ -14,9 +14,6 @@
         required: true,
       }
     },
-    mounted() {
-      console.log(this.label)
-    }
   }
 </script>
 
@@ -28,15 +25,19 @@
     align-items: center;
     width: 200upx;
     height: 46upx;
-    margin: 0 27upx;
     color: black;
     font-size: 28upx;
     font-family: PingFangSC-Semibold;
     font-weight: 600;
 
+    .text {
+      position: relative;
+      z-index: 1;
+    }
+
     .mask {
       position: absolute;
-      z-index: -1;
+      z-index: 0;
       top: 0;
       left: 0;
       width: 100%;

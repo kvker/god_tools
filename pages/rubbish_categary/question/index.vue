@@ -134,6 +134,7 @@
           }
           this.generateQuestion()
         } else {
+          uni.vibrateShort()
           let duration = 3000
           uni.showToast({
             icon: 'none',

@@ -1,24 +1,32 @@
 <template>
   <view class="page">
     <canvas canvas-id="canvas"></canvas>
-    <image :src="checkImgUrl" mode="aspectFit"></image>
+    <searcher class='searcher' @confirm="searchResult" @input='inputSearch' :value='searchStr' :placeholder="placeholder"></searcher>
+    <scroll-view scroll-y class="result-list-box">
+      <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
+    </scroll-view>
     <view ref='view' class="ctrls">
-      <button @click="goRabbishCategary" class="button">练习</button>
-      <button @click="chooseImage" class="button">图像检索</button>
+      <view class="ctrl" @click="goRabbishCategary">
+        <mask-label class='mask' label="分类练习"></mask-label>
+        <text>戳我！！！</text>
+        <text>垃圾知多少？</text>
+        <image src="http://lc-vdtaziqw.cn-e1.lcfile.com/b75d3713731bfe4029e4/god_utils_rubbish_test.png" mode="aspectFit"></image>
+      </view>
+      <view class="ctrl" @click="chooseImage">
+        <mask-label class='mask' label="垃圾识别"></mask-label>
+        <text>这是什么垃圾？</text>
+        <text>点我搜一下。</text>
+        <image src="http://lc-vdtaziqw.cn-e1.lcfile.com/0fdb91d831e62aeb8064/god_utils_rubbish_img.png" mode="aspectFit"></image>
+      </view>
     </view>
-    <view class="search-box">
-      <input class="main-input" confirm-type='search' :placeholder='placeholder' v-model="searchStr" @input="inputSearch"
-        @confirm="search"></input>
-      <scroll-view scroll-y class="result-list-box">
-        <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
-      </scroll-view>
-    </view>
+    <image class="search-img" :src="checkImgUrl" mode="aspectFit"></image>
   </view>
 </template>
 
 <script>
-  import searchMixin from '@/mixins/search'
   import commonPageMixin from '@/mixins/common_page'
+  import searcher from '@/components/searcher'
+  import maskLabel from '@/components/mask_label'
 
   const results = [{
     name: '可回收物',
@@ -35,14 +43,22 @@
   }]
 
   export default {
-    mixins: [searchMixin, commonPageMixin],
+    mixins: [commonPageMixin],
+    components: {
+      searcher,
+      maskLabel,
+    },
     data() {
       return {
-        title: '垃圾分类',
+        title: '',
         checkImgUrl: '',
       }
     },
+    onLoad() {},
     methods: {
+      inputSearch(e) {
+        this.searchStr = e.detail.value
+      },
       goRabbishCategary() {
         uni.navigateTo({
           url: `/pages/rubbish_categary/question/index`
@@ -117,6 +133,15 @@
 <style scoped lang="less">
   .page {
     align-items: center;
+    background: #EFFFF5;
+  }
+
+  .border() {
+    border: 4upx solid #161616;
+  }
+
+  .searcher {
+    margin: 28upx 0;
   }
 
   canvas {
@@ -127,40 +152,65 @@
     height: 2000px;
   }
 
-  image {
-    position: absolute;
+  .ctrls {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 100upx 0 32upx;
+
+    .ctrl {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 330upx;
+      height: 306upx;
+      border: 4upx solid black;
+      border-radius: 6upx;
+      background: white;
+
+      text {
+        line-height: 48upx;
+        margin-left: 32upx;
+
+        &:nth-child(2) {
+          margin-top: 60upx;
+        }
+      }
+
+      image {
+        align-self: flex-end;
+        width: 174upx;
+        height: 162upx;
+        margin-right: 20upx;
+      }
+
+      .mask {
+        position: absolute;
+        top: -36upx;
+        left: 62upx;
+      }
+    }
+  }
+
+  .result-list-box {
+    width: 690upx;
+    height: 350upx;
+    .border();
+    border-radius: 6upx;
+    background: white;
+    padding: 12upx 24upx;
+
+    .reslut-text {
+      width: 100%;
+      line-height: 48upx;
+      font-size: 24upx;
+      font-family: PingFangSC-Regular;
+    }
+  }
+
+  .search-img {
     @size: 200upx;
     width: @size;
     height: @size;
-  }
-
-  .ctrls {
-    display: flex;
-    width: 400upx;
-    justify-content: space-between;
-    margin: 240upx 0 32upx;
-  }
-
-  .search-box {
-    width: 100%;
-
-    .main-input {
-      height: 80upx;
-      border: 1px solid #666;
-      border-radius: 16upx;
-      padding: 0 16upx;
-      margin: 0 0 16upx;
-    }
-
-    .result-list-box {
-      border: 2upx solid #666;
-      height: 600upx;
-      border-radius: 8upx;
-    }
-
-    .reslut-text {
-      line-height: 64upx;
-      padding: 0 8upx;
-    }
   }
 </style>

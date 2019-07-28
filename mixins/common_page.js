@@ -17,7 +17,7 @@ export default {
       title: '',
       // 下发数据纯数组内字符串
       arrayOnly: false,
-      resultList: ['获取中...'],
+      resultList: ['请搜索'],
     }
   },
   onLoad(option) {
@@ -30,12 +30,12 @@ export default {
       this.hasPage = !!option.hasPage
       this.canRandom = !!option.canRandom
       this.arrayOnly = !!option.arrayOnly
-      if(option.label) {
+      if (option.label) {
         this.title = option.label
+        uni.setNavigationBarTitle({
+          title: option.label
+        })
       }
-      uni.setNavigationBarTitle({
-        title: option.label
-      })
     } catch (e) {
       throw '参数不足'
     }

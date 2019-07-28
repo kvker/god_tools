@@ -1,0 +1,53 @@
+<template>
+  <view class="search-box">
+    <image class="icon" placeholder="搜索" src="https://lc-vdtaziqw.cn-e1.lcfile.com/380cd34fdd6a53444068/god_utils_search.png"
+      mode="aspectFit"></image>
+    <input class="search-input" :placeholder="placeholder" confirm-type='search' :value="value" @input="$emit('input', $event)" @confirm="$emit('confirm', $event)"></input>
+  </view>
+</template>
+
+<script>
+  import searchMixin from '@/mixins/search'
+
+  export default {
+    mixins: [searchMixin],
+    props: {
+      value: {
+        type: String,
+      }
+    },
+    data() {
+      return {
+        searchStr: '',
+      }
+    }
+  }
+</script>
+
+<style scoped lang="less">
+  .search-box {
+    position: relative;
+    width: 690upx;
+    height: 88upx;
+    border: 4upx solid black;
+    border-radius: 6upx;
+    background: white;
+
+    .icon {
+      position: absolute;
+      left: 26upx;
+      top: 22upx;
+      width: 50upx;
+      height: 40upx;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      font-size: 38upx;
+      font-family: PingFangSC-Regular;
+      padding: 0 16upx 0 80upx;
+      color: black;
+    }
+  }
+</style>

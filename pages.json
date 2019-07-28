@@ -6,9 +6,7 @@
     },
     {
       "path": "pages/rubbish_categary/index",
-      "style": {
-        "navigationBarTitleText": "垃圾分类"
-      }
+      "style": {}
     },
     {
       "path": "pages/rubbish_categary/question/index",
@@ -37,7 +35,7 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "神的工具箱",
+    "navigationBarTitleText": "只有神才知道的工具合集",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },

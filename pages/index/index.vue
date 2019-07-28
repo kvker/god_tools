@@ -6,7 +6,7 @@
       <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
           <image class="v-line" :src="vLineUrl" mode=""></image>
-          <mask-label :label="group.label"></mask-label>
+          <mask-label class='mask' :label="group.label"></mask-label>
           <image class="v-line" :src="vLineUrl" mode=""></image>
         </view>
         <view class="utils">
@@ -25,7 +25,7 @@
 
 <script>
   import maskLabel from '@/components/mask_label'
-  
+
   const classs = 'MpUtil'
 
   export default {
@@ -87,9 +87,7 @@
           appId: item.wxmpid,
           path: '/pages/index/index',
           extraData: {},
-          success(res) {
-            console.log('跳转成功')
-          }
+          success(res) {}
         })
       },
       /**
@@ -172,7 +170,6 @@
         })
 
         this.utilGroups = utilGroups
-        console.log(this.utilGroups[0])
 
         // 如果有被隐藏的工具，则提示
         if (this.hiddens.length) {
@@ -228,6 +225,10 @@
         align-items: center;
         width: 100%;
         margin: 52upx 0 37upx;
+
+        .mask {
+          margin: 0 28upx;
+        }
       }
 
       .utils {
