@@ -4,7 +4,6 @@ export default {
       searchStr: '',
       result: '请搜索',
       resultList: ['请搜索'],
-      placeholder: '请搜索',
     }
   },
   onLoad(option) {

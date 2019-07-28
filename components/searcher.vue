@@ -1,6 +1,6 @@
 <template>
   <view class="search-box">
-    <image class="icon" placeholder="搜索" src="https://lc-vdtaziqw.cn-e1.lcfile.com/380cd34fdd6a53444068/god_utils_search.png"
+    <image class="icon" :placeholder="placeholder" src="https://lc-vdtaziqw.cn-e1.lcfile.com/380cd34fdd6a53444068/god_utils_search.png"
       mode="aspectFit"></image>
     <input class="search-input" :placeholder="placeholder" confirm-type='search' :value="value" @input="$emit('input', $event)" @confirm="$emit('confirm', $event)"></input>
   </view>
@@ -14,6 +14,10 @@
     props: {
       value: {
         type: String,
+      },
+      placeholder: {
+        type: String,
+        default: '搜索'
       }
     },
     data() {
@@ -32,6 +36,7 @@
     border: 4upx solid black;
     border-radius: 6upx;
     background: white;
+    margin: 0 auto;
 
     .icon {
       position: absolute;

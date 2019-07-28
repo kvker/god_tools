@@ -1,21 +1,26 @@
 <template>
   <view class="page">
-    <view class="info">
-      <view v-if="currentItem" class="current">
-        <text>{{currentItem.highest}}</text>
-        <view class="core">
-          <image class="weather-icon" :src="`http://res.tianapi.com/weather/${currentItem.weatherimg}`" mode="aspectFit"></image>
-          <text>{{currentItem.weather}}</text>
-          <text>{{currentItem.date}}</text>
-          <text>{{currentItem.wind}}：{{currentItem.windspeed}}</text>
+    <searcher placeholder='搜索地区' :value='searchKey' @confirm='search' @input='inputSearch'></searcher>
+    <view class="infos">
+      <view class="info">
+        <view v-if="currentItem" class="current">
+          <text>{{currentItem.highest}}</text>
+          <view class="core">
+            <image class="weather-icon" :src="`http://res.tianapi.com/weather/${currentItem.weatherimg}`" mode="aspectFit"></image>
+            <text>{{currentItem.weather}}</text>
+            <text>{{currentItem.date}}</text>
+            <text>{{currentItem.wind}}：{{currentItem.windspeed}}</text>
+          </view>
+          <text>{{currentItem.lowest}}</text>
         </view>
-        <text>{{currentItem.lowest}}</text>
       </view>
-    </view>
-    <view class="time">
-      <view class="list">
-        <view class="item" :class="{highlight: currentIndex === idx}" v-for="(item, idx) of list" :key='idx' @click="clickTime(item, idx)"><image class="inner-icon" :src="`http://res.tianapi.com/weather/${item.weatherimg}`" mode="aspectFit"></image>{{item.week}}<text
-            v-if="!idx" class="today">(今天)</text></view>
+      <view class="time">
+        <view class="list">
+          <view class="item" :class="{highlight: currentIndex === idx}" v-for="(item, idx) of list" :key='idx' @click="clickTime(item, idx)">
+            <image class="inner-icon" :src="`http://res.tianapi.com/weather/${item.weatherimg}`" mode="aspectFit"></image>{{item.week}}<text
+              v-if="!idx" class="today">(今天)</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
@@ -23,8 +28,13 @@
 
 <script>
   import singleMixin from '@/mixins/single'
+  import searcher from '@/components/searcher.vue'
+
   export default {
     mixins: [singleMixin],
+    components: {
+      searcher,
+    },
     data() {
       return {
         list: [],
@@ -37,39 +47,50 @@
       }
     },
     onLoad(option) {
-      uni.getLocation({
-        success: async ({ longitude, latitude }) => {
-          let res = await this.$http.tGet(this.$api.IP_QUERY, {
-            longitude,
-            latitude,
-          })
-          console.log(res)
-        }
-      })
+      // uni.getLocation({
+      //   success: async ({ longitude, latitude }) => {
+      //     let res = await this.$http.tGet(this.$api.IP_QUERY, {
+      //       longitude,
+      //       latitude,
+      //     })
+      //     console.log(res)
+      //   }
+      // })
       this.getList()
     },
     onShow() {},
     methods: {
       async getList() {
+        this.list = []
         this.showLoading('获取天气中...')
-        let res = await this.$http.tGet(this.$api.TIAN_QI)
+        let res = await this.$http.tGet(this.$api.TIAN_QI, {
+          city: this.searchKey,
+        })
         uni.hideLoading()
         this.list = res
       },
       clickTime(item, idx) {
         this.currentIndex = idx
-      }
+      },
+      inputSearch(e) {
+        this.searchKey = e.detail.value
+      },
+      search() {
+        this.getList()
+      },
     }
   }
 </script>
 
 <style scoped lang="less">
-  .page {
-    flex-direction: row;
-    padding: 0;
-  }
+  .page {}
 
   @grey: #333;
+
+  .infos {
+    display: flex;
+    flex: 1;
+  }
 
   .info,
   .time {
@@ -106,15 +127,19 @@
   .time {
     background: @grey;
 
+    .list {
+      height: 100%;
+    }
+
     .item {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: 14vh;
+      height: 14%;
       font-size: 40upx;
       color: white;
-      
+
       .inner-icon {
         @size: 64upx;
         width: @size;
@@ -129,7 +154,7 @@
     .highlight {
       background: white;
       color: @grey;
-      height: 16vh;
+      height: 16%;
     }
   }
 </style>
