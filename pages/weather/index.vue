@@ -116,7 +116,7 @@
       color: white;
       
       .inner-icon {
-        @size: 80upx;
+        @size: 64upx;
         width: @size;
         height: @size;
       }
