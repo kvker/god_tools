@@ -47,7 +47,7 @@
     computed: {
       info() {
         let info = this.list[0] || {}
-        info.time = this.$dayjs(info.time).format('MM-DD HH-mm')
+        info.time = this.$dayjs(info.time).format('MM-DD HH:mm')
         return info
       }
     },
