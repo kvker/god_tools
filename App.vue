@@ -1,9 +1,11 @@
 <script>
   export default {
     onLaunch() {
+      // #ifdef MP-WEIXIN
       this.$http.avUser.loginWithWeapp().then(user => {
         this.$globalData.user = user.toJSON()
       })
+      // #endif
     },
     onShow() {},
     onHide() {}
@@ -19,8 +21,9 @@
     box-sizing: border-box !important;
     font-size: 28upx;
   }
-  
-  view, input {
+
+  view,
+  input {
     box-sizing: border-box;
   }
 

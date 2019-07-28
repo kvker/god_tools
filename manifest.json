@@ -124,13 +124,14 @@
         "usingComponents" : true
     },
     "h5" : {
-        "title" : "神的工具箱",
+        "title" : "只有神才知道的工具合集",
         "router" : {
-            "mode" : "history"
+            "mode" : "history",
+            "base" : "/iframe/god_tools"
         },
         "devServer" : {
             "port" : 3098
         },
-        "domain" : "https://m.kvker.com/"
+        "domain" : "https://www.kvker.com/iframe/god_tools"
     }
 }
