@@ -20,7 +20,7 @@
     data() {
       return {
         searchStr: '',
-        placeholder: '请搜索地区',
+        placeholder: '请搜索',
         img,
       }
     }

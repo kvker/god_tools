@@ -3,27 +3,27 @@
     <searcher @input='inputSearch' @confirm='getList' :value='searchStr'></searcher>
     <template v-if="info.p0">
       <view class="oil-info">
-        {{info.time}}
+        更新时间  {{info.time}}
       </view>
       <view class="oil-info">
         <text class="oil-number">0#</text>
-        <text class="oil-price">{{info.p0}}元</text>
-      </view>
-      <view class="oil-info">
-        <text class="oil-number">89#</text>
-        <text class="oil-price">{{info.p89}}元</text>
+        <text class="oil-type">柴油</text>
+        <text class="oil-price">{{info.p0}}(元/升)</text>
       </view>
       <view class="oil-info">
         <text class="oil-number">92#</text>
-        <text class="oil-price">{{info.p92}}元</text>
+        <text class="oil-type">汽油</text>
+        <text class="oil-price">{{info.p92}}(元/升)</text>
       </view>
       <view class="oil-info">
         <text class="oil-number">95#</text>
-        <text class="oil-price">{{info.p95}}元</text>
+        <text class="oil-type">汽油</text>
+        <text class="oil-price">{{info.p95}}(元/升)</text>
       </view>
       <view class="oil-info">
         <text class="oil-number">98#</text>
-        <text class="oil-price">{{info.p98}}元</text>
+        <text class="oil-type">汽油</text>
+        <text class="oil-price">{{info.p98}}(元/升)</text>
       </view>
     </template>
     <view v-else class="oil-info">
@@ -47,15 +47,20 @@
     computed: {
       info() {
         let info = this.list[0] || {}
-        info.time = this.$dayjs(info.time).format('MM-DD HH:mm')
+        info.time = this.$dayjs(info.time).format('HH:mm')
         return info
       }
     },
     onLoad(option) {
-      this.searchStr = '北京'
-      this.getList()
+      this.getAddress()
     },
     methods: {
+       async getAddress() {
+        let res = await this.$http.kGet('/api/ip')
+        res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
+        this.searchStr = res[0].province
+        this.getList()
+      },
       async getList() {
         this.list = []
         let res = await this.$http.tGet(this.$api.OIL, {
@@ -80,8 +85,22 @@
       border-bottom: none;
     }
 
-    .oil-number {}
+    text {
+      display: block;
+      width: 200upx;
+      font-size: 40upx;
+    }
 
-    .oil-price {}
+    .oil-number {
+      color: red;
+    }
+    .oil-type {
+      color: green;
+      font-size: 32upx;
+    }
+    .oil-price {
+      text-align: right;
+      font-size: 28upx;
+    }
   }
 </style>

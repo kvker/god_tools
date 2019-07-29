@@ -47,7 +47,6 @@
     },
     onLoad(option) {
       this.getUtils()
-      console.log(this.img.homeHeader)
     },
     methods: {
       async getUtils() {
