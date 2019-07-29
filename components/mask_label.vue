@@ -1,8 +1,8 @@
 <template>
   <view class="mask-label">
     <text class="text">{{label}}</text>
-    <view class="mask"></view>
-    <view class="mask"></view>
+    <view class="mask" :style="'background:' + (nextBackground || background)"></view>
+    <view class="mask" :style="'background:' + background"></view>
   </view>
 </template>
 
@@ -12,7 +12,14 @@
       label: {
         type: String,
         required: true,
-      }
+      },
+      background: {
+        type: String,
+        default: '#FFCB05',
+      },
+      nextBackground: {
+        type: String,
+      },
     },
   }
 </script>
@@ -42,7 +49,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #FFCB05;
       border: 4upx solid #161616;
       border-radius: 10upx;
 
