@@ -10,6 +10,33 @@ const TAK = 'e3714a97786a795065d75327d2850115'
 const JAK = 'a4b5f6a060b6a457'
 
 export default {
+  /**
+   * Get
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  get(path, params, cb) {
+    if (!params) params = {}
+    let url = path
+    return new Promise(resolve => {
+      uni.request({
+        url,
+        data: params,
+        success: ({ data }) => {
+          if (data.code === 200) {
+            resolve(data.data)
+          } else {
+            uni.showToast({
+              title: data.msg,
+            })
+            resolve()
+          }
+        },
+      })
+    })
+  },
+  // AV相关
   avQuery: AV.Query,
   avUser: AV.User,
   avObject: AV.Object,
@@ -231,6 +258,68 @@ export default {
         }) => {
           if (data.status === 0) {
             resolve(data.result)
+          } else {
+            uni.showToast({
+              title: data.msg,
+            })
+            resolve()
+          }
+        }
+      })
+    })
+  },
+  /**
+   * 主站kvker的Get
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  kGet(path, params, cb) {
+    if (!params) params = {}
+    params.appkey = JAK
+    let url = 'https://www.kvker.com' + path
+    return new Promise(resolve => {
+      uni.request({
+        url,
+        data: params,
+        success: ({
+          data
+        }) => {
+          if (data.code === 200) {
+            resolve(data.data)
+          } else {
+            uni.showToast({
+              title: data.msg,
+            })
+            resolve()
+          }
+        },
+      })
+    })
+  },
+  /**
+   * 主站kvker的POST
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  kPost(path, data, cb) {
+    if (!data) data = {}
+    data.appkey = JAK
+    let url = 'https://www.kvker.com' + path
+    return new Promise(resolve => {
+      uni.request({
+        url,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        data,
+        success: ({
+          data
+        }) => {
+          if (data.code === 200) {
+            resolve(data.data)
           } else {
             uni.showToast({
               title: data.msg,
