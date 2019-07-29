@@ -11,6 +11,5 @@ export default {
   OIL: '/txapi/oilprice/',
   
   // 极速Api
-  // 天气
-  J_TIAN_QI: '/weather/query',
+  // ...
 }
