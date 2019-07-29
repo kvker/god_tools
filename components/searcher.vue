@@ -1,6 +1,6 @@
 <template>
   <view class="search-box">
-    <image class="icon" :placeholder="placeholder" src="https://lc-vdtaziqw.cn-e1.lcfile.com/380cd34fdd6a53444068/god_utils_search.png"
+    <image class="icon" :placeholder="placeholder" :src="img.searchIcon"
       mode="aspectFit"></image>
     <input class="search-input" :placeholder="placeholder" confirm-type='search' :value="value" @input="$emit('input', $event)" @confirm="$emit('confirm', $event)"></input>
   </view>
@@ -8,6 +8,7 @@
 
 <script>
   import searchMixin from '@/mixins/search'
+  import img from '@/assets/js/data/img.js'
 
   export default {
     mixins: [searchMixin],
@@ -20,6 +21,7 @@
       return {
         searchStr: '',
         placeholder: '请搜索地区',
+        img,
       }
     }
   }

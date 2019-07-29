@@ -10,13 +10,13 @@
         <mask-label class='mask' label="分类练习"></mask-label>
         <text>戳我！！！</text>
         <text>垃圾知多少？</text>
-        <image src="http://lc-vdtaziqw.cn-e1.lcfile.com/b75d3713731bfe4029e4/god_utils_rubbish_test.png" mode="aspectFit"></image>
+        <image :src="img.knowledge"></image>
       </view>
       <view class="ctrl" @click="chooseImage">
         <mask-label class='mask' label="垃圾识别"></mask-label>
         <text>这是什么垃圾？</text>
         <text>点我搜一下。</text>
-        <image src="http://lc-vdtaziqw.cn-e1.lcfile.com/0fdb91d831e62aeb8064/god_utils_rubbish_img.png" mode="aspectFit"></image>
+        <image :src="img.check"></image>
       </view>
     </view>
     <image class="search-img" :src="checkImgUrl" mode="aspectFit"></image>

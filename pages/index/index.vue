@@ -1,13 +1,13 @@
 <template>
   <view class="page">
-    <image class="logo" src="https://lc-vdtaziqw.cn-e1.lcfile.com/f46958c978de7292f540/god_utils_header.png" mode="aspectFill"></image>
+    <image class="logo" :src="img.homeHeader" mode="aspectFill"></image>
     <text v-if="!utilGroups.length">加载工具中...</text>
     <scroll-view scroll-y v-else class="utils-area">
       <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
-          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <image class="v-line" :src="img.vLineUrl" mode="aspectFill"></image>
           <mask-label class='mask' :label="group.label"></mask-label>
-          <image class="v-line" :src="vLineUrl" mode=""></image>
+          <image class="v-line" :src="img.vLineUrl" mode="aspectFill"></image>
         </view>
         <view class="utils">
           <!-- #ifdef MP-WEIXIN -->
@@ -25,10 +25,12 @@
 
 <script>
   import maskLabel from '@/components/mask_label'
+  import commonPageMixin from '@/mixins/common_page.js'
 
   const classs = 'MpUtil'
 
   export default {
+    mixins: [commonPageMixin],
     components: {
       maskLabel,
     },
@@ -38,8 +40,6 @@
         utilGroups: [],
         // 维护中被隐藏的工具
         hiddens: [],
-        // 波浪线链接
-        vLineUrl: 'https://lc-vdtaziqw.cn-e1.lcfile.com/4575142956cc21460df2/god_utils_v_line.png',
       }
     },
     onShow() {
@@ -47,6 +47,7 @@
     },
     onLoad(option) {
       this.getUtils()
+      console.log(this.img.homeHeader)
     },
     methods: {
       async getUtils() {

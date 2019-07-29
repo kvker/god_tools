@@ -5,7 +5,8 @@
       <view class="coins">
         <view class="row" v-for="(coin, idx) of coins" :key='idx'>
           <image class="coin-img" :src="coin.img" mode="aspectFit"></image>
-          <input placeholder-style='color: rgba(255, 255, 255, .5);' type='number' v-model='coin.count' placeholder='数量' class="coin-count">
+          <input placeholder-style='color: rgba(255, 255, 255, .5);' type='number' v-model='coin.count' placeholder='数量'
+            class="coin-count">
         </view>
       </view>
       <view class="result">
@@ -20,70 +21,69 @@
 
 <script>
   import singleMixin from '@/mixins/single.js'
+  let host = 'https://lc-vdtaziqw.cn-e1.lcfile.com'
   
-  let avFileBaseUrl = 'https://lc-vdtaziqw.cn-e1.lcfile.com'
-
   export default {
     mixins: [singleMixin],
     data() {
       return {
         coins: [{
-            img: avFileBaseUrl + '/ea14f4cc58f03bb18673/100.jpg',
+            img: host + '/ea14f4cc58f03bb18673/100.jpg',
             count: '',
             priceF: 10000
           },
           {
-            img: avFileBaseUrl + '/9a78271725382190023b/50.jpg',
+            img: host + '/9a78271725382190023b/50.jpg',
             count: '',
             priceF: 5000
           },
           {
-            img: avFileBaseUrl + '/2aab0cacb92777c711a9/20.jpg',
+            img: host + '/2aab0cacb92777c711a9/20.jpg',
             count: '',
             priceF: 2000
           },
           {
-            img: avFileBaseUrl + '/e6792f9553c120537eaa/10.jpg',
+            img: host + '/e6792f9553c120537eaa/10.jpg',
             count: '',
             priceF: 1000
           },
           {
-            img: avFileBaseUrl + '/1a1b5acfee16e683b942/5.jpg',
+            img: host + '/1a1b5acfee16e683b942/5.jpg',
             count: '',
             priceF: 500
           },
           {
-            img: avFileBaseUrl + '/f9dc8ea8eb4456c393dc/1.jpg',
+            img: host + '/f9dc8ea8eb4456c393dc/1.jpg',
             count: '',
             priceF: 100
           },
           {
-            img: avFileBaseUrl + '/2de519419ef3aa494141/1y.jpg',
+            img: host + '/2de519419ef3aa494141/1y.jpg',
             count: '',
             priceF: 100
           },
           {
-            img: avFileBaseUrl + '/9834bfa1b487c9c56660/5j.jpg',
+            img: host + '/9834bfa1b487c9c56660/5j.jpg',
             count: '',
             priceF: 50
           },
           {
-            img: avFileBaseUrl + '/b1e09d721ea954a54d9f/5m.jpg',
+            img: host + '/b1e09d721ea954a54d9f/5m.jpg',
             count: '',
             priceF: 50
           },
           {
-            img: avFileBaseUrl + '/0a777ca4097a24f10fcf/1j.jpg',
+            img: host + '/0a777ca4097a24f10fcf/1j.jpg',
             count: '',
             priceF: 10
           },
           {
-            img: avFileBaseUrl + '/d91569625283c638422e/1m.jpg',
+            img: host + '/d91569625283c638422e/1m.jpg',
             count: '',
             priceF: 10
           }
         ],
-        imgBg: avFileBaseUrl + '/4a055b5859763dce1cc1/bg.jpg',
+        imgBg: host + '/4a055b5859763dce1cc1/bg.jpg',
       }
     },
     computed: {
