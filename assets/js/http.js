@@ -1,28 +1,30 @@
 import AV from '@/libs/av-weapp-min.js'
 
-if(!(AV.applicationId && (AV.applicationKey || AV.masterKey))) {
+if (!(AV.applicationId && (AV.applicationKey || AV.masterKey))) {
   AV.init("vdTAziqW4rPfnhY0yqR8wXIv-9Nh9j0Va", "zRCcC5Mg9iOupMgwwGmd54b3")
 }
 
 // 天行Api的AppKey
 const TAK = 'e3714a97786a795065d75327d2850115'
+// 极速Api的AppKey
+const JAK = 'a4b5f6a060b6a457'
 
 export default {
   avQuery: AV.Query,
   avUser: AV.User,
   avObject: AV.Object,
   /**
-     * av删除对象
-     * @param {string} classs 新增对象的累
-     * @param {object} params 新增参数
-     */
+   * av删除对象
+   * @param {string} classs 新增对象的累
+   * @param {object} params 新增参数
+   */
   avCreate(classs, params) {
     var Obj = AV.Object.extend(classs)
     let obj = new Obj()
 
     // 设置属性
-    for(const key in params) {
-      if(params.hasOwnProperty(key)) {
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
         const element = params[key]
         obj.set(key, element)
       }
@@ -50,7 +52,7 @@ export default {
   avRetrieve(classs, cbForQuery) {
     let query = new AV.Query(classs)
     // 如果需要额外设置条件，则通过传入这个函数处理
-    if(cbForQuery) {
+    if (cbForQuery) {
       cbForQuery(query)
     }
     return new Promise((resolve, reject) => {
@@ -76,8 +78,8 @@ export default {
   avUpdate(classs, id, params) {
     let obj = AV.Object.createWithoutData(classs, id)
     // 设置属性
-    for(const key in params) {
-      if(params.hasOwnProperty(key)) {
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
         const element = params[key]
         obj.set(key, element)
       }
@@ -167,6 +169,68 @@ export default {
         }) => {
           if (data.code === 200) {
             resolve(data.newslist)
+          } else {
+            uni.showToast({
+              title: data.msg,
+            })
+            resolve()
+          }
+        }
+      })
+    })
+  },
+  /**
+   * 极速Api的Get
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  jGet(path, params, cb) {
+    if (!params) params = {}
+    params.appkey = JAK
+    let url = 'https://api.jisuapi.com' + path
+    return new Promise(resolve => {
+      uni.request({
+        url,
+        data: params,
+        success: ({
+          data
+        }) => {
+          if (data.status === 0) {
+            resolve(data.result)
+          } else {
+            uni.showToast({
+              title: data.msg,
+            })
+            resolve()
+          }
+        },
+      })
+    })
+  },
+  /**
+   * 极速Api的POST
+   * @param {String} url 地址，带上/
+   * @param {Object} data 参数
+   * @param {Function} cb 回调
+   */
+  jPost(path, data, cb) {
+    if (!data) data = {}
+    data.appkey = JAK
+    let url = 'https://api.jisuapi.com' + path
+    return new Promise(resolve => {
+      uni.request({
+        url,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        data,
+        success: ({
+          data
+        }) => {
+          if (data.status === 0) {
+            resolve(data.result)
           } else {
             uni.showToast({
               title: data.msg,
