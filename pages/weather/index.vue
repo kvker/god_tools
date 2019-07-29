@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <searcher placeholder='搜索地区' :value='searchKey' @confirm='search' @input='inputSearch'></searcher>
+    <searcher placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
     <view class="infos">
       <view class="info">
         <view v-if="currentItem" class="current">
@@ -28,10 +28,11 @@
 
 <script>
   import singleMixin from '@/mixins/single'
+  import searchMixin from '@/mixins/search'
   import searcher from '@/components/searcher.vue'
 
   export default {
-    mixins: [singleMixin],
+    mixins: [singleMixin, searchMixin],
     components: {
       searcher,
     },
@@ -47,24 +48,14 @@
       }
     },
     onLoad(option) {
-      // uni.getLocation({
-      //   success: async ({ longitude, latitude }) => {
-      //     let res = await this.$http.tGet(this.$api.IP_QUERY, {
-      //       longitude,
-      //       latitude,
-      //     })
-      //     console.log(res)
-      //   }
-      // })
       this.getList()
     },
-    onShow() {},
     methods: {
       async getList() {
         this.list = []
         this.showLoading('获取天气中...')
         let res = await this.$http.tGet(this.$api.TIAN_QI, {
-          city: this.searchKey,
+          city: this.searchStr,
         })
         uni.hideLoading()
         this.list = res
