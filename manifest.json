@@ -110,7 +110,7 @@
         "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ],
         "permission" : {
             "scope.userLocation" : {
-                "desc" : "天气预报苏姚根据定位获取数据"
+                "desc" : "天气预报等根据定位获取初次数据"
             }
         }
     },
