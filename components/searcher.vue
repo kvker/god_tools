@@ -7,20 +7,21 @@
 </template>
 
 <script>
-  import searchMixin from '@/mixins/search'
   import img from '@/assets/js/data/img.js'
 
   export default {
-    mixins: [searchMixin],
     props: {
       value: {
         type: String,
       },
+      placeholder: {
+        type: String,
+        default: '请搜索',
+      }
     },
     data() {
       return {
         searchStr: '',
-        placeholder: '请搜索',
         img,
       }
     }

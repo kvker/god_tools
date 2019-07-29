@@ -1,6 +1,6 @@
 <template>
   <view>
-    <searcher @input='inputSearch' @confirm='getList' :value='searchStr'></searcher>
+    <searcher @input='inputSearch' @confirm='getList' :value='searchStr' :placeholder="placeholder"></searcher>
     <template v-if="info.p0">
       <view class="oil-info">
         更新时间  {{info.time}}

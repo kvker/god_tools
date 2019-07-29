@@ -1,7 +1,6 @@
 <template>
   <view class="page">
-    <input class="main-input" confirm-type='search' :placeholder='placeholder' v-model="searchStr" @input="inputSearch"
-      @confirm="search"></input>
+    <searcher @input='inputSearch' @confirm='search' :value='searchStr' :placeholder="placeholder"></searcher>
     <scroll-view scroll-y class="result-list-box">
       <rich-text :nodes="result"></rich-text>
     </scroll-view>
@@ -16,9 +15,13 @@
 <script>
   import searchMixin from '@/mixins/search'
   import commonPageMixin from '@/mixins/common_page'
+  import searcher from '@/components/searcher.vue'
 
   export default {
     mixins: [searchMixin, commonPageMixin],
+    components: {
+      searcher,
+    },
     data() {
       return {
         hasPage: false,
