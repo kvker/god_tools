@@ -52,16 +52,10 @@
       }
     },
     onLoad(option) {
-      this.getAddress()
+      this.searchStr = this.$globalData.ipInfo.city
+      this.getList()
     },
     methods: {
-      async getAddress() {
-        this.showLoading('获取天气中...')
-        let res = await this.$http.kGet('/api/ip')
-        res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
-        this.searchStr = res[0].city
-        this.getList()
-      },
       async getList() {
         this.showLoading('获取天气中...')
         this.list = []
@@ -81,6 +75,7 @@
       },
       search() {
         this.searcherShow = false
+        this.showStr = this.searchStr
         this.getList()
       },
       clickSearchMask(e) {

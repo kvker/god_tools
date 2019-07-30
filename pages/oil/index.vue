@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <searcher style='margin: 30upx 0 40upx;' @input='inputSearch' @confirm='getList' :value='searchStr' :placeholder="placeholder"></searcher>
-    <template v-if="info.time">
+    <template v-if="info.p0">
       <view class="time">
         更新时间：{{info.time}}
       </view>
@@ -54,15 +54,10 @@
       }
     },
     onLoad(option) {
-      this.getAddress()
+      this.searchStr = this.$globalData.ipInfo.province
+      this.getList()
     },
     methods: {
-      async getAddress() {
-        let res = await this.$http.kGet('/api/ip')
-        res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
-        this.searchStr = res[0].province
-        this.getList()
-      },
       async getList() {
         this.list = []
         let res = await this.$http.tGet(this.$api.OIL, {

@@ -47,8 +47,16 @@
     },
     onLoad(option) {
       this.getUtils()
+      this.getAddress()
     },
     methods: {
+      async getAddress() {
+        let res = await this.$http.kGet('/api/ip')
+        res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
+        if(res) {
+          this.$globalData.ipInfo = res[0]
+        }
+      },
       async getUtils() {
         try {
           let res = await this.$http.avRetrieve(classs, query => {
