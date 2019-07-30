@@ -20,7 +20,7 @@ let imgPaths = {
   'lei.png': '/0b4ac27cf71384f7c2f3/lei.png',
   'bingbao.png': '/fe79385fde2c8bd2c65d/bingbao.png',
   
-  
+  oilSubBg:'/db516815067d33674d58/oil_sub_bg.png',
 }
 
 for (let key in imgPaths) {

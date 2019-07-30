@@ -44,7 +44,6 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - 80upx);
-    z-index: -1;
   }
 
   /* #ifdef MP */
