@@ -108,11 +108,7 @@
         },
         "usingComponents" : true,
         "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ],
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : "天气预报等根据定位获取初次数据"
-            }
-        }
+        "permission" : {}
     },
     "mp-alipay" : {
         "usingComponents" : true
