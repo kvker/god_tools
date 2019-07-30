@@ -11,7 +11,7 @@
     props: {
       label: {
         type: String,
-        required: true,
+        default: '',
       },
       background: {
         type: String,

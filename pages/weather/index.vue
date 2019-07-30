@@ -1,6 +1,12 @@
 <template>
   <view class="page">
-    <searcher placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
+    <searcher class='searcher' placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
+    <view class="mask-box">
+      <mask-label class='background'></mask-label>
+      <image class="thunder" :src="img.thunder" mode="aspectFit"></image>
+      <text>{{showStr}}</text>
+      <image class="local" :src="img.local" mode="aspectFit"></image>
+    </view>
     <view class="infos">
       <view class="info">
         <view v-if="currentItem" class="current">
@@ -30,16 +36,20 @@
   import singleMixin from '@/mixins/single'
   import searchMixin from '@/mixins/search'
   import searcher from '@/components/searcher.vue'
+  import maskLabel from '@/components/mask_label.vue'
 
   export default {
     mixins: [singleMixin, searchMixin],
     components: {
       searcher,
+      maskLabel,
     },
     data() {
       return {
         list: [],
         currentIndex: 0,
+        // 显示在mask上的问题
+        showStr: '',
       }
     },
     computed: {
@@ -66,6 +76,8 @@
         })
         uni.hideLoading()
         this.list = res
+        this.showStr = this.searchStr
+        this.searchStr = ''
       },
       clickTime(item, idx) {
         this.currentIndex = idx
@@ -78,13 +90,51 @@
 </script>
 
 <style scoped lang="less">
-  .page {}
+  .page {
+    align-items: center;
+    background: #E3F5FF;
+  }
 
   @grey: #333;
+  
+  // .searcher {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   z-index: 11;
+  // }
+
+  .mask-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200upx;
+    height: 46upx;
+    margin: 8upx 0;
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .thunder {
+      width: 40upx;
+      height: 54upx;
+    }
+
+    .local {
+      width: 44upx;
+      height: 30upx;
+    }
+  }
 
   .infos {
     display: flex;
     flex: 1;
+    width: 100%;
   }
 
   .info,
