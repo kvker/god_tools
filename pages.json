@@ -5,6 +5,10 @@
       "style": {}
     },
     {
+      "path": "pages/ip_query/index",
+      "style": {}
+    },
+    {
       "path": "pages/oil/index",
       "style": {}
     },

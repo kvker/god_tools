@@ -51,7 +51,13 @@
     },
     methods: {
       async getAddress() {
+        this.$globalData.ipInfo = {
+          province: '北京',
+          city: '北京',
+          ip: '',
+        }
         let res = await this.$http.kGet('/api/ip')
+        let ip = res.ip
         res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
         if(res) {
           this.$globalData.ipInfo = res[0]
@@ -61,6 +67,7 @@
             city: '北京',
           }
         }
+        this.$globalData.ipInfo.ip = ip
       },
       async getUtils() {
         try {
