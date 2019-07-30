@@ -1,31 +1,29 @@
 <template>
   <view class="page">
-    <searcher class='searcher' placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
-    <view class="mask-box">
+    <view id="mask" @click="clickSearchMask" :class="searcherShow ? 'searcher-box searcher-box-show' : 'searcher-box'">
+      <searcher @click.stop class='searcher' placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
+    </view>
+    <view class="mask-box" @click='searcherShow = true'>
       <mask-label class='background'></mask-label>
-      <image class="thunder" :src="img.thunder" mode="aspectFit"></image>
+      <image class="thunder" v-if="list.length" :src="img[list[0].weatherimg]" mode="aspectFit"></image>
       <text>{{showStr}}</text>
       <image class="local" :src="img.local" mode="aspectFit"></image>
     </view>
     <view class="infos">
-      <view class="info">
-        <view v-if="currentItem" class="current">
-          <text>{{currentItem.highest}}</text>
-          <view class="core">
-            <image class="weather-icon" :src="`http://res.tianapi.com/weather/${currentItem.weatherimg}`" mode="aspectFit"></image>
-            <text>{{currentItem.weather}}</text>
-            <text>{{currentItem.date}}</text>
-            <text>{{currentItem.wind}}：{{currentItem.windspeed}}</text>
-          </view>
-          <text>{{currentItem.lowest}}</text>
+      <view class="info" v-for="(item, idx) of list" :key='idx'>
+        <image class="weather-icon" :src="img[item.weatherimg]" mode="aspectFit"></image>
+        <text>{{item.weather}}</text>
+        <view class="temp">
+          <text>{{item.lowest}}</text>
+          ~
+          <text>{{item.highest}}</text>
         </view>
-      </view>
-      <view class="time">
-        <view class="list">
-          <view class="item" :class="{highlight: currentIndex === idx}" v-for="(item, idx) of list" :key='idx' @click="clickTime(item, idx)">
-            <image class="inner-icon" :src="`http://res.tianapi.com/weather/${item.weatherimg}`" mode="aspectFit"></image>{{item.week}}<text
-              v-if="!idx" class="today">(今天)</text>
-          </view>
+        <view v-if="!idx" class="dates">
+          <text>{{item.week}}</text>
+          <text>{{item.showDate}}</text>
+        </view>
+        <view v-else class="dates">
+          <text>{{item.showDate}}({{item.week}})</text>
         </view>
       </view>
     </view>
@@ -50,11 +48,7 @@
         currentIndex: 0,
         // 显示在mask上的问题
         showStr: '',
-      }
-    },
-    computed: {
-      currentItem() {
-        return this.list[this.currentIndex]
+        searcherShow: false,
       }
     },
     onLoad(option) {
@@ -75,7 +69,10 @@
           city: this.searchStr,
         })
         uni.hideLoading()
-        this.list = res
+        this.list = res.map(i => ({
+          ...i,
+          showDate: this.$dayjs(i.date).format("MM-DD")
+        }))
         this.showStr = this.searchStr
         this.searchStr = ''
       },
@@ -83,7 +80,13 @@
         this.currentIndex = idx
       },
       search() {
+        this.searcherShow = false
         this.getList()
+      },
+      clickSearchMask(e) {
+        if(e.target.id === e.currentTarget.id) {
+          this.searcherShow = false
+        }
       },
     }
   }
@@ -92,17 +95,25 @@
 <style scoped lang="less">
   .page {
     align-items: center;
+    z-index: 100;
     background: #E3F5FF;
   }
 
   @grey: #333;
-  
-  // .searcher {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   z-index: 11;
-  // }
+
+  .searcher-box {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, .1);
+    z-index: 11;
+  }
+
+  .searcher-box-show {
+    transform: translateY(100vh);
+  }
 
   .mask-box {
     position: relative;
@@ -111,7 +122,7 @@
     align-items: center;
     width: 200upx;
     height: 46upx;
-    margin: 8upx 0;
+    margin: 30upx 0;
 
     .background {
       position: absolute;
@@ -133,73 +144,48 @@
 
   .infos {
     display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     flex: 1;
     width: 100%;
-  }
 
-  .info,
-  .time {
-    width: 50%;
-    height: 100%;
-    text-align: center;
-  }
-
-  .info {
-    .current {
+    .info {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      height: 100%;
-      font-size: 120upx;
-      color: @grey;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 210upx;
+      height: 280upx;
+      background: white;
+      border: 4upx solid black;
+      border-radius: 6upx;
+      font-size: 24upx;
+      font-family: PingFangSC-Regular;
 
-      .core {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 40upx;
-        color: @grey;
+      &:first-child {
+        width: 690upx;
+        height: 346upx;
+        background: #FFEB09;
       }
 
       .weather-icon {
-        @size: 160upx;
-        width: @size;
-        height: @size;
-      }
-    }
-  }
-
-  .time {
-    background: @grey;
-
-    .list {
-      height: 100%;
-    }
-
-    .item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 14%;
-      font-size: 40upx;
-      color: white;
-
-      .inner-icon {
-        @size: 64upx;
+        @size: 80upx;
         width: @size;
         height: @size;
       }
 
-      .today {
+      .temp {
+        font-size: 32upx;
+        font-family: PingFangSC-Semibold;
+        font-weight: 600;
+      }
+
+      .dates {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
         font-size: 24upx;
       }
-    }
-
-    .highlight {
-      background: white;
-      color: @grey;
-      height: 16%;
     }
   }
 </style>
