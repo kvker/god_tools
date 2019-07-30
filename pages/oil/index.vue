@@ -8,23 +8,23 @@
       <view class="infos">
         <view class="info">
           <text class="number">92#</text>
-          <text class="price">{{info.p92}}元/升</text>
+          <text class="price">¥ {{info.p92}}<text class='sub'>元/升</text></text>
         </view>
         <view class="info">
           <text class="number">95#</text>
-          <text class="price">{{info.p95}}元/升</text>
+          <text class="price">¥ {{info.p95}}<text class='sub'>元/升</text></text>
         </view>
         <view class="info">
           <text class="number">98#</text>
-          <text class="price">{{info.p98}}元/升</text>
+          <text class="price">¥ {{info.p98}}<text class='sub'>元/升</text></text>
         </view>
         <view class="info">
           <text class="number">89#</text>
-          <text class="price">{{info.p89}}元/升</text>
+          <text class="price">¥ {{info.p89}}<text class='sub'>元/升</text></text>
         </view>
         <view class="info">
           <text class="number">0#</text>
-          <text class="price">{{info.p0}}元/升</text>
+          <text class="price">¥ {{info.p0}}<text class='sub'>元/升</text></text>
         </view>
       </view>
     </template>

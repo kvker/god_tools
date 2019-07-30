@@ -45,6 +45,10 @@
     flex-direction: column;
     height: calc(100vh - 80upx);
   }
+  
+  .sub {
+    font-size: .5em;
+  }
 
   /* #ifdef MP */
   .page {
