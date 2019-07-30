@@ -55,6 +55,11 @@
         res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
         if(res) {
           this.$globalData.ipInfo = res[0]
+        } else {
+          this.$globalData.ipInfo = {
+            province: '北京',
+            city: '北京',
+          }
         }
       },
       async getUtils() {
