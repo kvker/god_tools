@@ -142,8 +142,8 @@
           },
         ]
         homepageUtils.forEach(util => {
-          // 如果配置了隐藏，则pass，主要维护时候避免版本迭代挂掉
-          if (util.hidden) {
+          // 如果配置了隐藏，则pass，主要维护时候避免版本迭代挂掉，测试环境可打开
+          if (this.$isPro && util.hidden) {
             this.hiddens.push(util)
             return
           }

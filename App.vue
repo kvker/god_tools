@@ -45,7 +45,7 @@
     flex-direction: column;
     height: calc(100vh - 80upx);
   }
-  
+
   .sub {
     font-size: .5em;
   }
@@ -53,6 +53,24 @@
   /* #ifdef MP */
   .page {
     height: 100vh;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200upx;
+    height: 66upx;
+    background: #91CFFF;
+    border: 4upx solid black;
+    border-radius: 10upx;
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+  }
+  
+  .line-btn {
+    width: 100%;
   }
 
   /* #endif */
