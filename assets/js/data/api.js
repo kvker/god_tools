@@ -9,6 +9,10 @@ export default {
   IP_QUERY: '/txapi/ipquery/',
   // 今日油价
   OIL: '/txapi/oilprice/',
+  // 菜谱大全
+  RECIPE: '/txapi/caipu/',
+  // 美女
+  BEAUTY: '/meinv/',
   
   // 极速Api
   // ...

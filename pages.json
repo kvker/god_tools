@@ -5,6 +5,14 @@
       "style": {}
     },
     {
+      "path": "pages/recipe/index",
+      "style": {}
+    },
+    {
+      "path": "pages/beauty/index",
+      "style": {}
+    },
+    {
       "path": "pages/ip_query/index",
       "style": {}
     },
