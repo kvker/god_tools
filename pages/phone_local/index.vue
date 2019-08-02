@@ -53,7 +53,7 @@
           let node = ''
           res.forEach(item => {
             this.keys.forEach(key => {
-              node += item[key] + '\n'
+              node += item[key] + ' '
             })
           })
           this.result = node.replace(/\n$/, '')
