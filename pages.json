@@ -5,11 +5,19 @@
       "style": {}
     },
     {
+      "path": "pages/reverse_pinyin/index",
+      "style": {}
+    },
+    {
       "path": "pages/recipe/index",
       "style": {}
     },
     {
       "path": "pages/beauty/index",
+      "style": {}
+    },
+    {
+      "path": "pages/beauty/all",
       "style": {}
     },
     {

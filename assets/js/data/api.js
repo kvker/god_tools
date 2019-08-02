@@ -13,6 +13,8 @@ export default {
   RECIPE: '/txapi/caipu/',
   // 美女
   BEAUTY: '/meinv/',
+  // 网页抽取图片
+  HTML2PIC: '/txapi/htmlpic/',
   
   // 极速Api
   // ...
