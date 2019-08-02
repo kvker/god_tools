@@ -5,6 +5,10 @@
       "style": {}
     },
     {
+      "path": "pages/scenic/index",
+      "style": {}
+    },
+    {
       "path": "pages/phone_local/index",
       "style": {}
     },

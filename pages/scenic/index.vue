@@ -3,12 +3,9 @@
     <searcher @input='inputSearch' @confirm='search' @clean='clean' :value='searchStr' :placeholder="placeholder"></searcher>
     <scroll-view scroll-y>
       <view v-if="currentInfo" class="recipe">
-        <text>名称：{{currentInfo.cp_name}}({{currentInfo.type_name}})</text>
-        <text>特性：{{currentInfo.texing}}</text>
-        <text>原料：{{currentInfo.yuanliao}}</text>
-        <text>调料：{{currentInfo.tiaoliao}}</text>
-        <text>做法：{{currentInfo.zuofa}}</text>
-        <text>提示：{{currentInfo.tishi}}</text>
+        <text>名称：{{currentInfo.name}}</text>
+        <text>省市：{{currentInfo.province}} {{currentInfo.city}}</text>
+        <text>说明：{{currentInfo.content}}</text>
       </view>
       <view v-else class="recipe">
         <text>......</text>
@@ -50,12 +47,9 @@
         if (!item) {
           return ''
         }
-        return `名称：${item.cp_name}(${item.type_name})
-特性：${item.texing}
-原料：${item.yuanliao}
-调料：${item.tiaoliao}
-做法：${item.zuofa}
-提示：${item.tishi}
+        return `名称：${item.name}
+省市：${item.province}(${item.city})
+说明：${item.content}
 技术支持：只有神才知道的工具合集（小程序）`
       },
     },
