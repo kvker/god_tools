@@ -9,10 +9,9 @@
     <text v-else>...</text>
     <view class="ctrls">
       <view :style="!currentIndex ? 'opacity: .2;' : 'opcacity: 1;'" class="button" @click="pre">上篇</view>
-      <view class="button" @click="openAll">获取全部</view>
+      <view class="button" @click="openAll">相关图片</view>
       <view :style="isLast ? 'opacity: .2;' : 'opcacity: 1;'" class="button" @click="next">下篇</view>
     </view>
-    <view class="remind">"获取全部"功能，不保证质量，请自觉护眼……</view>
   </view>
 </template>
 
@@ -48,7 +47,11 @@
           page: ~~(Math.random() * Number(this.activePage)),
         })
         if (res) {
-          this.infos = res
+          this.infos = res.map(i => ({
+            ...i,
+            title: i.title.replace(/\[\d+P*\]$/, ''),
+            ctime: this.$dayjs().format('YYYY-MM-DD')
+          }))
         }
       },
       pre() {
@@ -131,10 +134,5 @@
       font-family: PingFangSC-Semibold;
       font-weight: 600;
     }
-  }
-  
-  .remind {
-    font-size: 24upx;
-    color: #666;
   }
 </style>
