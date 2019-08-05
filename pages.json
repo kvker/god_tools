@@ -2,11 +2,20 @@
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
       "path": "pages/index/index",
-      "style": {}
+      "style": {
+      }
     },
     {
       "path": "pages/target_bill/index",
-      "style": {}
+      "style": {
+        "navigationBarTitleText": "小目标账单"
+      }
+    },
+    {
+      "path": "pages/target_bill/create",
+      "style": {
+        "navigationBarTitleText": "创建小目标账单"
+      }
     },
     {
       "path": "pages/scenic/index",

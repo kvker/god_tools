@@ -7,4 +7,6 @@ export default {
   REG_STORAGE_KEY: 'REG_STORAGE_KEY',
   // IP搜索历史
   IP_HISTORY: 'IP_HISTORY',
+  // 记录小目标账单的那天
+  GENERATE_TARGET_DAY: 'GENERATE_TARGET_DAY',
 }

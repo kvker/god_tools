@@ -57,7 +57,15 @@
     data() {
       return {
         main: {
+          // 小目标
+          target: '',
+          // 预算
+          budget: 0,
+          // 月收入
+          income: 0,
+          // 收入列表
           listSpend: [],
+          // 支出列表
           listIncome: [],
         },
         spendShow: false,
@@ -77,7 +85,7 @@
       },
       // 共记账多少天
       totalDays() {
-        return new Date().getTime() / 1000 / (24 * 3600) - this.main.initialTimestampDay + 1 || ''
+        return this.$dayjs().diff(this.$dayjs(uni.getStorageSync(this.$storageKeys.GENERATE_TARGET_DAY)), 'day')
       },
       // 共消费
       totalSpend() {
@@ -94,21 +102,19 @@
     },
     onShow() {
       this.main = uni.getStorageSync('main') || {
+        budget: 0,
+        income: 0,
         listSpend: [],
         listIncome: [],
       }
     },
-    onReady() {
-      if (!this.main.target) {
-        uni.redirectTo({
-          url: '/pages/regist/main',
-        })
-      }
-    },
-    onLoad() {
+    onLoad(option) {
       this.checkCompleted()
       uni.showShareMenu({
         withShareTicket: false
+      })
+      uni.setNavigationBarTitle({
+        title: '小目标账单',
       })
     },
     methods: {

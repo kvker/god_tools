@@ -31,10 +31,10 @@
 
       clickAgain() {
         uni.removeStorage({
-          key: 'main',
+          key: this.$storageKeys.GENERATE_TARGET_DAY,
           success: () => {
             uni.redirectTo({
-              url: '/pages/regist/main',
+              url: '/pages/target_bill/create',
             })
           }
         })
