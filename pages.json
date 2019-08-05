@@ -5,6 +5,10 @@
       "style": {}
     },
     {
+      "path": "pages/target_bill/index",
+      "style": {}
+    },
+    {
       "path": "pages/scenic/index",
       "style": {}
     },
