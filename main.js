@@ -3,6 +3,7 @@ import App from './App'
 import util from './assets/js/util'
 import http from './assets/js/http'
 import api from './assets/js/data/api'
+import classs from './assets/js/data/classs'
 import storageKeys from './assets/js/data/storage_keys'
 import dayjs from 'dayjs'
 import maskLabel from './components/mask_label'
@@ -11,6 +12,7 @@ Vue.prototype.$util = util
 Vue.prototype.$dayjs = dayjs
 Vue.prototype.$http = http
 Vue.prototype.$api = api
+Vue.prototype.$classs = classs
 Vue.prototype.$storageKeys = storageKeys
 Vue.config.productionTip = false
 Vue.prototype.$isPro = process.env.NODE_ENV === 'production'

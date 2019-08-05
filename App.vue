@@ -3,6 +3,7 @@
     onLaunch() {
       // #ifdef MP-WEIXIN
       this.$http.avUser.loginWithWeapp().then(user => {
+        this.$globalData.sourceUser = user
         this.$globalData.user = user.toJSON()
       })
       // #endif

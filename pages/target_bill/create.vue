@@ -28,32 +28,24 @@
       })
     },
     methods: {
-      goIndex() {
+      async goIndex() {
         if (this.dataError()) return
 
-        uni.setStorage({
-          key: 'main',
-          data: {
-            target: this.target,
-            budget: this.budget,
-            income: this.income,
-            listSpend: [],
-            listIncome: [],
-            initialTimestampDay: (new Date()).getTime(), // 1000 // (24 * 3600) # 起始的时间戳天
-          },
-          success: () => {
-            uni.redirectTo({
-              url: '/pages/index/main'
-            })
-          },
-          fail: (error) => {
-            uni.showToast({
-              title: error,
-              icon: 'none',
-              duration: 2000,
-            })
-          }
-        })
+        let target = {
+          target: this.target,
+          budget: +this.budget,
+          income: +this.income,
+          listSpend: [],
+          listIncome: [],
+          user: this.$globalData.sourceUser,
+        }
+        let res = await this.$http.avCreate(this.$classs.LITTLE_TARGET, target)
+        console.log(res)
+        if(res) {
+          uni.navigateBack({
+            delta: 1
+          })
+        }
       },
       dataError() {
         let error

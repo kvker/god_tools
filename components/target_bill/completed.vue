@@ -11,8 +11,8 @@
         </text>
         <text>基金！</text>
       </view>
-      <button class="check" @click="clickCheck">查看成就</button>
-      <button class="again" @click="clickAgain">再许个愿</button>
+      <view class="btn check" @click="clickCheck">查看成就</view>
+      <view class="btn again" @click="clickAgain">再许个愿</view>
     </view>
   </view>
 </template>
@@ -33,7 +33,7 @@
         uni.removeStorage({
           key: this.$storageKeys.GENERATE_TARGET_DAY,
           success: () => {
-            uni.redirectTo({
+            uni.navigateTo({
               url: '/pages/target_bill/create',
             })
           }
