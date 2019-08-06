@@ -1,45 +1,49 @@
 <template>
   <view class="page">
-    <view class="total">
-      <view class="target">
-        离
-        <text class="underline">{{main.target}}</text>
-        还差
-        <text class="underline">{{lastDays}}</text>
-        天
+    <view v-if="!targetState" class='btn'>获取账单中...</view>
+    <view v-else-if="targetState === 2" class="btn" @click='clickCreate'>创建账单</view>
+    <template v-else>
+      <view class="total">
+        <view class="target">
+          离
+          <text class="underline">{{main.target}}</text>
+          还差
+          <text class="underline">{{lastDays}}</text>
+          天
+        </view>
+        <view class="spend">
+          <text>还差</text>
+          <text class="normal">{{totalAway}}</text>
+          <text>元</text>
+        </view>
+        <view class="markDays">
+          <text>记账第</text>
+          <text class="normal">{{totalDays}}</text>
+          <text>天</text>
+        </view>
       </view>
-      <view class="spend">
-        <text>还差</text>
-        <text class="normal">{{totalAway}}</text>
-        <text>元</text>
+      <view class="mark">
+        <view class='btn' @click='spendShow = true'>支出 - 远离小目标</view>
+        <view class="money">
+          <text>共消费</text>
+          <text class='normal'>{{totalSpend}}</text>
+          <text>元</text>
+        </view>
       </view>
-      <view class="markDays">
-        <text>记账第</text>
-        <text class="normal">{{totalDays}}</text>
-        <text>天</text>
+      <view class="mark">
+        <view class='btn' @click='incomeShow = true'>收入 - 靠近小目标</view>
+        <view class="money">
+          <text>小目标基金达</text>
+          <text class="normal">{{totalIncome}}</text>
+          <text>元</text>
+        </view>
       </view>
-    </view>
-    <view class="mark">
-      <view class='btn' @click='spendShow = true'>支出 - 远离小目标</view>
-      <view class="money">
-        <text>共消费</text>
-        <text class='normal'>{{totalSpend}}</text>
-        <text>元</text>
-      </view>
-    </view>
-    <view class="mark">
-      <view class='btn' @click='incomeShow = true'>收入 - 靠近小目标</view>
-      <view class="money">
-        <text>小目标基金达</text>
-        <text class="normal">{{totalIncome}}</text>
-        <text>元</text>
-      </view>
-    </view>
-    <button class="cancel" @click='clickCancel'>放弃小目标</button>
-    <confirm v-if='spendShow' title='输入支出金额' :type='0' @close='spendShow = false' @confirm='clickConfirm(0, $event)'></confirm>
-    <confirm v-if='incomeShow' title='输入收入金额' :type='1' @close='incomeShow = false' @confirm='clickConfirm(1, $event)'></confirm>
-    <completed v-if='completedShow' :totalDays='totalDays' @clickCheck='clickCheck'></completed>
-    <share v-if='shareShow' :totalDays="totalDays" :main="main" @close='clickShareClose'></share>
+      <button class="cancel" @click='clickCancel'>放弃小目标</button>
+      <confirm v-if='spendShow' title='输入支出金额' :type='0' @close='spendShow = false' @confirm='clickConfirm(0, $event)'></confirm>
+      <confirm v-if='incomeShow' title='输入收入金额' :type='1' @close='incomeShow = false' @confirm='clickConfirm(1, $event)'></confirm>
+      <completed v-if='completedShow' :totalDays='totalDays' @clickCheck='clickCheck'></completed>
+      <share v-if='shareShow' :totalDays="totalDays" :main="main" @close='clickShareClose'></share>
+    </template>
   </view>
 </template>
 
@@ -56,6 +60,8 @@
     },
     data() {
       return {
+        // 检测是否有账单，0：检测中，1：有，2：没有
+        targetState: 0,
         main: {
           // 小目标
           target: '',
@@ -100,14 +106,6 @@
         return this.totalAway / this.dayIncome || 0
       },
     },
-    onShow() {
-      this.main = uni.getStorageSync('main') || {
-        budget: 0,
-        income: 0,
-        listSpend: [],
-        listIncome: [],
-      }
-    },
     onLoad(option) {
       uni.showShareMenu({
         withShareTicket: false
@@ -117,41 +115,58 @@
       })
       this.getTarget()
     },
+    onShow() {
+      if(this.targetState === 2) {
+        this.getTarget()
+      }
+    },
     methods: {
       async getTarget() {
         let res = await this.$http.avRetrieve(this.$classs.LITTLE_TARGET, query => {
           query.equalTo('user', this.$globalData.sourceUser)
         })
-        if (res.length) {
+        if (res[0]) {
+          this.targetState = 1
           this.main = res[0]
           this.checkCompleted()
+        } else {
+          this.targetState = 2
         }
       },
-      // 检查是否完成
+      clickCreate() {
+        uni.navigateTo({
+          url: '/pages/target_bill/create',
+        })
+      },
+      /**
+       * 检查是否完成
+       */
       checkCompleted() {
         this.completedShow = this.lastDays < 1
       },
       async clickConfirm(type, item) {
         switch (type) {
-          case 0: {
-            let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
-              key: 'listSpend', 
-              item,
-            })
-            if (res) {
-              this.main.listSpend.push(item)
+          case 0:
+            {
+              let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
+                key: 'listSpend',
+                item,
+              })
+              if (res) {
+                this.main.listSpend.push(item)
+              }
             }
-          }
             break;
-          case 1: {
-            let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
-              key :'listIncome',
-              item,
-            })
-            if (res) {
-              this.main.listIncome.push(item)
+          case 1:
+            {
+              let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
+                key: 'listIncome',
+                item,
+              })
+              if (res) {
+                this.main.listIncome.push(item)
+              }
             }
-          }
             break;
           default:
             ;
@@ -167,6 +182,19 @@
         this.shareShow = false
         this.completedShow = false
       },
+      clickCancel() {
+        uni.showModal({
+          title: '提示',
+          content: '删除小目标？',
+          success: async () => {
+            let res = await this.$http.avDelete(this.$classs.LITTLE_TARGET, this.main.objectId)
+            console.log(res)
+            if (res) {
+              this.checkCompleted()
+            }
+          },
+        })
+      },
     },
     onShareAppMessage() {
       return {
@@ -178,6 +206,11 @@
 
 <style scoped lang="less">
   @import '~@/assets/css/target_bill/main.less';
+  
+  .page {
+    justify-content: center;
+    align-items: center;
+  }
 
   .moneyMixin() {
     display: flex;
@@ -236,7 +269,6 @@
       color: @mainTextColor;
     }
   }
-
 
   @cancelRB: 20rpx;
 

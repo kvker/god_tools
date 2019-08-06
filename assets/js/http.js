@@ -132,7 +132,7 @@ export default {
     return new Promise((resolve, reject) => {
       obj.destroy()
         .then(() => {
-          resolve()
+          resolve(true)
         }, err => {
           reject()
           uni.showToast({
