@@ -129,6 +129,7 @@
           this.targetState = 1
           this.main = res[0]
           this.checkCompleted()
+          this.shareShow = true
         } else {
           this.targetState = 2
         }
