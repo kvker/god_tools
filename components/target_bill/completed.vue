@@ -1,5 +1,5 @@
 <template>
-  <view class="completed model">
+  <view class="completed modal">
     <view class="content">
       <text class="title">~梦想实现~</text>
       <view class="congratulation">
@@ -11,8 +11,7 @@
         </text>
         <text>基金！</text>
       </view>
-      <view class="btn check" @click="clickCheck">查看成就</view>
-      <view class="btn again" @click="clickAgain">再许个愿</view>
+      <view class="btn again" @click="oneMore">再许个愿</view>
     </view>
   </view>
 </template>
@@ -25,18 +24,10 @@
       },
     },
     methods: {
-      clickCheck() {
-        this.$emit('clickCheck')
-      },
-
-      clickAgain() {
-        uni.removeStorage({
-          key: this.$storageKeys.GENERATE_TARGET_DAY,
-          success: () => {
-            uni.navigateTo({
-              url: '/pages/target_bill/create',
-            })
-          }
+      oneMore() {
+        this.$emit('click')
+        uni.navigateTo({
+          url: '/pages/target_bill/create',
         })
       },
     }

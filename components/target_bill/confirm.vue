@@ -1,5 +1,5 @@
 <template>
-  <view class="confirm model">
+  <view class="confirm modal">
     <view class="content">
       <text class="title">{{title}}</text>
       <input type="digit" class="input" v-model='price' placeholder='0'>

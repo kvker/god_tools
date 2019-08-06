@@ -38,11 +38,10 @@
           <text>元</text>
         </view>
       </view>
-      <button class="cancel" @click='clickCancel'>放弃小目标</button>
+      <button class="cancel" @click='clickCancel'>放弃</button>
       <confirm v-if='spendShow' title='输入支出金额' :type='0' @close='spendShow = false' @confirm='clickConfirm(0, $event)'></confirm>
       <confirm v-if='incomeShow' title='输入收入金额' :type='1' @close='incomeShow = false' @confirm='clickConfirm(1, $event)'></confirm>
-      <completed v-if='completedShow' :totalDays='totalDays' @clickCheck='clickCheck'></completed>
-      <share v-if='shareShow' :totalDays="totalDays" :main="main" @close='clickShareClose'></share>
+      <completed v-if='completedShow' :totalDays='totalDays' @click='clickCompleted'></completed>
     </template>
   </view>
 </template>
@@ -50,13 +49,11 @@
 <script>
   import confirm from '@/components/target_bill/confirm'
   import completed from '@/components/target_bill/completed'
-  import share from '@/components/target_bill/share'
 
   export default {
     components: {
       confirm,
       completed,
-      share,
     },
     data() {
       return {
@@ -77,7 +74,6 @@
         spendShow: false,
         incomeShow: false,
         completedShow: false, // 愿望完成
-        shareShow: false, // 显示分享
       }
     },
     computed: {
@@ -107,9 +103,6 @@
       },
     },
     onLoad(option) {
-      uni.showShareMenu({
-        withShareTicket: false
-      })
       uni.setNavigationBarTitle({
         title: '小目标账单',
       })
@@ -124,12 +117,12 @@
       async getTarget() {
         let res = await this.$http.avRetrieve(this.$classs.LITTLE_TARGET, query => {
           query.equalTo('user', this.$globalData.sourceUser)
+          query.notEqualTo('completed', true)
         })
         if (res[0]) {
           this.targetState = 1
           this.main = res[0]
           this.checkCompleted()
-          this.shareShow = true
         } else {
           this.targetState = 2
         }
@@ -174,15 +167,6 @@
         }
         this.checkCompleted()
       },
-      // 点击前往查看
-      clickCheck() {
-        this.shareShow = true
-      },
-      // 点击分享后的关闭功能
-      clickShareClose() {
-        this.shareShow = false
-        this.completedShow = false
-      },
       clickCancel() {
         uni.showModal({
           title: '提示',
@@ -197,10 +181,16 @@
           },
         })
       },
+      async clickCompleted() {
+        this.completedShow = false
+        this.targetState = 2
+        await this.$http.avUpdate(this.$classs.LITTLE_TARGET, this.main.objectId, {completed: true})
+      },
     },
     onShareAppMessage() {
       return {
         title: '一步一步，助你实现小目标！',
+        path: '/pages/index/index',
       }
     },
   }

@@ -1,5 +1,5 @@
 <template>
-  <view class="inputDream">
+  <view class="input-dream">
     <text class="title">{{title}}</text>
     <input :type="type" class="input" :placeholder="placeholder" @input="$emit('input', $event)">
     <text class="remind">{{remind}}</text>
@@ -20,7 +20,7 @@ export default {
 <style scoped lang='less'>
   @import '~@/assets/css/target_bill/main.less';
 
-.inputDream {
+.input-dream {
   display: flex;
   flex-direction: column;
   align-items: center;
