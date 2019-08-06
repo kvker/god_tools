@@ -103,7 +103,7 @@
       },
       // 还差多少天
       lastDays() {
-        return this.totalAway / this.dayIncome || 0
+        return Math.ceil(this.totalAway / this.dayIncome) || 0
       },
     },
     onLoad(option) {
@@ -116,7 +116,7 @@
       this.getTarget()
     },
     onShow() {
-      if(this.targetState === 2) {
+      if (this.targetState === 2) {
         this.getTarget()
       }
     },
@@ -186,11 +186,12 @@
         uni.showModal({
           title: '提示',
           content: '删除小目标？',
-          success: async () => {
-            let res = await this.$http.avDelete(this.$classs.LITTLE_TARGET, this.main.objectId)
-            console.log(res)
-            if (res) {
-              this.checkCompleted()
+          success: async res => {
+            if (res.confirm) {
+              res = await this.$http.avDelete(this.$classs.LITTLE_TARGET, this.main.objectId)
+              if (res) {
+                this.targetState = 2
+              }
             }
           },
         })
@@ -206,7 +207,7 @@
 
 <style scoped lang="less">
   @import '~@/assets/css/target_bill/main.less';
-  
+
   .page {
     justify-content: center;
     align-items: center;
@@ -215,8 +216,8 @@
   .moneyMixin() {
     display: flex;
     justify-content: space-between;
-    width: 480rpx;
-    font-size: 40rpx;
+    width: 480upx;
+    font-size: 40upx;
     color: @mainTextColor;
 
     .normal {
@@ -234,15 +235,15 @@
     background-image: linear-gradient(-180deg, #FEF3AA 0%, #FFE888 100%);
 
     .target {
-      font-size: 48rpx;
+      font-size: 48upx;
       color: @mainTextColor;
       text-align: center;
     }
 
     .underline {
       color: #756766;
-      border-bottom: 6rpx solid @mainTextColor;
-      margin: 0 40rpx 0 20rpx;
+      border-bottom: 6upx solid @mainTextColor;
+      margin: 0 40upx 0 20upx;
     }
 
     .spend,
@@ -255,7 +256,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120rpx;
+    margin-top: 120upx;
 
     .btn {
       .buttonHightlight();
@@ -263,14 +264,13 @@
 
     .money {
       .moneyMixin();
-      width: 320rpx;
-      margin: 20rpx 0 0 160rpx;
-      font-size: 36rpx;
+      width: 100%;
+      font-size: 36upx;
       color: @mainTextColor;
     }
   }
 
-  @cancelRB: 20rpx;
+  @cancelRB: 20upx;
 
   .cancel {
     position: absolute;
@@ -279,7 +279,7 @@
     padding: 0;
     line-height: normal;
     border-radius: 0;
-    font-size: 24rpx;
+    font-size: 24upx;
     color: red;
     background: transparent;
   }
