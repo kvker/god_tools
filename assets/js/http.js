@@ -84,10 +84,8 @@ export default {
     return new Promise((resolve, reject) => {
       query.find()
         .then(res => {
-          uni.hideLoading()
           resolve(res.map(i => i.toJSON()))
         }, err => {
-          uni.hideLoading()
           reject()
           uni.showToast({
             title: err.rawMessage
@@ -135,6 +133,21 @@ export default {
       obj.destroy()
         .then(() => {
           resolve()
+        }, err => {
+          reject()
+          uni.showToast({
+            title: err.rawMessage
+          })
+        })
+    })
+  },
+  avArrayCtrl(classs, id, { key, item }, ctrl = 'add') {
+    let obj = AV.Object.createWithoutData(classs, id)
+    obj[ctrl](key, item)
+    return new Promise((resolve, reject) => {
+      obj.save()
+        .then(res => {
+          resolve(res)
         }, err => {
           reject()
           uni.showToast({

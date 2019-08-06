@@ -14,13 +14,13 @@
         <text>元</text>
       </view>
       <view class="markDays">
-        <text>共记账</text>
+        <text>记账第</text>
         <text class="normal">{{totalDays}}</text>
         <text>天</text>
       </view>
     </view>
     <view class="mark">
-      <view class='btn' @click='spendShow = true'>支出 -- 远离小目标</view>
+      <view class='btn' @click='spendShow = true'>支出 - 远离小目标</view>
       <view class="money">
         <text>共消费</text>
         <text class='normal'>{{totalSpend}}</text>
@@ -28,7 +28,7 @@
       </view>
     </view>
     <view class="mark">
-      <view class='btn' @click='incomeShow = true'>收入 -- 靠近小目标</view>
+      <view class='btn' @click='incomeShow = true'>收入 - 靠近小目标</view>
       <view class="money">
         <text>小目标基金达</text>
         <text class="normal">{{totalIncome}}</text>
@@ -58,7 +58,7 @@
       return {
         main: {
           // 小目标
-          target: '--',
+          target: '',
           // 预算
           budget: 0,
           // 月收入
@@ -81,11 +81,11 @@
       },
       // 还差多少元
       totalAway() {
-        return this.main.budget + this.totalSpend - this.totalIncome - (this.dayIncome * this.totalDays) || ''
+        return this.main.budget + this.totalSpend - this.totalIncome - (this.dayIncome * (this.totalDays - 1)) || ''
       },
-      // 共记账多少天
+      // 记账第几天
       totalDays() {
-        return this.$dayjs().diff(this.$dayjs(this.main.createdAt), 'day')
+        return this.$dayjs().diff(this.$dayjs(this.main.createdAt), 'day') + 1
       },
       // 共消费
       totalSpend() {
@@ -131,15 +131,30 @@
       checkCompleted() {
         this.completedShow = this.lastDays < 1
       },
-      clickConfirm(type, payload) {
+      async clickConfirm(type, item) {
         switch (type) {
-          case 0:
-            this.main.listSpend.push(payload)
+          case 0: {
+            let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
+              key: 'listSpend', 
+              item,
+            })
+            if (res) {
+              this.main.listSpend.push(item)
+            }
+          }
             break;
-          case 1:
-            this.main.listIncome.push(payload)
+          case 1: {
+            let res = await this.$http.avArrayCtrl(this.$classs.LITTLE_TARGET, this.main.objectId, {
+              key :'listIncome',
+              item,
+            })
+            if (res) {
+              this.main.listIncome.push(item)
+            }
+          }
             break;
           default:
+            ;
         }
         this.checkCompleted()
       },
