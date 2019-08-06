@@ -1,13 +1,13 @@
 <template>
   <view class="page">
     <view class="total">
-      <text class="target">
+      <view class="target">
         离
         <text class="underline">{{main.target}}</text>
         还差
         <text class="underline">{{lastDays}}</text>
         天
-      </text>
+      </view>
       <view class="spend">
         <text>还差</text>
         <text class="normal">{{totalAway}}</text>
@@ -18,17 +18,17 @@
         <text class="normal">{{totalDays}}</text>
         <text>天</text>
       </view>
-      <view class="mark">
-        <button @click='spendShow = true'>支出--远离小目标</button>
-        <view class="money">
-          <text>共消费</text>
-          <text class='normal'>{{totalSpend}}</text>
-          <text>元</text>
-        </view>
+    </view>
+    <view class="mark">
+      <view class='btn' @click='spendShow = true'>支出 -- 远离小目标</view>
+      <view class="money">
+        <text>共消费</text>
+        <text class='normal'>{{totalSpend}}</text>
+        <text>元</text>
       </view>
     </view>
     <view class="mark">
-      <button @click='incomeShow = true'>收入--靠近小目标</button>
+      <view class='btn' @click='incomeShow = true'>收入 -- 靠近小目标</view>
       <view class="money">
         <text>小目标基金达</text>
         <text class="normal">{{totalIncome}}</text>
@@ -58,7 +58,7 @@
       return {
         main: {
           // 小目标
-          target: '',
+          target: '--',
           // 预算
           budget: 0,
           // 月收入
@@ -85,15 +85,15 @@
       },
       // 共记账多少天
       totalDays() {
-        return this.$dayjs().diff(this.$dayjs(uni.getStorageSync(this.$storageKeys.GENERATE_TARGET_DAY)), 'day')
+        return this.$dayjs().diff(this.$dayjs(this.main.createdAt), 'day')
       },
       // 共消费
       totalSpend() {
-        return this.main.listSpend.reduce((pre, cur) => util.yuan2yuan(pre + cur.price), 0) || 0
+        return this.main.listSpend.reduce((pre, cur) => pre + cur.price, 0) || 0
       },
       // 共收入
       totalIncome() {
-        return this.main.listIncome.reduce((pre, cur) => util.yuan2yuan(pre + cur.price), 0) || 0
+        return this.main.listIncome.reduce((pre, cur) => pre + cur.price, 0) || 0
       },
       // 还差多少天
       lastDays() {
@@ -109,15 +109,24 @@
       }
     },
     onLoad(option) {
-      this.checkCompleted()
       uni.showShareMenu({
         withShareTicket: false
       })
       uni.setNavigationBarTitle({
         title: '小目标账单',
       })
+      this.getTarget()
     },
     methods: {
+      async getTarget() {
+        let res = await this.$http.avRetrieve(this.$classs.LITTLE_TARGET, query => {
+          query.equalTo('user', this.$globalData.sourceUser)
+        })
+        if (res.length) {
+          this.main = res[0]
+          this.checkCompleted()
+        }
+      },
       // 检查是否完成
       checkCompleted() {
         this.completedShow = this.lastDays < 1
@@ -131,27 +140,8 @@
             this.main.listIncome.push(payload)
             break;
           default:
-            ;
         }
         this.checkCompleted()
-        uni.setStorage({
-          key: 'main',
-          data: this.main,
-          success: () => {
-            uni.showToast({
-              title: '保存成功',
-              icon: 'success',
-              duration: 300,
-              fail: error => {
-                uni.uni.showToast({
-                  title: error,
-                  icon: 'none',
-                  duration: 2000,
-                })
-              }
-            })
-          }
-        })
       },
       // 点击前往查看
       clickCheck() {
@@ -214,9 +204,12 @@
   }
 
   .mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 120rpx;
 
-    button {
+    .btn {
       .buttonHightlight();
     }
 

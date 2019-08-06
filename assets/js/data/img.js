@@ -1,4 +1,4 @@
-let host = 'https://lc-vdtaziqw.cn-e1.lcfile.com'
+let host = 'http://file.kvker.com'
 
 let imgPaths = {
   searchIcon: '/380cd34fdd6a53444068/god_utils_search.png',

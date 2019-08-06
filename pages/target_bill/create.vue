@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <image class="title-img" src="https://lc-vdtaziqw.cn-e1.lcfile.com/92998e6c3e64e311e569/target_bill_create_title.png"></image>
+    <image class="title-img" src="http://file.kvker.com/92998e6c3e64e311e569/target_bill_create_title.png"></image>
     <input-dream title='输入你的小目标' placeholder='请输入小目标' remind='注:如去日本' type='number' @input='inputCard(0, $event)'></input-dream>
     <input-dream title='小目标的预算' placeholder='请输入预算' remind='注：如5000' type='number' @input='inputCard(1, $event)'></input-dream>
     <input-dream title='月实际收入' placeholder='请输入月收入' remind='注：如5000' type='number' @input='inputCard(2, $event)'></input-dream>
@@ -40,7 +40,6 @@
           user: this.$globalData.sourceUser,
         }
         let res = await this.$http.avCreate(this.$classs.LITTLE_TARGET, target)
-        console.log(res)
         if(res) {
           uni.navigateBack({
             delta: 1

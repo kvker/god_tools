@@ -21,7 +21,7 @@
 
 <script>
   import singleMixin from '@/mixins/single.js'
-  let host = 'https://lc-vdtaziqw.cn-e1.lcfile.com'
+  let host = 'http://file.kvker.com'
   
   export default {
     mixins: [singleMixin],

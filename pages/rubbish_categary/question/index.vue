@@ -215,7 +215,7 @@
       flex: 1;
       height: 240upx;
       color: white;
-      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/a122e504699a06628671/rubbish_category_icon.png) 0 0 ~'/'400% auto no-repeat;
+      background: url(http://file.kvker.com/a122e504699a06628671/rubbish_category_icon.png) 0 0 ~'/'400% auto no-repeat;
 
       &:after {
         border: 0;

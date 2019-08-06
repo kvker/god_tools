@@ -56,7 +56,6 @@ export default {
         obj.set(key, element)
       }
     }
-    obj.set('user', this.user)
 
     // 将对象保存到云端
     return new Promise((resolve, reject) => {

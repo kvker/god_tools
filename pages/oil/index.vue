@@ -71,7 +71,7 @@
 
 <style scoped lang="less">
   .page {
-    background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/9910f824d13371dc65a7/oil_bg.png) 0 0 ~'/'100% 100vh no-repeat;
+    background: url(http://file.kvker.com/9910f824d13371dc65a7/oil_bg.png) 0 0 ~'/'100% 100vh no-repeat;
   }
 
   .time {
@@ -95,7 +95,7 @@
       font-size: 48upx;
       border-bottom: 2upx solid black;
       color: white;
-      background: url(https://lc-vdtaziqw.cn-e1.lcfile.com/db516815067d33674d58/oil_sub_bg.png) 0 0 ~'/'276upx 230upx no-repeat;
+      background: url(http://file.kvker.com/db516815067d33674d58/oil_sub_bg.png) 0 0 ~'/'276upx 230upx no-repeat;
 
       &:last-child {
         border-bottom: none;
