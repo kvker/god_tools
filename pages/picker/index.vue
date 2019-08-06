@@ -92,6 +92,18 @@
   .button {
     margin-bottom: 8px;
   }
+  
+  scroll-view {
+    width: 690upx;
+    height: 600upx;
+    margin: 40upx 0 28upx;
+    padding: 32upx;
+    background: #FFD9AD;
+    border: 4upx solid black;
+    border-radius: 20upx;
+    font-size: 24upx;
+    font-family: PingFangSC-Regular;
+  }
 
   .result-list-box {
     border: 2upx solid #666;
