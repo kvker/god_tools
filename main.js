@@ -6,7 +6,7 @@ import api from './assets/js/data/api'
 import classs from './assets/js/data/classs'
 import storageKeys from './assets/js/data/storage_keys'
 import dayjs from 'dayjs'
-import maskLabel from './components/mask_label'
+// import maskLabel from './components/mask_label'
 
 Vue.prototype.$util = util
 Vue.prototype.$dayjs = dayjs
@@ -24,7 +24,7 @@ App.mpType = 'app'
 Vue.mixin({
   // 这里设置组件无效，艹
   components: {
-    maskLabel,
+    // maskLabel,
   },
   onShareAppMessage(res) {
     return {

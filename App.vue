@@ -44,16 +44,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80upx);
+    height: 100vh;
   }
-
+  
   .sub {
     font-size: .5em;
-  }
-
-  /* #ifdef MP */
-  .page {
-    height: 100vh;
   }
 
   .btn {
@@ -73,8 +68,7 @@
   .line-btn {
     width: 100%;
   }
-
-  /* #endif */
+  
   .highlight {
     color: black;
   }

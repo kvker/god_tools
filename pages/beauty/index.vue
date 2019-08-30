@@ -2,14 +2,14 @@
   <view class="page">
     <template v-if="currentInfo">
       <image class="img" :src="currentInfo.picUrl" mode="aspectFill"></image>
-      <view class="title">{{currentInfo.title}}</view>
+      <!-- <view class="title">{{currentInfo.title}}</view>
       <view class="desc">{{currentInfo.description}}</view>
-      <view class="time">{{currentInfo.ctime}}</view>
+      <view class="time">{{currentInfo.ctime}}</view> -->
     </template>
     <text v-else>...</text>
     <view class="ctrls">
       <view :style="!currentIndex ? 'opacity: .2;' : 'opcacity: 1;'" class="button" @click="pre">上篇</view>
-      <view class="button" @click="openAll">相关图片</view>
+      <view class="button" @click="openAll">组图</view>
       <view :style="isLast ? 'opacity: .2;' : 'opcacity: 1;'" class="button" @click="next">下篇</view>
     </view>
   </view>
@@ -84,7 +84,7 @@
 
   .img {
     width: 650upx;
-    height: 720upx;
+    height: 1000upx;
     margin: 30upx 0;
     border: 4upx solid black;
     border-radius: 20upx;

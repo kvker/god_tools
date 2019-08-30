@@ -54,8 +54,30 @@
         checkImgUrl: '',
       }
     },
-    onLoad() {},
+    onLoad() {
+      this.getHot()
+    },
     methods: {
+      /**
+       * 热搜
+       */
+      async getHot() {
+        let resultList = ['(今日热搜)']
+        let res = await this.$http.tGet(this.$api.RUBBISH_HOT)
+        if (res) {
+          res.forEach(item => {
+            let type = ''
+            let matchResult = results.find(i => i.category === 2 ** item.type)
+            if (matchResult) {
+              type = matchResult.name
+            } else {
+              type = '未知类型'
+            }
+            resultList.push(`${item.name}: ${type}`)
+          })
+        }
+        this.resultList = resultList
+      },
       inputSearch(e) {
         this.searchStr = e.detail.value
       },

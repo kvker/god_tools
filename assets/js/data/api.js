@@ -15,6 +15,7 @@ export default {
   BEAUTY: '/meinv/',
   // 网页抽取图片
   HTML2PIC: '/txapi/htmlpic/',
+  RUBBISH_HOT: '/txapi/hotlajifenlei/',
   
   // 极速Api
   // ...

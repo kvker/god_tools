@@ -59,7 +59,7 @@
         let res = await this.$http.kGet('/api/ip')
         let ip = res.ip
         res = await this.$http.tGet(this.$api.IP_QUERY, { ip: res.ip })
-        if(res) {
+        if (res) {
           this.$globalData.ipInfo = res[0]
         } else {
           this.$globalData.ipInfo = {
@@ -157,6 +157,7 @@
             url,
             params,
             single,
+            account,
             objectId,
           } = util
 
@@ -176,12 +177,25 @@
                     }
                   }
                 }
-                group.utils.push({
-                  label,
-                  path,
-                  single,
-                  objectId,
-                })
+
+                
+                if (account) {
+                  // #ifdef MP-WEIXIN
+                  group.utils.push({
+                    label,
+                    path,
+                    single,
+                    objectId,
+                  })
+                  // #endif
+                } else {
+                  group.utils.push({
+                    label,
+                    path,
+                    single,
+                    objectId,
+                  })
+                }
               } else {
                 group.jumps.push(util)
               }
