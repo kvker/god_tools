@@ -1,7 +1,7 @@
 <template>
   <view class="search-box">
     <image class="icon" :placeholder="placeholder" :src="img.searchIcon" mode="aspectFit"></image>
-    <input class="search-input" :placeholder="placeholder" confirm-type='search' :value="value" @input="$emit('input', $event)"
+    <input class="search-input" :placeholder="placeholder" confirm-type='search' v-model="searchStr" @input="$emit('input', $event)"
       @confirm="$emit('confirm', $event)"></input>
     <text class="clean" @click="clean">X</text>
   </view>
@@ -12,9 +12,7 @@
 
   export default {
     props: {
-      value: {
-        type: String,
-      },
+      value: String,
       placeholder: {
         type: String,
         default: '请搜索',
@@ -22,14 +20,17 @@
     },
     data() {
       return {
-        searchStr: '',
         img,
+        searchStr: '',
       }
+    },
+    mounted() {
+      this.searchStr =  this.value
     },
     methods: {
       clean() {
         this.$emit('clean')
-        this.$emit('input', { detail: { value: '' } })
+        this.searchStr = ''
       }
     }
   }

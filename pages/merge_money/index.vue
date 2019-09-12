@@ -98,9 +98,6 @@
       }
     },
     onLoad() {
-      wx.showShareMenu({
-        withShareTicket: false
-      })
     },
     methods: {
       clickReset() {

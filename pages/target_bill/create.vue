@@ -23,9 +23,6 @@
       }
     },
     onLoad(option) {
-      wx.showShareMenu({
-        withShareTicket: false
-      })
     },
     methods: {
       async goIndex() {
