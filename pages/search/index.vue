@@ -30,7 +30,6 @@
         searched: false,
       }
     },
-    onLoad(option) {},
     methods: {
       async searchResult() {
         if (!this.searchStr.length && !this.canRandom) {

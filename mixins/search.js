@@ -9,6 +9,7 @@ export default {
     }
   },
   onLoad(option) {
+    // console.log(option)
     if (option.placeholder) {
       this.placeholder = option.placeholder
     }
@@ -19,11 +20,7 @@ export default {
         this.resultList = ['请搜索']
         this.result = '请搜索'
       }
-      console.log(e.detail.value)
-      setTimeout(() => {
-        this.searchStr = e.detail.value
-        console.log(this.searchStr)
-      }, 50)
+      this.searchStr = e.detail.value
     },
     search() {
       this.result = '获取中...'

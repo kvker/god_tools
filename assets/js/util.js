@@ -8,7 +8,9 @@ let timeout = 500
 // RegExp替换资源
 const regClasss = 'RegExpReplace'
 let regs = []
-http.avRetrieve(regClasss)
+http.avRetrieve(regClasss, q => {
+    q.descending('updatedAt')
+  })
   .then(res => {
     regs = res
     uni.setStorageSync(storageKeys.REG_STORAGE_KEY, JSON.stringify(regs))
@@ -153,7 +155,10 @@ export default {
   replaceWords(str) {
     regs.forEach(item => {
       let reg = new RegExp(item.before, item.rule)
+      // console.log(reg)
+      // console.log(str)
       str = str.replace(reg, item.after)
+      // console.log(str)
     })
     return str
   },
@@ -163,12 +168,14 @@ export default {
    * @params {number} length 数字左侧留着的长度，默认2是作为常用倒计时
    */
   pointLeftNumberLength(num, length = 2) {
-    if(typeof(num) === 'number') {
+    if (typeof(num) === 'number') {
       let numStr = String(num)
       let leftLength = numStr.split('.')[0].length
-      if(length > leftLength) {
+      if (length > leftLength) {
         let lengthCut = length - leftLength
-        let zeroStr = Array.from({length: lengthCut}, () => '0').join('')
+        let zeroStr = Array.from({
+          length: lengthCut
+        }, () => '0').join('')
         numStr = zeroStr + numStr
       }
       return numStr
@@ -177,3 +184,4 @@ export default {
     }
   },
 }
+// 
