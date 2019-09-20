@@ -26,7 +26,6 @@
 <script>
   import commonPageMixin from '@/mixins/common_page'
   import searcher from '@/components/searcher'
-  import maskLabel from '@/components/mask_label'
 
   const results = [{
     name: '可回收物',
@@ -46,7 +45,6 @@
     mixins: [commonPageMixin],
     components: {
       searcher,
-      maskLabel,
     },
     data() {
       return {
