@@ -117,8 +117,9 @@
         "usingComponents" : true
     },
     "mp-toutiao" : {
-        "usingComponents" : false,
-        "appid" : "tt146262df8b48f708"
+        "usingComponents" : true,
+        "appid" : "tt146262df8b48f708",
+        "navigateToMiniProgramAppIdList" : [ "tt345942e4ab73d725" ]
     },
     "h5" : {
         "title" : "只有神才知道的工具合集",

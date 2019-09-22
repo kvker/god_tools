@@ -17,7 +17,7 @@
         </view>
       </view>
     </scroll-view>
-    <!-- #ifdef MP-WEIXIN -->
+    <!-- #ifdef MP -->
     <button class="contact" open-type="contact">问</button>
     <!-- #endif -->
   </view>
@@ -103,12 +103,24 @@
       },
       jump(item, idx, jidx) {
         item = this.utilGroups[idx].jumps[jidx]
+        // #ifdef MP-TOUTIAO
+        tt.navigateToMiniProgram({
+          appId: item.ttmpid,
+          path: '/pages/index/index',
+          extraData: {},
+          success(res) {}
+        })
+        console.log(item.ttmpid)
+        // #endif
+        
+        // #ifdef MP-WEIXIN
         uni.navigateToMiniProgram({
           appId: item.wxmpid,
           path: '/pages/index/index',
           extraData: {},
           success(res) {}
         })
+        // #endif
       },
       /**
        * 处理下发的utils对象转换成精简有效的utils数组
@@ -282,7 +294,6 @@
           width: 200upx;
           height: 80upx;
           .border();
-          font-size: 28rpx;
           font-family: PingFangSC-Semibold;
           font-weight: 600;
           margin: 15upx 0;

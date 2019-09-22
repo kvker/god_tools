@@ -40,27 +40,35 @@
 
 <style lang="less">
   /*每个页面公共css */
+  page,
   view,
   scroll-view,
   button,
+  input,
   navigator {
     box-sizing: border-box !important;
     font-size: 28upx;
   }
   
-  * {
-    box-sizing: border-box !important;
-    font-size: 28upx;
-  }
-
-  view,
-  input {
-    box-sizing: border-box;
-  }
-
   rich-text {
     line-height: 48upx;
   }
+  
+  /* #ifdef MP-TOUTIAO */
+  page,
+  body,
+  tt-view,
+  tt-scroll-view,
+  tt-button,
+  tt-navigator {
+    box-sizing: border-box !important;
+    font-size: 28upx;
+  }
+  
+  tt-rich-text {
+    line-height: 48upx;
+  }
+  /* #endif */
 
   .button {
     min-width: 120upx;
