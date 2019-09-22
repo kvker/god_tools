@@ -107,7 +107,7 @@
             "checkSiteMap" : false
         },
         "usingComponents" : true,
-        "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b" ],
+        "navigateToMiniProgramAppIdList" : [ "wx370aae98dc3ead4b", "wx1df864e479abd472", "wxa4cb43dddae5e63f", "wxfe51a197d8487990" ],
         "permission" : {}
     },
     "mp-alipay" : {
@@ -119,7 +119,7 @@
     "mp-toutiao" : {
         "usingComponents" : true,
         "appid" : "tt146262df8b48f708",
-        "navigateToMiniProgramAppIdList" : [ "tt345942e4ab73d725" ]
+        "navigateToMiniProgramAppIdList" : [ "tt345942e4ab73d725", "tt25a55318ba8fc72e", "tt3dc74b7aa2edc35b" ]
     },
     "h5" : {
         "title" : "只有神才知道的工具合集",
