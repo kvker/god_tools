@@ -4,7 +4,7 @@
     <text v-if="!utilGroups.length">加载工具中...</text>
     <scroll-view scroll-y v-else class="utils-area">
       <!-- #ifdef MP-TOUTIAO -->
-      <!-- <ad unit-id="adunit-6e37r5hphrj506e947"></ad> -->
+      <ad unit-id="adunit-6e37r5hphrj506e947"></ad>
       <!-- #endif -->
       <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
@@ -20,7 +20,7 @@
         </view>
       </view>
       <!-- #ifdef MP-TOUTIAO -->
-      <!-- <ad unit-id="adunit-6e37r5hphrj506e947"></ad> -->
+      <ad unit-id="adunit-6e37r5hphrj506e947"></ad>
       <!-- #endif -->
     </scroll-view>
     <!-- #ifdef MP-WEIXIN -->
