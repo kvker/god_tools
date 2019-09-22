@@ -4,7 +4,9 @@
       <searcher @click.stop class='searcher' placeholder='搜索地区' :value='searchStr' @confirm='search' @input='inputSearch'></searcher>
     </view>
     <view class="mask-box" @click='searcherShow = true'>
-      <mask-label class='background'></mask-label>
+      <view class='background'>
+        <mask-label></mask-label>
+      </view>
       <image class="thunder" v-if="list.length" :src="img[list[0].weatherimg]" mode="aspectFit"></image>
       <text>{{showStr}}</text>
       <image class="local" :src="img.local" mode="aspectFit"></image>
@@ -31,13 +33,13 @@
 </template>
 
 <script>
-  import singleMixin from '@/mixins/single'
+  import commonMixin from '@/mixins/common_page'
   import searchMixin from '@/mixins/search'
   import searcher from '@/components/searcher.vue'
   import maskLabel from '@/components/mask_label.vue'
 
   export default {
-    mixins: [singleMixin, searchMixin],
+    mixins: [commonMixin, searchMixin],
     components: {
       searcher,
       maskLabel,

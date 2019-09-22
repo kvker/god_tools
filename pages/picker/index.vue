@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <picker class="button" @change="changePicker" :value="index" :range="showLabels">
+    <picker v-if="values.length" class="button" @change="changePicker" :value="index" :range="showLabels">
       <view class="uni-input">{{values[index].label}}</view>
     </picker>
     <scroll-view scroll-y class="result-list-box">
@@ -29,9 +29,6 @@
       showLabels() {
         return this.values.map(i => i.label)
       }
-    },
-    onLoad(option) {
-      this.getInfo()
     },
     methods: {
       changePicker(e) {

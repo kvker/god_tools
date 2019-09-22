@@ -1,6 +1,8 @@
 <template>
   <view class="page">
-    <searcher style='margin: 30upx 0 40upx;' @input='inputSearch' @confirm='getList' :value='searchStr' :placeholder="placeholder"></searcher>
+    <view style='margin: 30upx 0 40upx;'>
+      <searcher @input='inputSearch' @confirm='getList' :value='searchStr' :placeholder="placeholder"></searcher>
+    </view>
     <template v-if="info.p0">
       <view class="time">
         更新时间：{{info.time}}

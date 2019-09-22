@@ -20,9 +20,6 @@
     data() {
       return {}
     },
-    onLoad(option) {
-      this.getInfo()
-    },
     methods: {
       async getInfo() {
         this.resultList = ['获取中...']

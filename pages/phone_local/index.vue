@@ -16,11 +16,11 @@
 
 <script>
   import searchMixin from '@/mixins/search'
-  import singleMixin from '@/mixins/single'
+  import commonMixin from '@/mixins/common_page'
   import searcher from '@/components/searcher.vue'
 
   export default {
-    mixins: [searchMixin, singleMixin],
+    mixins: [searchMixin, commonMixin],
     components: {
       searcher,
     },

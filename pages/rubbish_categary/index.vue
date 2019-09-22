@@ -1,7 +1,9 @@
 <template>
   <view class="page">
     <canvas canvas-id="canvas"></canvas>
-    <searcher class='searcher' @confirm="searchResult" @input='inputSearch' :value='searchStr' :placeholder="placeholder"></searcher>
+    <view class='searcher'>
+      <searcher @confirm="searchResult" @input='inputSearch' :value='searchStr' :placeholder="placeholder"></searcher>
+    </view>
     <scroll-view scroll-y class="result-list-box">
       <view class="reslut-text" v-for="(item, idx) of resultList" :key='idx'>{{item}}</view>
     </scroll-view>
@@ -14,7 +16,12 @@
       </view>
       <view class="ctrl" @click="chooseImage">
         <mask-label class='mask' label="垃圾识别"></mask-label>
+        <!-- #ifdef MP-TOUTIAO -->
+        <text style="color: red;">(头条暂不支持)</text>
+        <!-- #endif -->
+        <!-- #ifndef MP-TOUTIAO -->
         <text>这是什么垃圾？</text>
+        <!-- #endif -->
         <text>点我搜一下。</text>
         <image :src="img.check"></image>
       </view>

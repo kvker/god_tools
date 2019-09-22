@@ -6,18 +6,6 @@
       }
     },
     {
-      "path": "pages/target_bill/index",
-      "style": {
-        "navigationBarTitleText": "小目标账单"
-      }
-    },
-    {
-      "path": "pages/target_bill/create",
-      "style": {
-        "navigationBarTitleText": "创建小目标账单"
-      }
-    },
-    {
       "path": "pages/scenic/index",
       "style": {}
     },

@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import singleMixin from '@/mixins/single'
+  import commonMixin from '@/mixins/common_page'
 
   export default {
-    mixins: [singleMixin],
+    mixins: [commonMixin],
     data() {
       return {
         infos: [],

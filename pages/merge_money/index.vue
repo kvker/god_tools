@@ -20,11 +20,11 @@
 </template>
 
 <script>
-  import singleMixin from '@/mixins/single.js'
+  import commonMixin from '@/mixins/common_page'
   let host = 'http://file.kvker.com'
   
   export default {
-    mixins: [singleMixin],
+    mixins: [commonMixin],
     data() {
       return {
         coins: [{
