@@ -3,6 +3,9 @@
     <image class="logo" :src="img.homeHeader" mode="aspectFill"></image>
     <text v-if="!utilGroups.length">加载工具中...</text>
     <scroll-view scroll-y v-else class="utils-area">
+      <!-- #ifdef MP-TOUTIAO -->
+      <!-- <ad unit-id="adunit-6e37r5hphrj506e947"></ad> -->
+      <!-- #endif -->
       <view class="utils-group" v-for="(group, idx) of utilGroups" :key='idx'>
         <view class="group-title-box">
           <image class="v-line" :src="img.vLineUrl" mode="aspectFill"></image>
@@ -10,14 +13,17 @@
           <image class="v-line" :src="img.vLineUrl" mode="aspectFill"></image>
         </view>
         <view class="utils">
-          <!-- #ifdef MP-WEIXIN -->
+          <!-- #ifdef MP -->
           <view class="util" @click="jump(item, idx, jidx)" v-for="(item, jidx) of group.jumps" :key='jidx'>{{item.label}}</view>
           <!-- #endif -->
           <view class="util" v-for="(item, uidx) of group.utils" :key='uidx' @click="doNavi(item, idx, uidx)">{{item.label}}</view>
         </view>
       </view>
+      <!-- #ifdef MP-TOUTIAO -->
+      <!-- <ad unit-id="adunit-6e37r5hphrj506e947"></ad> -->
+      <!-- #endif -->
     </scroll-view>
-    <!-- #ifdef MP -->
+    <!-- #ifdef MP-WEIXIN -->
     <button class="contact" open-type="contact">问</button>
     <!-- #endif -->
   </view>
