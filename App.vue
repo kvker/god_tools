@@ -47,6 +47,11 @@
     box-sizing: border-box !important;
     font-size: 28upx;
   }
+  
+  * {
+    box-sizing: border-box !important;
+    font-size: 28upx;
+  }
 
   view,
   input {

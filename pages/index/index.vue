@@ -282,6 +282,7 @@
           width: 200upx;
           height: 80upx;
           .border();
+          font-size: 28rpx;
           font-family: PingFangSC-Semibold;
           font-weight: 600;
           margin: 15upx 0;

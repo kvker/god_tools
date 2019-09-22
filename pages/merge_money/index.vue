@@ -119,14 +119,14 @@
 
 <style scoped lang="less">
   .count {
-    height: 84rpx;
-    border: 2rpx solid #FFFFFF;
-    border-radius: 10rpx;
+    height: 84upx;
+    border: 2upx solid #FFFFFF;
+    border-radius: 10upx;
     text-align: center;
   }
 
   .page {
-    font-size: 36rpx;
+    font-size: 36upx;
     padding: 0;
 
     .bg {
@@ -154,16 +154,16 @@
           display: flex;
           justify-content: space-around;
           align-items: center;
-          margin-top: 24rpx;
+          margin-top: 24upx;
 
           .coin-img {
-            width: 248rpx;
-            height: 110rpx;
+            width: 248upx;
+            height: 110upx;
           }
 
           .coin-count {
             .count;
-            width: 204rpx;
+            width: 204upx;
             color: #fff;
           }
         }
@@ -176,14 +176,14 @@
         height: 10%;
 
         .reset {
-          width: 60rpx;
-          height: 60rpx;
-          margin: 0 40rpx 0 0;
+          width: 60upx;
+          height: 60upx;
+          margin: 0 40upx 0 0;
           padding: 0;
-          border: 2rpx solid red;
-          border-radius: 30rpx;
+          border: 2upx solid red;
+          border-radius: 30upx;
           background: transparent;
-          font-size: 24rpx;
+          font-size: 24upx;
           color: #fff;
         }
 
@@ -197,8 +197,8 @@
 
         .result-count {
           .count;
-          width: 360rpx;
-          margin: 0 40rpx;
+          width: 360upx;
+          margin: 0 40upx;
           background: #fff;
         }
       }
