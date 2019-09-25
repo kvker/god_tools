@@ -88,29 +88,13 @@ export default {
       // #endif
 
       // #ifndef APP-PLUS
-      uni.getImageInfo({
-        src: filePath,
-        success: image => {
-          let width = image.width
-          let height = image.height
-          let canvas = uni.createCanvasContext(canvasId)
-          canvas.drawImage(filePath, 0, 0, width, height)
-          canvas.draw(false, res => {
-            uni.canvasGetImageData({
-              canvasId,
-              x: 0,
-              y: 0,
-              width,
-              height,
-              success: res => {
-                let pngData = upng.encode([res.data.buffer], width, height)
-                let base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(pngData)
-                uni.hideLoading()
-                resolve({
-                  base64,
-                })
-              }
-            })
+      uni.getFileSystemManager().readFile({
+        filePath, //选择图片返回的相对路径
+        encoding: 'base64', //编码格式
+        success: res => { //成功的回调
+          uni.hideLoading()
+          resolve({
+            base64: 'data:image/png;base64,' + res.data,
           })
         }
       })
@@ -184,4 +168,4 @@ export default {
     }
   },
 }
-// 
+//

@@ -43,6 +43,11 @@
     {
       "path": "pages/merge_money/index",
       "style": {}
+    }, {
+      "path": "pages/guoqi/index",
+      "style": {
+        "navigationBarTitleText": "头像加国旗"
+      }
     }
   ],
   "globalStyle": {

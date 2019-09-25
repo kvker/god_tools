@@ -14,7 +14,7 @@
         </view>
         <view class="utils">
           <!-- #ifdef MP -->
-          <view class="util" @click="jump(item, idx, jidx)" v-for="(item, jidx) of group.jumps" :key='jidx'>{{item.label}}</view>
+          <view class="util jump" @click="jump(item, idx, jidx)" v-for="(item, jidx) of group.jumps" :key='jidx'>{{item.label}}</view>
           <!-- #endif -->
           <view class="util" v-for="(item, uidx) of group.utils" :key='uidx' @click="doNavi(item, idx, uidx)">{{item.label}}</view>
         </view>
@@ -195,8 +195,7 @@
                     }
                   }
                 }
-
-                
+                                
                 if (account) {
                   // #ifdef MP-WEIXIN
                   group.utils.push({
@@ -315,6 +314,11 @@
           margin: 15upx 0;
           background: white;
           color: black;
+        }
+        
+        .jump {
+          border: 2upx dashed #F3944E;
+          color: #F3944E;
         }
       }
     }
