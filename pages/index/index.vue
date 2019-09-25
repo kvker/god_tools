@@ -207,6 +207,9 @@
                   })
                   // #endif
                 } else {
+                  // #ifdef MP-TOUTIAO
+                  if(util.level >= 8) return
+                  // #endif
                   group.utils.push({
                     label,
                     path,
@@ -215,6 +218,13 @@
                   })
                 }
               } else {
+                // #ifdef MP-TOUTIAO
+                // 头条Android支持，iOS不支持
+                if (uni.getSystemInfoSync().platform == "android") {
+                  group.jumps.push(util)
+                }
+                return
+                // #endif
                 group.jumps.push(util)
               }
             }
