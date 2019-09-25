@@ -19,14 +19,6 @@
       "style": {}
     },
     {
-      "path": "pages/beauty/index",
-      "style": {}
-    },
-    {
-      "path": "pages/beauty/all",
-      "style": {}
-    },
-    {
       "path": "pages/ip_query/index",
       "style": {}
     },
@@ -39,17 +31,6 @@
       "style": {}
     },
     {
-      "path": "pages/rubbish_categary/index",
-      "style": {}
-    },
-    {
-      "path": "pages/rubbish_categary/question/index",
-      "style": {
-        "navigationBarTitleText": "垃圾分类100问",
-        "navigationBarBackgroundColor": "#EFFFF5"
-      }
-    },
-    {
       "path": "pages/search/index",
       "style": {}
     }, {
@@ -58,7 +39,8 @@
     }, {
       "path": "pages/picker/index",
       "style": {}
-    }, {
+    },
+    {
       "path": "pages/merge_money/index",
       "style": {}
     }
