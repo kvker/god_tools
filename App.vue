@@ -83,6 +83,9 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    /* #ifdef H5 */
+    height: calc(100vh - 88upx);
+    /* #endif */
   }
   
   .sub {
